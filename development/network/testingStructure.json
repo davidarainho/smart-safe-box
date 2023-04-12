@@ -1,0 +1,51 @@
+[
+    {
+        "username": "user1", 
+        "password": "pass1", 
+        "email": "email1", 
+        "active_locks": [
+            {
+                "lockID": "Lock1",
+                "Name": "Lock1Name",
+                "Location": "Porto",
+                "State": "Closed",
+                "maxNumUsers": 3
+            }
+        ]
+    },
+    {
+        "username": "user2", 
+        "password": "pass2",
+        "email": "email2", 
+        "active_locks": [
+            {
+                "lockID": "Lock1",
+                "Name": "Lock1Name",
+                "Location": "Porto",
+                "State": "Closed",
+                "maxNumUsers": 3
+            },
+            {
+                "lockID": "Lock2",
+                "Name": "Lock2Name",
+                "Location": "Viseu",
+                "State": "Closed",
+                "maxNumUsers": 4
+            }
+        ]
+    },
+    {
+        "username": "user3", 
+        "password": "pass3", 
+        "email": "email3", 
+        "active_locks": [
+            {
+                "lockID": "Lock1",
+                "Name": "Lock1Name",
+                "Location": "Porto",
+                "State": "Closed",
+                "maxNumUsers": 3
+            }
+        ]
+    }
+]
