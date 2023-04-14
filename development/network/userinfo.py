@@ -43,14 +43,14 @@ def add_user(username, password, email, access_level, locks):
         cursor.execute("SELECT max_users FROM locks WHERE lock_id=?", (lock_id,))
         max_users = cursor.fetchone()[0]
         if count >= max_users:
-            print(f"Failed to add user to lock {lock_id}: maximum number of users reached!")
+            print(f"Failed to add user {username} to lock {lock_id}: maximum number of users reached!")
             continue
         
         else:
             cursor.execute("INSERT INTO users (username, password, email, access_level) VALUES (?, ?, ?, ?)", (username, password, email, access_level))
             user_id = cursor.lastrowid
             cursor.execute("INSERT INTO lock_users (lock_id, username, access_level) VALUES (?, ?, ?)", (lock_id, username, access_level))
-            print("User added successfully!")
+            print(f"User {username} added successfully!")
             conn.commit()
     
 
@@ -126,14 +126,16 @@ add_user("user3", "password3", "user3@example.com", 3, [(lock_id, 3)]) # Should 
 
 # Assuming you have a user called "user1"
 update_username = update_username_function("user1")
-update_password = update_password_function("user1")
-update_email = update_email_function("user1")
 
 # Change the username
 update_username("johnd")
 
+update_password = update_password_function("johnd")
+
 # Change the password
 update_password("newpassword")
+
+update_email = update_email_function("johnd")
 
 # Change the email
 update_email("johnd@example.com")
