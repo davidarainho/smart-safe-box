@@ -8,10 +8,11 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
 
     <color name="blue_top">#FF70A9A1</color>
     <color name="blue_buttons">#FF40798C</color>
-    <color name="background_color">#10CFD7C7</color>
+    <color name="background_color">#45CFD7C7</color>
     <color name="Text_Bold">#FF0B2027</color>
 
 </resources>
