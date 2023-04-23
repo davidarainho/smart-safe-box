@@ -1,8 +1,28 @@
 <resources>
+    <!-- Hints -->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="your_email">Your E-mail</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="search">Search</string>
+
+    <!-- activity_main -->
     <string name="app_name">GUI</string>
     <string name="hello">Hello!</string>
     <string name="welcome">Welcome to xxx</string>
     <string name="create_account">Don\'t have an account? <b>Create</b>!</string>
     <string name="forgotten_password">Forgot your password?</string>
     <string name="sign_in">Sign In</string>
+
+
+    <!-- create_account -->
+    <string name="create_account_title">Create account</string>
+    <string name="terms_services">I agree with <u>Terms and services</u></string>
+    <string name="sign_up">Sign Up</string>
+    <string name="have_account">Have already an account? <b>Login here!</b></string>
+
+    <!-- my_locks -->
+    <string name="my_locks">My Locks!</string>
+    <string name="active_locks">Currently you have X locks active</string>
+
 </resources>
