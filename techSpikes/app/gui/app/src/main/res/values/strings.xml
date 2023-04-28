@@ -25,4 +25,29 @@
     <string name="my_locks">My Locks!</string>
     <string name="active_locks">Currently you have X locks active</string>
 
+
+    <!-- Settings -->
+    <string name="share_multiple_locks">Share Multiple Locks</string>
+    <string name="manage_notifications">Manage Notifications</string>
+    <string name="change_email">Change e-mail</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="settings">Settings</string>
+
+
+
+    <!-- Share Locks-->
+
+
+
+    <!-- Notifications -->
+    <string name="notifications">Notifications</string>
+    <string name="allownotifications">Allow System Notifications</string>
+    <string name="donotdisturb">Do Not Disturb</string>
+
+    <!-- Change Email-->
+    <string name="changeyouremail">Change your e-mail</string>
+    <string name="oldemail">Enter your <b>old</b> e-mail</string>
+    <string name="newemail">Enter your <b>new</b> e-mail</string>
+    <string name="changeemail">Change e-mail </string>
+
 </resources>

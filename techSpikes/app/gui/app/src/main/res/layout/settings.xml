@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:rotation="1"
+        android:scaleType="centerCrop"
+        android:scaleX="1.2"
+        android:scaleY="1"
+        android:translationY="-10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/wave" />
+
+
+    <TextView
+        android:id="@+id/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/settings"
+        android:textColor="@color/Text_Bold"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+
+        android:id="@+id/changeemail"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="321dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounded_view"
+        android:drawableLeft="@android:drawable/sym_action_email"
+        android:text="@string/change_email"
+        android:textColor="@color/blue_buttons"
+        app:backgroundTintMode="add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/managenotifications" />
+
+    <Button
+
+        android:id="@+id/sharemultiplelocks"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="321dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/rounded_view"
+        android:drawableLeft="@android:drawable/ic_menu_share"
+        android:text="@string/share_multiple_locks"
+        android:textColor="@color/blue_buttons"
+        app:backgroundTintMode="add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+
+        android:id="@+id/managenotifications"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="321dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounded_view"
+        android:drawableLeft="@android:drawable/ic_popup_reminder"
+        android:text="@string/manage_notifications"
+        android:textColor="@color/blue_buttons"
+        app:backgroundTintMode="add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sharemultiplelocks" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="changeemail,sharemultiplelocks,managenotifications" />
+
+    <Button
+        android:id="@+id/deleteaccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/rounded_view_red"
+        android:text="@string/delete_account"
+        app:backgroundTintMode="add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeemail" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
