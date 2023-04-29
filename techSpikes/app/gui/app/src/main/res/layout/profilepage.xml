@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".MainActivity">
+
+
+    <Button
+
+        android:id="@+id/settingbuttonpage"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="321dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_view"
+        android:drawableLeft="@android:drawable/ic_menu_manage"
+        android:text="@string/settingspagebutton"
+        android:textColor="@color/blue_buttons"
+        app:backgroundTintMode="add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeusernamepagebutton" />
+
+    <Button
+
+        android:id="@+id/youremailpage"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="321dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rounded_view"
+        android:drawableLeft="@android:drawable/ic_menu_myplaces"
+        android:text="@string/youremail"
+        android:textColor="@color/blue_buttons"
+        app:backgroundTintMode="add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wave" />
+
+    <Button
+        android:id="@+id/logoutbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/rounded_view"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="@string/logout"
+        android:textAllCaps="false"
+        android:textColor="#F6F1D1"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingbuttonpage" />
+
+    <ImageView
+        android:id="@+id/wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:rotation="1"
+        android:scaleType="centerCrop"
+        android:scaleX="1.2"
+        android:scaleY="1"
+        android:translationY="-10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/wave" />
+
+
+    <TextView
+        android:id="@+id/welcometoaccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:text="@string/welcometoaccount"
+        android:textColor="@color/Text_Bold"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+
+        android:id="@+id/changeusernamepagebutton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="321dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_view"
+        android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+        android:text="@string/changedisplayname"
+        android:textColor="@color/blue_buttons"
+        app:backgroundTintMode="add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changepasswordpagebutton" />
+
+    <Button
+
+        android:id="@+id/changepasswordpagebutton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="321dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_view"
+        android:drawableLeft="@android:drawable/ic_lock_lock"
+        android:text="@string/changepasswordpagebutton"
+        android:textColor="@color/blue_buttons"
+        app:backgroundTintMode="add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/youremailpage" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,6 +36,10 @@
 
 
     <!-- Share Locks-->
+    <string name="sharelocks">Share Locks</string>
+    <string name="selectlockid">Select lock <b>ID</b></string>
+    <string name="sharewith">Share with</string>
+    <string name="sharebutton">Share</string>
 
 
 
@@ -49,5 +53,57 @@
     <string name="oldemail">Enter your <b>old</b> e-mail</string>
     <string name="newemail">Enter your <b>new</b> e-mail</string>
     <string name="changeemail">Change e-mail </string>
+
+
+    <!-- Allocate Locks -->
+
+    <string name="allocatelocks">Allocate Locks</string>
+    <string name="allocatebutton">Allocate</string>
+
+
+
+    <!-- Manual Setup -->
+
+
+
+
+
+    <!-- Locker Page -->
+
+
+
+
+
+    <!-- Change Username -->
+
+    <string name="changeyourusername">Change your Username</string>
+    <string name="enteryournewusername">Enter your <b>new</b> username</string>
+    <string name="newdisplayname">New Display Name</string>
+    <string name="confirmchangebutton">Confirm Change</string>
+
+
+    <!-- Change Password -->
+
+    <string name="changeyourpassword">Change your password</string>
+    <string name="enteryouroldpassword">Enter your <b>old</b> password</string>
+    <string name="enteryournewpassword">Enter your <b>new</b> password</string>
+    <string name="confirmyournewpassword">Confirm your <b>new</b> password</string>
+    <string name="changepasswordbutton">Change Password</string>
+
+    <!-- Profile Page -->
+
+    <string name="welcometoaccount">XXX, Welcome to your account!</string>
+    <string name="youremail">Your e-mail:</string>
+    <string name="changepasswordpagebutton">Change Password</string>
+    <string name="changedisplayname">Change Display Name</string>
+    <string name="settingspagebutton">Settings</string>
+    <string name="logout">Log out</string>
+
+
+    <!-- My Locks (Admin) -->
+
+    <string name="locksadmin">Locks</string>
+    <string name="activelocksadmin">There are a total of <b>X</b> active locks</string>
+
 
 </resources>
