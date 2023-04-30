@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/background_color"
+        android:text="@string/exitbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontallinesetup17" />
+
+    <TextView
+        android:id="@+id/ownerchangelockpassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/ownerchangelockpassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontallinesetup16" />
+
+    <TextView
+        android:id="@+id/numberofusers4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/ownernumberofusers"
+        app:layout_constraintStart_toStartOf="@+id/horizontallinesetup15"
+        app:layout_constraintTop_toBottomOf="@+id/horizontallinesetup15" />
+
+    <TextView
+        android:id="@+id/numberofuserstext4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/numberofusersinfo"
+        app:layout_constraintEnd_toEndOf="@+id/horizontallinesetup15"
+        app:layout_constraintTop_toBottomOf="@+id/horizontallinesetup15" />
+
+    <TextView
+        android:id="@+id/infoowner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/ownerinfo"
+        app:layout_constraintStart_toStartOf="@+id/lastaccessowner"
+        app:layout_constraintTop_toBottomOf="@+id/lastaccessowner" />
+
+    <TextView
+        android:id="@+id/infoowner2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/ownerinfo"
+        app:layout_constraintStart_toStartOf="@+id/numberofusers4"
+        app:layout_constraintTop_toBottomOf="@+id/numberofusers4" />
+
+    <TextView
+        android:id="@+id/lastaccessowner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/ownerlastaccess"
+        app:layout_constraintStart_toStartOf="@+id/horizontallinesetup14"
+        app:layout_constraintTop_toBottomOf="@+id/horizontallinesetup14" />
+
+    <Button
+        android:id="@+id/openclockbutton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/rounded_view"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="@string/owneropenlock"
+        android:textAllCaps="false"
+        android:textColor="#F6F1D1"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wave" />
+
+    <Button
+        android:id="@+id/sharelockbutton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/rounded_view"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="@string/ownersharelockbutton"
+        android:textAllCaps="false"
+        android:textColor="#F6F1D1"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/openclockbutton" />
+
+    <ImageView
+        android:id="@+id/wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:rotation="1"
+        android:scaleType="centerCrop"
+        android:scaleX="1.2"
+        android:scaleY="1.5"
+        android:translationY="-10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/wave" />
+
+    <TextView
+        android:id="@+id/lockernameowner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/ownerlockername"
+        android:textColor="@color/Text_Bold"
+        android:textSize="55sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lockeruseridentifier3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ownerlockeruseridentifier"
+        android:textColor="@color/Text_Bold"
+        app:layout_constraintStart_toStartOf="@+id/lockernameowner"
+        app:layout_constraintTop_toBottomOf="@+id/lockernameowner" />
+
+    <TextView
+        android:id="@+id/lockstatusowner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/ownerlockisclosed"
+        app:layout_constraintBottom_toTopOf="@+id/openclockbutton"
+        app:layout_constraintStart_toStartOf="@+id/openclockbutton" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/openclockbutton"
+        app:layout_constraintEnd_toEndOf="@+id/openclockbutton"
+        app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+
+    <View
+        android:id="@+id/horizontallinesetup14"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:background="#80b1aa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sharelockbutton" />
+
+    <View
+        android:id="@+id/horizontallinesetup15"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="#80b1aa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoowner1" />
+
+    <View
+        android:id="@+id/horizontallinesetup16"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="#80b1aa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoowner2" />
+
+    <View
+        android:id="@+id/horizontallinesetup17"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="30dp"
+        android:background="#80b1aa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ownerchangelockpassword" />
+
+    <TextView
+        android:id="@+id/lastaccessdateowner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/ownerdateoflastaccess"
+        app:layout_constraintEnd_toEndOf="@+id/horizontallinesetup14"
+        app:layout_constraintTop_toBottomOf="@+id/horizontallinesetup14" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

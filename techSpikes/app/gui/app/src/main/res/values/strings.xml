@@ -62,14 +62,40 @@
 
 
 
-    <!-- Manual Setup -->
 
 
 
+    <!-- Locker Info -->
 
 
-    <!-- Locker Page -->
+    <string name="lockername">Locker_Name</string>
+    <string name="lockeruseridentifier">#Locker_User_Identifier</string>
+    <string name="lockisopen"><font color="#000000">Lock is</font><font color="#fb5654"> Open</font></string>
+    <string name="lastaccess"><font color="#00000">Last Access:</font></string>
+    <string name="dateoflastaccess"><font color="#8e9999">dd/mm/yyyy</font></string>
+    <string name="info"><font color="#568798"><u>+info:</u></font></string>
+    <string name="numberofusers"><font color="#000000">Number of users:</font></string>
+    <string name="numberofusersinfo"><font color="#8e9999">X</font></string>
+    <string name="changelockpassword"><font color="#00000">Change User #ID Lock Password</font></string>
+    <string name="exitbutton"><font color="#568798">exit</font></string>
+    <string name="closelock">Close Lock</string>
 
+
+    <!-- Locker Owner Info -->
+
+
+    <string name="ownerlockername">Locker_Name</string>
+    <string name="ownerlockeruseridentifier">#Owner (By default ID is 0)</string>
+    <string name="ownerlockisclosed"><font color="#000000">Lock is</font><font color="#5cdc61"> Closed</font></string>
+    <string name="ownerlastaccess"><font color="#00000">Last Access:</font></string>
+    <string name="ownerdateoflastaccess"><font color="#8e9999">dd/mm/yyyy</font></string>
+    <string name="ownerinfo"><font color="#568798"><u>+info:</u></font></string>
+    <string name="ownernumberofusers"><font color="#000000">Number of users:</font></string>
+    <string name="ownernumberofusersinfo"><font color="#8e9999">X</font></string>
+    <string name="ownerchangelockpassword"><font color="#00000">Change User #ID Lock Password</font></string>
+    <string name="ownerexitbutton"><font color="#568798">exit</font></string>
+    <string name="owneropenlock">Open Lock</string>
+    <string name="ownersharelockbutton">Share Lock</string>
 
 
 
@@ -104,6 +130,20 @@
 
     <string name="locksadmin">Locks</string>
     <string name="activelocksadmin">There are a total of <b>X</b> active locks</string>
+
+
+
+
+    <!-- Manual locket setup -->
+
+
+    <string name="manuallocketsetup">Manual setup of Locker</string>
+    <string name="openwifisettings">Open Wifi settings</string>
+    <string name="connectotowifi">Connect to Wifi "Lock_Conf_XX"</string>
+    <string name="returntothispage">Return to this page</string>
+    <string name="num1"> 1</string>
+    <string name="num2"> 2</string>
+    <string name="num3"> 3</string>
 
 
 </resources>
