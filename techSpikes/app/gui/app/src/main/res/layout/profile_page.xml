@@ -9,39 +9,38 @@
 
 
     <Button
-
-        android:id="@+id/settingbuttonpage"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="321dp"
+        android:id="@+id/settings"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="45dp"
         android:layout_height="54dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/rounded_view"
         android:drawableLeft="@android:drawable/ic_menu_manage"
-        android:text="@string/settingspagebutton"
+        android:text="@string/settings"
         android:textColor="@color/blue_buttons"
         app:backgroundTintMode="add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changeusernamepagebutton" />
+        app:layout_constraintTop_toBottomOf="@+id/change_username" />
 
     <Button
-
-        android:id="@+id/youremailpage"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="321dp"
+        android:id="@+id/your_email"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="45dp"
         android:layout_height="54dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/rounded_view"
         android:drawableLeft="@android:drawable/ic_menu_myplaces"
-        android:text="@string/youremail"
+        android:text="@string/your_email"
         android:textColor="@color/blue_buttons"
+        app:startIconDrawable="@drawable/search_icon"
         app:backgroundTintMode="add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wave" />
 
     <Button
-        android:id="@+id/logoutbutton"
+        android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -54,7 +53,7 @@
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingbuttonpage" />
+        app:layout_constraintTop_toBottomOf="@+id/settings" />
 
     <ImageView
         android:id="@+id/wave"
@@ -74,13 +73,13 @@
 
 
     <TextView
-        android:id="@+id/welcometoaccount"
+        android:id="@+id/welcome_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="5dp"
-        android:text="@string/welcometoaccount"
+        android:text="@string/welcome_to_account"
         android:textColor="@color/Text_Bold"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -89,42 +88,34 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-
-        android:id="@+id/changeusernamepagebutton"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="321dp"
+        android:id="@+id/change_username"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="45dp"
         android:layout_height="54dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/rounded_view"
         android:drawableLeft="@android:drawable/ic_menu_my_calendar"
-        android:text="@string/changedisplayname"
+        android:text="@string/change_display_name"
         android:textColor="@color/blue_buttons"
         app:backgroundTintMode="add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changepasswordpagebutton" />
+        app:layout_constraintTop_toBottomOf="@+id/change_password" />
 
     <Button
-
-        android:id="@+id/changepasswordpagebutton"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="321dp"
+        android:id="@+id/change_password"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="45dp"
         android:layout_height="54dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/rounded_view"
         android:drawableLeft="@android:drawable/ic_lock_lock"
-        android:text="@string/changepasswordpagebutton"
+        android:text="@string/change_password"
         android:textColor="@color/blue_buttons"
         app:backgroundTintMode="add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/youremailpage" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top" />
+        app:layout_constraintTop_toBottomOf="@+id/your_email" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

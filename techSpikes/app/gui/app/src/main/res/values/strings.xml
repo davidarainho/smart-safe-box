@@ -25,125 +25,90 @@
     <string name="my_locks">My Locks!</string>
     <string name="active_locks">Currently you have X locks active</string>
 
-
-    <!-- Settings -->
+    <!-- settings -->
     <string name="share_multiple_locks">Share Multiple Locks</string>
     <string name="manage_notifications">Manage Notifications</string>
     <string name="change_email">Change e-mail</string>
     <string name="delete_account">Delete Account</string>
     <string name="settings">Settings</string>
 
+    <!-- share locks-->
+    <string name="share_locks">Share Locks</string>
+    <string name="select_lock_id">Select lock <b>ID</b></string>
+    <string name="share_with">Share with</string>
+    <string name="share_button">Share</string>
 
-
-    <!-- Share Locks-->
-    <string name="sharelocks">Share Locks</string>
-    <string name="selectlockid">Select lock <b>ID</b></string>
-    <string name="sharewith">Share with</string>
-    <string name="sharebutton">Share</string>
-
-
-
-    <!-- Notifications -->
+    <!-- notifications -->
     <string name="notifications">Notifications</string>
-    <string name="allownotifications">Allow System Notifications</string>
-    <string name="donotdisturb">Do Not Disturb</string>
+    <string name="allow_notifications">Allow System Notifications</string>
+    <string name="do_not_disturb">Do Not Disturb</string>
 
-    <!-- Change Email-->
-    <string name="changeyouremail">Change your e-mail</string>
-    <string name="oldemail">Enter your <b>old</b> e-mail</string>
-    <string name="newemail">Enter your <b>new</b> e-mail</string>
-    <string name="changeemail">Change e-mail </string>
+    <!-- change email-->
+    <string name="change_your_email">Change your e-mail</string>
+    <string name="old_email">Enter your <b>old</b> e-mail</string>
+    <string name="new_email">Enter your <b>new</b> e-mail</string>
 
-
-    <!-- Allocate Locks -->
-
-    <string name="allocatelocks">Allocate Locks</string>
-    <string name="allocatebutton">Allocate</string>
-
-
-
-
-
-
-    <!-- Locker Info -->
-
-
-    <string name="lockername">Locker_Name</string>
-    <string name="lockeruseridentifier">#Locker_User_Identifier</string>
-    <string name="lockisopen"><font color="#000000">Lock is</font><font color="#fb5654"> Open</font></string>
-    <string name="lastaccess"><font color="#00000">Last Access:</font></string>
-    <string name="dateoflastaccess"><font color="#8e9999">dd/mm/yyyy</font></string>
-    <string name="info"><font color="#568798"><u>+info:</u></font></string>
-    <string name="numberofusers"><font color="#000000">Number of users:</font></string>
-    <string name="numberofusersinfo"><font color="#8e9999">X</font></string>
-    <string name="changelockpassword"><font color="#00000">Change User #ID Lock Password</font></string>
-    <string name="exitbutton"><font color="#568798">exit</font></string>
-    <string name="closelock">Close Lock</string>
-
-
-    <!-- Locker Owner Info -->
-
-
-    <string name="ownerlockername">Locker_Name</string>
-    <string name="ownerlockeruseridentifier">#Owner (By default ID is 0)</string>
-    <string name="ownerlockisclosed"><font color="#000000">Lock is</font><font color="#5cdc61"> Closed</font></string>
-    <string name="ownerlastaccess"><font color="#00000">Last Access:</font></string>
-    <string name="ownerdateoflastaccess"><font color="#8e9999">dd/mm/yyyy</font></string>
-    <string name="ownerinfo"><font color="#568798"><u>+info:</u></font></string>
-    <string name="ownernumberofusers"><font color="#000000">Number of users:</font></string>
-    <string name="ownernumberofusersinfo"><font color="#8e9999">X</font></string>
-    <string name="ownerchangelockpassword"><font color="#00000">Change User #ID Lock Password</font></string>
-    <string name="ownerexitbutton"><font color="#568798">exit</font></string>
-    <string name="owneropenlock">Open Lock</string>
-    <string name="ownersharelockbutton">Share Lock</string>
-
-
+    <!-- allocate locks -->
+    <string name="allocate_locks">Allocate Locks</string>
+    <string name="allocate_button">Allocate</string>
 
 
     <!-- Change Username -->
-
-    <string name="changeyourusername">Change your Username</string>
-    <string name="enteryournewusername">Enter your <b>new</b> username</string>
-    <string name="newdisplayname">New Display Name</string>
-    <string name="confirmchangebutton">Confirm Change</string>
+    <string name="change_username">Change Username</string>
+    <string name="enter_new_username">Enter <b>new</b> username</string>
+    <string name="new_display_name">New Display Name</string>
+    <string name="confirm_change_button">Confirm Change</string>
 
 
     <!-- Change Password -->
-
-    <string name="changeyourpassword">Change your password</string>
-    <string name="enteryouroldpassword">Enter your <b>old</b> password</string>
-    <string name="enteryournewpassword">Enter your <b>new</b> password</string>
-    <string name="confirmyournewpassword">Confirm your <b>new</b> password</string>
-    <string name="changepasswordbutton">Change Password</string>
+    <string name="enter_your_old_password">Enter your <b>old</b> password</string>
+    <string name="enter_your_new_password">Enter your <b>new</b> password</string>
+    <string name="confirm_your_new_password">Confirm your <b>new</b> password</string>
+    <string name="change">Change</string>
 
     <!-- Profile Page -->
-
-    <string name="welcometoaccount">XXX, Welcome to your account!</string>
-    <string name="youremail">Your e-mail:</string>
-    <string name="changepasswordpagebutton">Change Password</string>
-    <string name="changedisplayname">Change Display Name</string>
-    <string name="settingspagebutton">Settings</string>
+    <string name="change_password">Change Password</string>
+    <string name="welcome_to_account">XXX account</string>
+    <string name="change_display_name">Change Display Name</string>
     <string name="logout">Log out</string>
 
 
     <!-- My Locks (Admin) -->
-
-    <string name="locksadmin">Locks</string>
-    <string name="activelocksadmin">There are a total of <b>X</b> active locks</string>
-
-
+    <string name="locks_admin">Locks</string>
 
 
     <!-- Manual locket setup -->
-
-
-    <string name="manuallocketsetup">Manual setup of Locker</string>
-    <string name="openwifisettings">Open Wifi settings</string>
-    <string name="connectotowifi">Connect to Wifi "Lock_Conf_XX"</string>
-    <string name="returntothispage">Return to this page</string>
+    <string name="manual_lock_setup">Manual setup of Locker</string>
+    <string name="open_wifi_settings">Open Wifi settings</string>
+    <string name="connect_wifi">Connect to Wifi "Lock_Conf_XX"</string>
+    <string name="return_to_page">Return to this page</string>
     <string name="num1"> 1</string>
     <string name="num2"> 2</string>
     <string name="num3"> 3</string>
+
+
+    <!-- recover_password -->
+    <string name="recover_password">Recover Password</string>
+    <string name="send_email">Send</string>
+    <string name="instructions_pass_recover">Email to send password recovery</string>
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+    <string name="affirmation2">Lock2Trabalho</string>
+    <string name="affirmation1">LockCasa</string>
+    <string name="affirmation4">Lock4</string>
+    <string name="affirmation3">Lock3</string>
+    <string name="affirmation6">LockGinasio</string>
+    <string name="affirmation5">Lock5</string>
+    <string name="affirmation8">Lock8</string>
+    <string name="affirmation7">Lock7</string>
+    <string name="affirmation10">LockCasa2</string>
+    <string name="affirmation9">Lock9</string>
 
 
 </resources>

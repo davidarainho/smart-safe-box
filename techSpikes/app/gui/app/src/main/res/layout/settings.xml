@@ -43,8 +43,8 @@
     <Button
 
         android:id="@+id/changeemail"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="321dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="45dp"
         android:layout_height="54dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/rounded_view"
@@ -58,12 +58,11 @@
         app:layout_constraintTop_toBottomOf="@+id/managenotifications" />
 
     <Button
-
         android:id="@+id/sharemultiplelocks"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="321dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="45dp"
         android:layout_height="54dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/rounded_view"
         android:drawableLeft="@android:drawable/ic_menu_share"
         android:text="@string/share_multiple_locks"
@@ -71,13 +70,12 @@
         app:backgroundTintMode="add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/wave" />
 
     <Button
-
         android:id="@+id/managenotifications"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="321dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="45dp"
         android:layout_height="54dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/rounded_view"
@@ -89,13 +87,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sharemultiplelocks" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="changeemail,sharemultiplelocks,managenotifications" />
 
     <Button
         android:id="@+id/deleteaccount"
