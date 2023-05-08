@@ -3,7 +3,9 @@ package com.example.es_database.userlock
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.es_database.lock.Lock
+import com.example.es_database.lock.LockDao
 import com.example.es_database.user.User
+import com.example.es_database.user.UserDao
 
 @Database
     (
@@ -12,6 +14,11 @@ import com.example.es_database.user.User
 )
 abstract class UserLockDatabase : RoomDatabase() {
 
-    abstract val dao: UserLockDao
+    abstract fun userLockDao(): UserLockDao
+
+    abstract fun lockDao(): LockDao
+    abstract fun userDao(): UserDao
+
 
 }
+

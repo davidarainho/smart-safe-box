@@ -1,7 +1,5 @@
 package com.example.es_database.user
 
-import com.example.es_database.SortType
-
 sealed interface UserEvent {
 
     // event == user action
@@ -11,14 +9,11 @@ sealed interface UserEvent {
     data class SetEmail (val email: String): UserEvent
     data class SetPassword (val password: String): UserEvent
 
-    data class SortUsers(val sortType: SortType): UserEvent
+    data class SortUsers(val userSortType: UserSortType): UserEvent
     data class DeleteUser(val user: User): UserEvent
 
     object ShowDialog: UserEvent
     object HideDialog: UserEvent
-
-
-
 
 
 }

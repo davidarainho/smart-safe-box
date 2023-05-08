@@ -16,13 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.es_database.AddUserDialog
-import com.example.es_database.SortType
 
 @Composable
 fun UserScreen(
     state: UserState,
     onEvent: (UserEvent) -> Unit
-) {
+) {/*
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {
@@ -51,7 +50,7 @@ fun UserScreen(
                         .horizontalScroll(rememberScrollState()),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    SortType.values().forEach { sortType ->
+                    UserSortType.values().forEach { sortType ->
                         Row(
                             modifier = Modifier
                                 .clickable {
@@ -60,7 +59,7 @@ fun UserScreen(
                             verticalAlignment = CenterVertically
                         ) {
                             RadioButton(
-                                selected = state.sortType == sortType,
+                                selected = state.userSortType == sortType,
                                 onClick = {
                                     onEvent(UserEvent.SortUsers(sortType))
                                 }
@@ -88,11 +87,21 @@ fun UserScreen(
                     }) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "Delete contact"
+                            contentDescription = "Delete User"
                         )
                     }
                 }
             }
         }
     }
+
+ */
 }
+
+
+enum class UserSortType {
+
+    USERNAME,
+    EMAIL
+}
+

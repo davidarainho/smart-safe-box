@@ -2,7 +2,6 @@ package com.example.es_database.user
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import androidx.lifecycle.viewModelScope
-import com.example.es_database.SortType
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -10,22 +9,22 @@ class UserViewModel (
     private val dao: UserDao
 ) : ViewModel() {
 
-    private val _sortType= MutableStateFlow(SortType.USERNAME)
-    private val _users =_sortType
+    private val _User_sortType= MutableStateFlow(UserSortType.USERNAME)
+    private val _users =_User_sortType
         .flatMapLatest { sortType ->
             when(sortType) {
-                SortType.USERNAME -> dao.getUserByUsername()
-                SortType.EMAIL -> dao.getUserByEmail()
+                UserSortType.USERNAME -> dao.getUserByUsername()
+                UserSortType.EMAIL -> dao.getUserByEmail()
             }
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
     private val _state = MutableStateFlow(UserState())
 
-    val state = combine(_state, _sortType, _users) { state, sortType, users ->
+    val state = combine(_state, _User_sortType, _users) { state, sortType, users ->
         state.copy(
             users = users,
-            sortType = sortType
+            userSortType = sortType
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), UserState())
 
@@ -96,7 +95,7 @@ class UserViewModel (
                 ) }
             }
             is UserEvent.SortUsers -> {
-                _sortType.value=event.sortType
+                _User_sortType.value=event.userSortType
             }
         }
 

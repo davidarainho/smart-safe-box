@@ -1,6 +1,5 @@
 package com.example.es_database
 
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,14 +10,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.es_database.ui.RoomGuideAndroidTheme
-import com.example.es_database.user.UserDatabase
-import com.example.es_database.user.UserScreen
-import com.example.es_database.user.UserViewModel
-
+import com.example.es_database.user.*
 
 @Suppress("UNCHECKED_CAST")
 class MainActivity : ComponentActivity()
 {
+
     private val db by lazy {
         Room.databaseBuilder(
             applicationContext,
@@ -42,5 +39,9 @@ class MainActivity : ComponentActivity()
                 UserScreen(state = state, onEvent = viewModel::onEvent)
             }
         }
+
     }
 }
+
+
+
