@@ -1,0 +1,125 @@
+<resources>
+    <!-- Hints -->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="your_email">Your E-mail</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="search">Search</string>
+
+    <!-- activity_main -->
+    <string name="app_name">GUI</string>
+    <string name="hello">Hello!</string>
+    <string name="welcome">Welcome to xxx</string>
+    <string name="create_account">Don\'t have an account? <b>Create</b>!</string>
+    <string name="forgotten_password">Forgot your password?</string>
+    <string name="sign_in">Sign In</string>
+
+
+    <!-- create_account -->
+    <string name="create_account_title">Create account</string>
+    <string name="terms_services">I agree with <u>Terms and services</u></string>
+    <string name="sign_up">Sign Up</string>
+    <string name="have_account">Have already an account? <b>Login here!</b></string>
+
+    <!-- my_locks -->
+    <string name="my_locks">My Locks!</string>
+    <string name="active_locks">Currently you have X locks active</string>
+
+    <!-- settings -->
+    <string name="share_multiple_locks">Share Multiple Locks</string>
+    <string name="manage_notifications">Manage Notifications</string>
+    <string name="change_email">Change e-mail</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="settings">Settings</string>
+
+    <!-- share locks-->
+    <string name="share_locks">Share Locks</string>
+    <string name="select_lock_id">Select lock <b>ID</b></string>
+    <string name="share_with">Share with</string>
+    <string name="share_button">Share</string>
+
+    <!-- notifications -->
+    <string name="notifications">Notifications</string>
+    <string name="allow_notifications">Allow System Notifications</string>
+    <string name="do_not_disturb">Do Not Disturb</string>
+
+    <!-- change email-->
+    <string name="change_your_email">Change your e-mail</string>
+    <string name="old_email">Enter your <b>old</b> e-mail</string>
+    <string name="new_email">Enter your <b>new</b> e-mail</string>
+
+    <!-- allocate locks -->
+    <string name="allocate_locks">Allocate Locks</string>
+    <string name="allocate_button">Allocate</string>
+
+
+    <!-- Change Username -->
+    <string name="change_username">Change Username</string>
+    <string name="enter_new_username">Enter <b>new</b> username</string>
+    <string name="new_display_name">New Display Name</string>
+    <string name="confirm_change_button">Confirm Change</string>
+
+
+    <!-- Change Password -->
+    <string name="enter_your_old_password">Enter your <b>old</b> password</string>
+    <string name="enter_your_new_password">Enter your <b>new</b> password</string>
+    <string name="confirm_your_new_password">Confirm your <b>new</b> password</string>
+    <string name="change">Change</string>
+
+    <!-- Profile Page -->
+    <string name="change_password">Change Password</string>
+    <string name="welcome_to_account">XXX account</string>
+    <string name="change_display_name">Change Display Name</string>
+    <string name="logout">Log out</string>
+
+
+    <!-- My Locks (Admin) -->
+    <string name="locks">Locks</string>
+
+
+    <!-- Manual locket setup -->
+    <string name="manual_lock_setup">Manual setup of Locker</string>
+    <string name="open_wifi_settings">Open Wifi settings</string>
+    <string name="connect_wifi">Connect to Wifi "Lock_Conf_XX"</string>
+    <string name="return_to_page">Return to this page</string>
+    <string name="num1"> 1</string>
+    <string name="num2"> 2</string>
+    <string name="num3"> 3</string>
+
+
+    <!-- recover_password -->
+    <string name="recover_password">Recover Password</string>
+    <string name="send_email">Send</string>
+    <string name="instructions_pass_recover">Email to send password recovery</string>
+
+    <!-- Menu Options -->
+    <string name="home">Home</string>
+
+    <!-- Recover password -->
+    <string name="go_back">Return to <b>Login Page</b>!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="affirmations">
+        <item>
+            affirmation2
+        </item>
+        <item>
+            cenas
+        </item>
+    </string-array>
+
+    <string name="affirmation2">Lock2Trabalho</string>
+    <string name="affirmation1">LockCasa</string>
+    <string name="affirmation4">Lock4</string>
+    <string name="affirmation3">Lock3</string>
+    <string name="affirmation6">LockGinasio</string>
+    <string name="affirmation5">Lock5</string>
+    <string name="affirmation8">Lock8</string>
+    <string name="affirmation7">Lock7</string>
+    <string name="affirmation10">LockCasa2</string>
+    <string name="affirmation9">Lock9</string>
+
+
+</resources>
