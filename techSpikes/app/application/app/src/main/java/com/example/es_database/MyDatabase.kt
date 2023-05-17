@@ -10,7 +10,7 @@ import com.example.es_database.user.User
 import com.example.es_database.user.UserDao
 import com.example.es_database.userlock.UserLock
 import com.example.es_database.userlock.UserLockDao
-
+/*
 @Database(entities = [User::class, Lock::class, UserLock::class], version = 1)
 abstract class MyDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
@@ -35,3 +35,4 @@ abstract class MyDatabase : RoomDatabase() {
         }
     }
 }
+*/
