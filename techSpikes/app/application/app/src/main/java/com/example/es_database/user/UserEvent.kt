@@ -1,7 +1,7 @@
 package com.example.es_database.user
 
 sealed interface UserEvent {
-
+/*
     // event == user action
 
     object SaveUser: UserEvent
@@ -14,6 +14,6 @@ sealed interface UserEvent {
 
     object ShowDialog: UserEvent
     object HideDialog: UserEvent
-
+*/
 
 }

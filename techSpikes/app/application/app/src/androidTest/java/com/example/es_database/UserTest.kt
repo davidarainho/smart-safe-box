@@ -40,7 +40,7 @@ class UserTest {
     @Test
     @Throws(Exception::class)
     fun insertAndRetrieveUserByUsername() = runBlocking {
-        val user = User("JohnDoe", "john@example.com", "password")
+        val user = User("JohnDoe", "john@example.com", "password", allow_notifications=1)
         userDao.upsertUser(user)
 
         val users = userDao.getUserByUsername().first()
@@ -49,13 +49,13 @@ class UserTest {
         Assert.assertEquals("JohnDoe", users[0].username)
         Assert.assertEquals("john@example.com", users[0].email)
         Assert.assertEquals("password", users[0].password)
-        //Assert.assertEquals(1, users[0].allow_notifications)
+        Assert.assertEquals(1, users[0].allow_notifications)
     }
 
     @Test
     @Throws(Exception::class)
     fun insertAndRetrieveUserByEmail() = runBlocking {
-        val user = User("JaneSmith", "jane@example.com", "password")
+        val user = User("JaneSmith", "jane@example.com", "password", allow_notifications=1)
         userDao.upsertUser(user)
 
         val users = userDao.getUserByEmail().first()
@@ -69,7 +69,7 @@ class UserTest {
 
     @Test
     fun deleteUser() = runBlocking {
-        val user = User("JohnDoe", "john@example.com", "password")
+        val user = User("JohnDoe", "john@example.com", "password", allow_notifications=1)
         userDao.upsertUser(user)
 
         val retrievedUser = userDao.getUserByUsername().first().firstOrNull()
@@ -83,7 +83,7 @@ class UserTest {
 
     @Test
     fun getUserByUserId() = runBlocking {
-        val user = User("JohnDoe", "john@example.com", "password",47)
+        val user = User("JohnDoe", "john@example.com", "password", allow_notifications=1,47)
         userDao.upsertUser(user)
 
         val retrievedUser = userDao.getUserByUserId(user.user_id).firstOrNull()
@@ -97,7 +97,7 @@ class UserTest {
 
     @Test
     fun getUserIdByEmail() = runBlocking {
-        val user = User("JohnDoe", "john@example.com", "password",1)
+        val user = User("JohnDoe", "john@example.com", "password", allow_notifications=1,1)
         userDao.upsertUser(user)
 
         val retrievedUserId = userDao.getUserIdByEmail(user.email)
@@ -105,10 +105,32 @@ class UserTest {
         assertEquals(user.user_id, retrievedUserId)
     }
 
+    @Test
+    fun getNotificationPreferenceByUserId() = runBlocking {
+        val user = User("JohnDoe", "john@example.com", "password", allow_notifications=1, 47)
+        userDao.upsertUser(user)
+
+        val retrievedNotificationPreference = userDao.getNotificationPreferenceByUserId(user.user_id)
+
+        assertNotNull(retrievedNotificationPreference)
+        assertEquals(user.allow_notifications, retrievedNotificationPreference)
+    }
 
     @Test
+    fun updateNotificationPreference() = runBlocking {
+        val user = User("JohnDoe", "john@example.com", "password", allow_notifications=1,7)
+        userDao.upsertUser(user)
+
+        val newPref = 1
+        userDao.updateNotificationPreference(user.user_id, newPref)
+
+        val retrievedUser = userDao.getUserByUserId(user.user_id).first()
+
+        assertEquals(newPref, retrievedUser.allow_notifications)
+    }
+    @Test
     fun updateUsername() = runBlocking {
-        val user = User("JohnDoe", "john@example.com", "password",7)
+        val user = User("JohnDoe", "john@example.com", "password", allow_notifications=1,7)
         userDao.upsertUser(user)
 
         val newUsername = "JohnSmith"
@@ -121,7 +143,7 @@ class UserTest {
 
     @Test
     fun updatePassword() = runBlocking {
-        val user = User("JohnDoe", "john@example.com", "password",9)
+        val user = User("JohnDoe", "john@example.com", "password", allow_notifications=1,9)
         userDao.upsertUser(user)
 
         val newPassword = "newPassword"
@@ -134,7 +156,7 @@ class UserTest {
 
     @Test
     fun updateEmail() = runBlocking {
-        val user = User("JohnDoe", "john@example.com", "password",4)
+        val user = User("JohnDoe", "john@example.com", "password", allow_notifications=1,4)
         userDao.upsertUser(user)
 
         val newEmail = "john.smith@example.com"

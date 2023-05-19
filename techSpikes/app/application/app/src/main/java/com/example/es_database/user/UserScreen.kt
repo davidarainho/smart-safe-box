@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.es_database.AddUserDialog
+//import com.example.es_database.AddUserDialog
 
 @Composable
 fun UserScreen(

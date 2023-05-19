@@ -26,8 +26,11 @@ interface UserDao {
     @Query("SELECT user_id FROM User WHERE email = :Email")
     suspend fun getUserIdByEmail(Email: String): Int
 
-    //@Query("SELECT allow_notifications FROM User WHERE user_id = :userId")
-    //suspend fun getNotificationPreference(userId: Int): Boolean
+    @Query("SELECT allow_notifications FROM User WHERE user_id = :userId")
+    suspend fun getNotificationPreferenceByUserId(userId: Int): Int
+
+    @Query("UPDATE User SET allow_notifications = :newPreference WHERE user_id = :userId")
+    suspend fun updateNotificationPreference(userId: Int, newPreference: Int)
 
     @Query("SELECT * FROM User WHERE user_id = :userId")
     fun getUserByUserId(userId: Int): kotlinx.coroutines.flow.Flow<User>

@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.es_database.user.UserEvent
 import com.example.es_database.user.UserState
-
+/*
 @Composable
 fun AddUserDialog(
     state: UserState,
@@ -73,4 +73,4 @@ fun AddUserDialog(
             }
         }
     )
-}
+}*/
