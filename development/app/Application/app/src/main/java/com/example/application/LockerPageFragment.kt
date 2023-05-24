@@ -52,15 +52,30 @@ class LockerPageFragment : Fragment() {
         return binding.root
     }
 
+    lateinit var botsheetAccessFragment : BotsheetAccessFragment
+    lateinit var botsheetUserFragment : BotsheetUserFragment
+    lateinit var botsheetPinFragment: UpdatePinFragment
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val imageView: ImageView = binding.imageView
         imageView.setOnClickListener{
             setLockState(imageView)
         }
 
-//        binding.lastAccessed.setOnClickListener {
-//
-//        }
+        binding.moreInfoAccesses.setOnClickListener {
+            botsheetAccessFragment = BotsheetAccessFragment()
+            botsheetAccessFragment.show(childFragmentManager,botsheetAccessFragment.tag)
+        }
+
+        binding.moreInfoNumber.setOnClickListener {
+            botsheetUserFragment = BotsheetUserFragment()
+            botsheetUserFragment.show(childFragmentManager,botsheetUserFragment.tag)
+        }
+
+        binding.changePassword.setOnClickListener {
+            botsheetPinFragment = UpdatePinFragment()
+            botsheetPinFragment.show(childFragmentManager,botsheetPinFragment.tag)
+        }
     }
 
     override fun onDestroyView() {

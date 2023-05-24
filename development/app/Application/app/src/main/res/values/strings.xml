@@ -130,6 +130,8 @@
     <string name="old_email">Old email</string>
     <string name="new_email">New Email</string>
     <string name="access_history"><b>Access History</b></string>
+    <string name="users_with_access"><b>Users with access</b></string>
+    <string name="update_lock_pin"><b>Update Lock Pin</b></string>
 
 
 </resources>

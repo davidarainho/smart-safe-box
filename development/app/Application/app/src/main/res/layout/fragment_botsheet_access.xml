@@ -7,6 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:paddingHorizontal="25dp"
         android:paddingVertical="15dp"
         android:text="@string/access_history"

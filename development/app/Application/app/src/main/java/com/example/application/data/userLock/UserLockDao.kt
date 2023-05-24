@@ -60,9 +60,7 @@ interface UserLockDao {
 
         for (lock in locks) {
             val permissionLevel = getUserLockPermissionLevel(userId, lock.lock_id)
-            if (permissionLevel != null) {
-                permissionLevels[lock.lock_id] = permissionLevel
-            }
+            permissionLevels[lock.lock_id] = permissionLevel
         }
 
         return permissionLevels
