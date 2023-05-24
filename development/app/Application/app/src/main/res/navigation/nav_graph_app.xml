@@ -8,10 +8,73 @@
         android:id="@+id/myLocksFragment"
         android:name="com.example.application.MyLocksFragment"
         android:label="fragment_my_locks"
-        tools:layout="@layout/fragment_my_locks" />
+        tools:layout="@layout/fragment_my_locks" >
+        <action
+            android:id="@+id/action_myLocksFragment_to_lockerPageFragment"
+            app:destination="@id/lockerPageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profilePageFragment"
         android:name="com.example.application.ProfilePageFragment"
         android:label="fragment_profile_page"
-        tools:layout="@layout/fragment_profile_page" />
+        tools:layout="@layout/fragment_profile_page" >
+        <action
+            android:id="@+id/action_profilePageFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_profilePageFragment_to_changeUsernameFragment"
+            app:destination="@id/changeUsernameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.application.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_changeEmailFragment"
+            app:destination="@id/changeEmailFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_changeLockNameFragment"
+            app:destination="@id/changeLockNameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.application.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/changeEmailFragment"
+        android:name="com.example.application.ChangeEmailFragment"
+        android:label="fragment_change_email"
+        tools:layout="@layout/fragment_change_email" />
+    <fragment
+        android:id="@+id/changeUsernameFragment"
+        android:name="com.example.application.ChangeUsernameFragment"
+        android:label="fragment_change_username"
+        tools:layout="@layout/fragment_change_username" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.application.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/changeLockNameFragment"
+        android:name="com.example.application.ChangeLockNameFragment"
+        android:label="fragment_change_lock_name"
+        tools:layout="@layout/fragment_change_lock_name" />
+    <fragment
+        android:id="@+id/lockerPageFragment"
+        android:name="com.example.application.LockerPageFragment"
+        android:label="@string/name_label"
+        tools:layout="@layout/fragment_locker_page">
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="lockID"
+            app:argType="integer" />
+    </fragment>
 </navigation>

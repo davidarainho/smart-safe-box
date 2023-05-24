@@ -1,130 +1,158 @@
 [
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-mdpi\\ic_launcher_round.webp"
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-anydpi-v21_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-anydpi-v21\\ic_launcher_background.xml"
+        "merged": "com.example.gui.app-merged_res-30:/layout_settings.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/settings.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-ldpi_ic_launcher_background.png.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-ldpi\\ic_launcher_background.png"
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-xhdpi_ic_launcher_background.png.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-xhdpi\\ic_launcher_background.png"
+        "merged": "com.example.gui.app-merged_res-30:/drawable_rounded_view.xml.flat",
+        "source": "com.example.gui.app-main-32:/drawable/rounded_view.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\layout\\activity_main.xml"
+        "merged": "com.example.gui.app-merged_res-30:/layout_locker_page.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/locker_page.xml"
     },
     {
-        "merged": "com.example.gui.app-merged_res-29:/drawable_rounded_view.xml.flat",
-        "source": "com.example.gui.app-main-31:/drawable/rounded_view.xml"
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\xml_data_extraction_rules.xml.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\xml\\data_extraction_rules.xml"
+        "merged": "com.example.gui.app-merged_res-30:/drawable_lock_open.xml.flat",
+        "source": "com.example.gui.app-main-32:/drawable/lock_open.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "com.example.gui.app-merged_res-30:/drawable_wave.xml.flat",
+        "source": "com.example.gui.app-main-32:/drawable/wave.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.gui.app-merged_res-30:/drawable_rounded_view_red.xml.flat",
+        "source": "com.example.gui.app-main-32:/drawable/rounded_view_red.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-xhdpi\\ic_launcher.webp"
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-anydpi-v21_wave.xml.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-anydpi-v21\\wave.xml"
+        "merged": "com.example.gui.app-merged_res-30:/drawable_rounded_view_blue.xml.flat",
+        "source": "com.example.gui.app-main-32:/drawable/rounded_view_blue.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-hdpi_wave.png.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-hdpi\\wave.png"
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-xxxhdpi_ic_launcher_background.png.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-xxxhdpi\\ic_launcher_background.png"
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-anydpi-v33_ic_launcher.xml.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-anydpi-v33/ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-xxxhdpi_wave.png.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-xxxhdpi\\wave.png"
+        "merged": "com.example.gui.app-merged_res-30:/layout_my_locks_admin.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/my_locks_admin.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-mdpi_ic_launcher_background.png.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-mdpi\\ic_launcher_background.png"
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-hdpi\\ic_launcher.webp"
+        "merged": "com.example.gui.app-merged_res-30:/layout_recover_password.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/recover_password.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "com.example.gui.app-merged_res-30:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.example.gui.app-pngs-25:/drawable-anydpi-v24/ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-hdpi_ic_launcher_background.png.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-hdpi\\ic_launcher_background.png"
+        "merged": "com.example.gui.app-merged_res-30:/layout_notifications.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/notifications.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\xml_backup_rules.xml.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\xml\\backup_rules.xml"
+        "merged": "com.example.gui.app-merged_res-30:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.gui.app-main-32:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.gui.app-merged_res-30:/layout_changeusername.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/changeusername.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-anydpi-v33_ic_launcher.xml.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-anydpi-v33\\ic_launcher.xml"
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-ldpi_wave.png.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-ldpi\\wave.png"
+        "merged": "com.example.gui.app-merged_res-30:/layout_list_item.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/list_item.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-xxxhdpi\\ic_launcher.webp"
+        "merged": "com.example.gui.app-merged_res-30:/drawable_search_icon.xml.flat",
+        "source": "com.example.gui.app-main-32:/drawable/search_icon.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-xxhdpi_wave.png.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-xxhdpi\\wave.png"
+        "merged": "com.example.gui.app-merged_res-30:/layout_activity_main.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-xhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-mdpi\\ic_launcher.webp"
+        "merged": "com.example.gui.app-merged_res-30:/layout_changepassword.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/changepassword.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-hdpi\\ic_launcher_round.webp"
+        "merged": "com.example.gui.app-merged_res-30:/layout_create_account.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/create_account.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-mdpi_wave.png.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-mdpi\\wave.png"
+        "merged": "com.example.gui.app-merged_res-30:/layout_profile_page.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/profile_page.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
+        "merged": "com.example.gui.app-merged_res-30:/layout_my_locks.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/my_locks.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-main-31:\\mipmap-xxhdpi\\ic_launcher.webp"
+        "merged": "com.example.gui.app-merged_res-30:/layout_changeemail.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/changeemail.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-xhdpi_wave.png.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-xhdpi\\wave.png"
+        "merged": "com.example.gui.app-merged_res-30:/layout_fragment_teste.xml.flat",
+        "source": "com.example.gui.app-main-32:/layout/fragment_teste.xml"
     },
     {
-        "merged": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-merged_res-29:\\drawable-xxhdpi_ic_launcher_background.png.flat",
-        "source": "C:\\Users\\beatr\\.gradle\\daemon\\7.5\\com.example.gui.app-pngs-24:\\drawable-xxhdpi\\ic_launcher_background.png"
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.gui.app-merged_res-30:/xml_backup_rules.xml.flat",
+        "source": "com.example.gui.app-main-32:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.gui.app-merged_res-30:/drawable_locker_options.xml.flat",
+        "source": "com.example.gui.app-main-32:/drawable/locker_options.xml"
+    },
+    {
+        "merged": "com.example.gui.app-merged_res-30:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.gui.app-main-32:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.gui.app-merged_res-30:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.gui.app-main-32:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.gui.app-merged_res-30:/drawable_lock_closed.xml.flat",
+        "source": "com.example.gui.app-main-32:/drawable/lock_closed.xml"
     }
 ]

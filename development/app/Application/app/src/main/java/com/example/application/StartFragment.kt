@@ -40,6 +40,8 @@ class StartFragment : Fragment() {
         binding.signIn.setOnClickListener{
             findNavController().navigate(R.id.action_startFragment_to_mainAppActivity)
         }
+
+        // No Dao
     }
 
     override fun onDestroyView() {

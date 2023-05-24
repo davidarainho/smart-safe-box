@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".SettingsFragment">
+
+    <ImageView
+        android:id="@+id/wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:rotation="1"
+        android:scaleType="centerCrop"
+        android:scaleX="1.2"
+        android:scaleY="1"
+        android:translationY="-10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/wave" />
+
+
+    <TextView
+        android:id="@+id/welcometoaccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/settings"
+        android:textColor="@color/Text_Bold"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!-- Alterar para ser somente texto!!! -->
+    <Button
+        android:id="@+id/share_multiple_locks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rounded_view"
+        android:paddingVertical="8dp"
+        android:text="@string/share_multiple_locks"
+        android:textColor="@color/blue_buttons"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/share_multiple_locks"
+        app:iconTint="@color/blue_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wave"
+        app:startIconDrawable="@drawable/search_icon" />
+
+    <Button
+        android:id="@+id/change_lock_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_view"
+        android:paddingVertical="8dp"
+        android:text="@string/change_lock_name"
+        android:textColor="@color/blue_buttons"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/lock_closed"
+        app:iconTint="@color/blue_buttons"
+        app:iconSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/share_multiple_locks" />
+
+    <Button
+        android:id="@+id/manage_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_view"
+        android:paddingVertical="8dp"
+        android:text="@string/manage_notifications"
+        android:textColor="@color/blue_buttons"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/notifications_icon"
+        app:iconTint="@color/blue_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_lock_name" />
+
+    <Button
+        android:id="@+id/change_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_view"
+        android:paddingVertical="8dp"
+        android:text="@string/change_email"
+        android:textColor="@color/blue_buttons"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/change_email"
+        app:iconTint="@color/blue_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/manage_notifications" />
+
+    <Button
+        android:id="@+id/deleteaccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:paddingVertical="8dp"
+        android:background="@drawable/rounded_view_red"
+        android:text="@string/delete_account"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:backgroundTint="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

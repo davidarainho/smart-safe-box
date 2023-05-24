@@ -7,38 +7,6 @@
     android:background="@color/background_color"
     tools:context=".ProfilePageFragment">
 
-    <Button
-        android:id="@+id/your_email"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="45dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/rounded_view"
-        android:drawableLeft="@android:drawable/ic_menu_myplaces"
-        android:text="@string/your_email"
-        android:textColor="@color/blue_buttons"
-        app:startIconDrawable="@drawable/search_icon"
-        app:backgroundTintMode="add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wave" />
-
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:background="@drawable/rounded_view"
-        android:paddingHorizontal="24dp"
-        android:paddingVertical="10dp"
-        android:text="@string/logout"
-        android:textAllCaps="false"
-        android:textColor="#F6F1D1"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
     <ImageView
         android:id="@+id/wave"
         android:layout_width="wrap_content"
@@ -61,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="5dp"
         android:text="@string/welcome_to_account"
         android:textColor="@color/Text_Bold"
@@ -71,34 +39,81 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Alterar para ser somente texto!!! -->
+    <Button
+        android:id="@+id/your_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rounded_view"
+        android:paddingVertical="8dp"
+        android:text="@string/your_email"
+        android:textColor="@color/blue_buttons"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
+        android:clickable="false"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/person_icon"
+        app:iconTint="@color/blue_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wave"
+        app:startIconDrawable="@drawable/search_icon" />
+
+    <Button
+        android:id="@+id/change_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_view"
+        android:paddingVertical="8dp"
+        android:text="@string/change_password"
+        android:textColor="@color/blue_buttons"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/change_password"
+        app:iconTint="@color/blue_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/your_email" />
+
     <Button
         android:id="@+id/change_username"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="45dp"
-        android:layout_height="54dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/rounded_view"
-        android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+        android:paddingVertical="8dp"
         android:text="@string/change_display_name"
         android:textColor="@color/blue_buttons"
-        app:backgroundTintMode="add"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/change_username"
+        app:iconTint="@color/blue_buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/change_password" />
 
     <Button
-        android:id="@+id/change_password"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="45dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="25dp"
+        android:id="@+id/logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/rounded_view"
-        android:drawableLeft="@android:drawable/ic_lock_lock"
-        android:text="@string/change_password"
-        android:textColor="@color/blue_buttons"
-        app:backgroundTintMode="add"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="@string/logout"
+        android:textAllCaps="false"
+        android:textColor="#F6F1D1"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/your_email" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

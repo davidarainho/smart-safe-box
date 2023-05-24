@@ -2,7 +2,7 @@
     <!-- Hints -->
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="your_email">Your E-mail</string>
+    <string name="your_email">Your E-mail: X</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="search">Search</string>
 
@@ -29,6 +29,7 @@
     <string name="share_multiple_locks">Share Multiple Locks</string>
     <string name="manage_notifications">Manage Notifications</string>
     <string name="change_email">Change e-mail</string>
+    <string name="change_lock_name">Change Lock Name</string>
     <string name="delete_account">Delete Account</string>
     <string name="settings">Settings</string>
 
@@ -40,13 +41,13 @@
 
     <!-- notifications -->
     <string name="notifications">Notifications</string>
-    <string name="allow_notifications">Allow System Notifications</string>
-    <string name="do_not_disturb">Do Not Disturb</string>
+    <string name="allow_notifications">Allow system notifications</string>
+    <string name="do_not_disturb">Do not disturb</string>
 
     <!-- change email-->
     <string name="change_your_email">Change your e-mail</string>
-    <string name="old_email">Enter your <b>old</b> e-mail</string>
-    <string name="new_email">Enter your <b>new</b> e-mail</string>
+    <string name="enter_your_old_email">Enter your <b>old</b> e-mail</string>
+    <string name="enter_your_new_email">Enter your <b>new</b> e-mail</string>
 
     <!-- allocate locks -->
     <string name="allocate_locks">Allocate Locks</string>
@@ -69,7 +70,7 @@
     <!-- Profile Page -->
     <string name="change_password">Change Password</string>
     <string name="welcome_to_account">XXX account</string>
-    <string name="change_display_name">Change Display Name</string>
+    <string name="change_display_name">Change Username</string>
     <string name="logout">Log out</string>
 
 
@@ -101,13 +102,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string-array name="affirmations">
-        <item>
-            affirmation2
-        </item>
-        <item>
-            cenas
-        </item>
+    <string-array name="array_lock_id">
+        <item> Batata </item>
+        <item> Cenoura </item>
     </string-array>
 
     <string name="affirmation2">Lock2Trabalho</string>
@@ -120,6 +117,19 @@
     <string name="affirmation7">Lock7</string>
     <string name="affirmation10">LockCasa2</string>
     <string name="affirmation9">Lock9</string>
+
+
+    <string name="new_lock_name">New Lock Name</string>
+    <string name="enter_the_new_lock_name">Enter the <b>new</b> Lock Name</string>
+    <string name="name_label">{locker_name}</string>
+    <string name="last_accessed">Last Accessed:</string>
+    <string name="number_of_users">Number of users:</string>
+    <string name="info"><u>+ info:</u></string>
+    <string name="change_lock_password">Change User #ID Lock Password</string>
+    <string name="exit">exit</string>
+    <string name="old_email">Old email</string>
+    <string name="new_email">New Email</string>
+    <string name="access_history"><b>Access History</b></string>
 
 
 </resources>

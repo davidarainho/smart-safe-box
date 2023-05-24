@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.MyLocksFragment
+import com.example.application.MyLocksFragmentDirections
 import com.example.application.R
 import com.example.application.model.Affirmation
 
 class ItemAdapter(
-    private val context: Context,
     private val dataset: List<Affirmation>
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
@@ -39,7 +41,15 @@ class ItemAdapter(
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-        holder.textView.text = context.resources.getString(item.stringResourceId)
+        holder.textView.text = item.lockName
+
+        holder.textView.setOnClickListener {
+            // Create an action from WordList to DetailList
+            // using the required arguments
+            val action = MyLocksFragmentDirections.actionMyLocksFragmentToLockerPageFragment(name = holder.textView.text.toString(), lockID = position)
+            // Navigate using that action
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     /**

@@ -5,12 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigator
+import androidx.navigation.fragment.findNavController
 import com.example.application.databinding.FragmentProfilePageBinding
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import java.util.jar.Attributes.Name
 
 /**
  * A simple [Fragment] subclass.
@@ -18,9 +16,25 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProfilePageFragment : Fragment() {
+
+    companion object {
+        const val NAME = "name"
+    }
+
+
     private var _binding : FragmentProfilePageBinding? = null
 
     private val binding get() = _binding!!
+
+    private lateinit var name: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            name = it.getString(NAME).toString()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,4 +45,18 @@ class ProfilePageFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.changePassword.setOnClickListener {
+            findNavController().navigate(R.id.action_profilePageFragment_to_changePasswordFragment)
+        }
+
+        binding.changeUsername.setOnClickListener {
+            findNavController().navigate(R.id.action_profilePageFragment_to_changeUsernameFragment)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -14,4 +14,7 @@
     <color name="blue_buttons">#FF40798C</color>
     <color name="background_color">#45CFD7C7</color>
     <color name="Text_Bold">#FF0B2027</color>
+
+    <color name="red">#EE1616</color>
+    <color name="whitish_blue">#FF70A9BC</color>
 </resources>

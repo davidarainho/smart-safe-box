@@ -15,11 +15,11 @@ class RecoverPassword : AppCompatActivity()  {
         //    val intent = Intent(this,RecoverPassword::class.java)
         //    startActivity(intent)
         //}
-        val buttonTwo:TextView=findViewById(R.id.returnHelloPage)
-        buttonTwo.setOnClickListener(){
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
-        }
+//        val buttonTwo:TextView=findViewById(R.id.returnHelloPage)
+//        buttonTwo.setOnClickListener(){
+//            val intent = Intent(this,MainActivity::class.java)
+//            startActivity(intent)
+//        }
 
 
     }

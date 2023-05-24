@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:ns1="http://schemas.android.com/tools">
+<resources>
     <color name="Text_Bold">#FF0B2027</color>
     <color name="background_color">#45CFD7C7</color>
     <color name="black">#FF000000</color>
@@ -12,12 +12,74 @@
     <color name="teal_700">#FF018786</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="white">#FFFFFFFF</color>
+    <string name="active_locks">Currently you have X locks active</string>
+    <string name="affirmation1">LockCasa</string>
+    <string name="affirmation10">LockCasa2</string>
+    <string name="affirmation2">Lock2Trabalho</string>
+    <string name="affirmation3">Lock3</string>
+    <string name="affirmation4">Lock4</string>
+    <string name="affirmation5">Lock5</string>
+    <string name="affirmation6">LockGinasio</string>
+    <string name="affirmation7">Lock7</string>
+    <string name="affirmation8">Lock8</string>
+    <string name="affirmation9">Lock9</string>
+    <string name="allocate_button">Allocate</string>
+    <string name="allocate_locks">Allocate Locks</string>
+    <string name="allow_notifications">Allow System Notifications</string>
     <string name="app_name">GUI</string>
+    <string name="change">Change</string>
+    <string name="change_display_name">Change Display Name</string>
+    <string name="change_email">Change e-mail</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_username">Change Username</string>
+    <string name="change_your_email">Change your e-mail</string>
+    <string name="confirm_change_button">Confirm Change</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm_your_new_password">Confirm your <b>new</b> password</string>
+    <string name="connect_wifi">Connect to Wifi "Lock_Conf_XX"</string>
     <string name="create_account">Don\'t have an account? <b>Create</b>!</string>
+    <string name="create_account_title">Create account</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="do_not_disturb">Do Not Disturb</string>
+    <string name="enter_new_username">Enter <b>new</b> username</string>
+    <string name="enter_your_new_password">Enter your <b>new</b> password</string>
+    <string name="enter_your_old_password">Enter your <b>old</b> password</string>
     <string name="forgotten_password">Forgot your password?</string>
+    <string name="have_account">Have already an account? <b>Login here!</b></string>
     <string name="hello">Hello!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="instructions_pass_recover">Email to send password recovery</string>
+    <string name="locks_admin">Locks</string>
+    <string name="logout">Log out</string>
+    <string name="manage_notifications">Manage Notifications</string>
+    <string name="manual_lock_setup">Manual setup of Locker</string>
+    <string name="my_locks">My Locks!</string>
+    <string name="new_display_name">New Display Name</string>
+    <string name="new_email">Enter your <b>new</b> e-mail</string>
+    <string name="notifications">Notifications</string>
+    <string name="num1"> 1</string>
+    <string name="num2"> 2</string>
+    <string name="num3"> 3</string>
+    <string name="old_email">Enter your <b>old</b> e-mail</string>
+    <string name="open_wifi_settings">Open Wifi settings</string>
+    <string name="password">Password</string>
+    <string name="recover_password">Recover Password</string>
+    <string name="return_to_page">Return to this page</string>
+    <string name="search">Search</string>
+    <string name="select_lock_id">Select lock <b>ID</b></string>
+    <string name="send_email">Send</string>
+    <string name="settings">Settings</string>
+    <string name="share_button">Share</string>
+    <string name="share_locks">Share Locks</string>
+    <string name="share_multiple_locks">Share Multiple Locks</string>
+    <string name="share_with">Share with</string>
     <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="terms_services">I agree with <u>Terms and services</u></string>
+    <string name="username">Username</string>
     <string name="welcome">Welcome to xxx</string>
+    <string name="welcome_to_account">XXX account</string>
+    <string name="your_email">Your E-mail</string>
     <style name="Theme.GUI" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         
         <item name="colorPrimary">@color/blue_buttons</item>
@@ -28,7 +90,7 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/blue_buttons</item>
         
-        <item name="android:statusBarColor" ns1:targetApi="21">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         
     </style>
 </resources>

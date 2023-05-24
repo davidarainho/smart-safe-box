@@ -1,0 +1,10 @@
+<TextView android:id="@+id/enter_new_lock_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Exemplo"
+    android:textColor="@color/blue_buttons"
+    android:textSize="18sp"
+    android:layout_marginHorizontal="25dp"
+    android:paddingVertical="10dp"
+    android:paddingStart="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_lockers"
+    <item android:id="@+id/myLocksFragment"
         android:title="@string/locks"
         android:icon="@drawable/lock_closed" />
-    <item android:id="@+id/action_home"
+    <item android:id="@+id/profilePageFragment"
         android:title="@string/home"
         android:icon="@drawable/home" />
-    <item android:id="@+id/action_settings"
+    <item android:id="@+id/settingsFragment"
         android:title="@string/settings"
         android:icon="@drawable/settings" />
 </menu>

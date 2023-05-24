@@ -5,81 +5,166 @@
 5    android:versionName="1.0" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="19"
-8-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml
+8        android:minSdkVersion="21"
+8-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="33" />
-9-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml
+9-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml
 10
 11    <permission
-11-->[androidx.core:core:1.9.0] C:\Users\beatr\.gradle\caches\transforms-3\c73afc1fa215d9ca128620a3c01802b0\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+11-->[androidx.core:core:1.9.0] C:\Users\David\.gradle\caches\transforms-3\c73afc1fa215d9ca128620a3c01802b0\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
 12        android:name="com.example.gui.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-12-->[androidx.core:core:1.9.0] C:\Users\beatr\.gradle\caches\transforms-3\c73afc1fa215d9ca128620a3c01802b0\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+12-->[androidx.core:core:1.9.0] C:\Users\David\.gradle\caches\transforms-3\c73afc1fa215d9ca128620a3c01802b0\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
 13        android:protectionLevel="signature" />
-13-->[androidx.core:core:1.9.0] C:\Users\beatr\.gradle\caches\transforms-3\c73afc1fa215d9ca128620a3c01802b0\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+13-->[androidx.core:core:1.9.0] C:\Users\David\.gradle\caches\transforms-3\c73afc1fa215d9ca128620a3c01802b0\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
 14
 15    <uses-permission android:name="com.example.gui.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-15-->[androidx.core:core:1.9.0] C:\Users\beatr\.gradle\caches\transforms-3\c73afc1fa215d9ca128620a3c01802b0\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
-15-->[androidx.core:core:1.9.0] C:\Users\beatr\.gradle\caches\transforms-3\c73afc1fa215d9ca128620a3c01802b0\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+15-->[androidx.core:core:1.9.0] C:\Users\David\.gradle\caches\transforms-3\c73afc1fa215d9ca128620a3c01802b0\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.9.0] C:\Users\David\.gradle\caches\transforms-3\c73afc1fa215d9ca128620a3c01802b0\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 16
 17    <application
-17-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:5:5-23:19
+17-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:5:5-62:19
 18        android:allowBackup="true"
-18-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:6:9-35
+18-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:6:9-35
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-19-->[androidx.core:core:1.9.0] C:\Users\beatr\.gradle\caches\transforms-3\c73afc1fa215d9ca128620a3c01802b0\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+19-->[androidx.core:core:1.9.0] C:\Users\David\.gradle\caches\transforms-3\c73afc1fa215d9ca128620a3c01802b0\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
 20        android:dataExtractionRules="@xml/data_extraction_rules"
-20-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:7:9-65
+20-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:7:9-65
 21        android:debuggable="true"
 22        android:fullBackupContent="@xml/backup_rules"
-22-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:8:9-54
+22-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:8:9-54
 23        android:icon="@mipmap/ic_launcher"
-23-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:9:9-43
+23-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:9:9-43
 24        android:label="@string/app_name"
-24-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:10:9-41
+24-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:10:9-41
 25        android:supportsRtl="true"
-25-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:11:9-35
+25-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:11:9-35
 26        android:testOnly="true"
 27        android:theme="@style/Theme.GUI" >
-27-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:12:9-41
+27-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:12:9-41
 28        <activity
-28-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:14:9-22:20
+28-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:14:9-21:20
 29            android:name="com.example.gui.MainActivity"
-29-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:15:13-41
+29-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:15:13-41
 30            android:exported="true" >
-30-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:16:13-36
+30-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:16:13-36
 31            <intent-filter>
-31-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:17:13-21:29
+31-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:17:13-20:29
 32                <action android:name="android.intent.action.MAIN" />
-32-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:17-69
-32-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:25-66
+32-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:17-69
+32-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:25-66
 33
 34                <category android:name="android.intent.category.LAUNCHER" />
-34-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:20:17-77
-34-->D:\REPOS_GIT\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:20:27-74
+34-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:19:17-77
+34-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:19:27-74
 35            </intent-filter>
 36        </activity>
-37
-38        <provider
-38-->[androidx.emoji2:emoji2:1.2.0] C:\Users\beatr\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
-39            android:name="androidx.startup.InitializationProvider"
-39-->[androidx.emoji2:emoji2:1.2.0] C:\Users\beatr\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
-40            android:authorities="com.example.gui.androidx-startup"
-40-->[androidx.emoji2:emoji2:1.2.0] C:\Users\beatr\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
-41            android:exported="false" >
-41-->[androidx.emoji2:emoji2:1.2.0] C:\Users\beatr\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
-42            <meta-data
-42-->[androidx.emoji2:emoji2:1.2.0] C:\Users\beatr\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
-43                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-43-->[androidx.emoji2:emoji2:1.2.0] C:\Users\beatr\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
-44                android:value="androidx.startup" />
-44-->[androidx.emoji2:emoji2:1.2.0] C:\Users\beatr\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
-45            <meta-data
-45-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\beatr\.gradle\caches\transforms-3\d64e7ca6b93f4a6c092b1dd37cf249d6\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
-46                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-46-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\beatr\.gradle\caches\transforms-3\d64e7ca6b93f4a6c092b1dd37cf249d6\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
-47                android:value="androidx.startup" />
-47-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\beatr\.gradle\caches\transforms-3\d64e7ca6b93f4a6c092b1dd37cf249d6\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
-48        </provider>
-49    </application>
-50
-51</manifest>
+37        <activity
+37-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:22:9-29:20
+38            android:name="com.example.gui.CreateAccount"
+38-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:23:13-42
+39            android:exported="true" >
+39-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:24:13-36
+40            <intent-filter>
+40-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:17:13-20:29
+41                <action android:name="android.intent.action.MAIN" />
+41-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:17-69
+41-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:25-66
+42
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:19:17-77
+43-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:19:27-74
+44            </intent-filter>
+45        </activity>
+46        <activity
+46-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:30:9-37:20
+47            android:name="com.example.gui.RecoverPassword"
+47-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:31:13-44
+48            android:exported="true" >
+48-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:32:13-36
+49            <intent-filter>
+49-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:17:13-20:29
+50                <action android:name="android.intent.action.MAIN" />
+50-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:17-69
+50-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:25-66
+51
+52                <category android:name="android.intent.category.LAUNCHER" />
+52-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:19:17-77
+52-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:19:27-74
+53            </intent-filter>
+54        </activity>
+55        <activity
+55-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:38:9-45:20
+56            android:name="com.example.gui.ProfilePage"
+56-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:39:13-40
+57            android:exported="true" >
+57-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:40:13-36
+58            <intent-filter>
+58-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:17:13-20:29
+59                <action android:name="android.intent.action.MAIN" />
+59-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:17-69
+59-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:25-66
+60
+61                <category android:name="android.intent.category.LAUNCHER" />
+61-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:19:17-77
+61-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:19:27-74
+62            </intent-filter>
+63        </activity>
+64        <activity
+64-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:46:9-53:20
+65            android:name="com.example.gui.MyLocks"
+65-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:47:13-36
+66            android:exported="true" >
+66-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:48:13-36
+67            <intent-filter>
+67-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:17:13-20:29
+68                <action android:name="android.intent.action.MAIN" />
+68-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:17-69
+68-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:25-66
+69
+70                <category android:name="android.intent.category.LAUNCHER" />
+70-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:19:17-77
+70-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:19:27-74
+71            </intent-filter>
+72        </activity>
+73        <activity
+73-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:54:9-61:20
+74            android:name="com.example.gui.LockerPage"
+74-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:55:13-39
+75            android:exported="true" >
+75-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:56:13-36
+76            <intent-filter>
+76-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:17:13-20:29
+77                <action android:name="android.intent.action.MAIN" />
+77-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:17-69
+77-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:18:25-66
+78
+79                <category android:name="android.intent.category.LAUNCHER" />
+79-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:19:17-77
+79-->C:\Users\David\OneDrive\Ambiente de Trabalho\reposGit\smart-safe-box\techSpikes\app\gui\app\src\main\AndroidManifest.xml:19:27-74
+80            </intent-filter>
+81        </activity>
+82
+83        <provider
+83-->[androidx.emoji2:emoji2:1.2.0] C:\Users\David\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+84            android:name="androidx.startup.InitializationProvider"
+84-->[androidx.emoji2:emoji2:1.2.0] C:\Users\David\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+85            android:authorities="com.example.gui.androidx-startup"
+85-->[androidx.emoji2:emoji2:1.2.0] C:\Users\David\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+86            android:exported="false" >
+86-->[androidx.emoji2:emoji2:1.2.0] C:\Users\David\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+87            <meta-data
+87-->[androidx.emoji2:emoji2:1.2.0] C:\Users\David\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+88                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+88-->[androidx.emoji2:emoji2:1.2.0] C:\Users\David\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+89                android:value="androidx.startup" />
+89-->[androidx.emoji2:emoji2:1.2.0] C:\Users\David\.gradle\caches\transforms-3\66814d0c9c223a08105bc116aeb53dd5\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+90            <meta-data
+90-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\David\.gradle\caches\transforms-3\d64e7ca6b93f4a6c092b1dd37cf249d6\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+91                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+91-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\David\.gradle\caches\transforms-3\d64e7ca6b93f4a6c092b1dd37cf249d6\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+92                android:value="androidx.startup" />
+92-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\David\.gradle\caches\transforms-3\d64e7ca6b93f4a6c092b1dd37cf249d6\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+93        </provider>
+94    </application>
+95
+96</manifest>

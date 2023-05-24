@@ -7,8 +7,8 @@
 
     <gradient
         android:startColor="@color/blue_buttons"
-        android:endColor="@color/blue_top"
-        android:angle="90"
+        android:endColor="@color/whitish_blue"
+        android:angle="0"
         />
 
 </shape>
