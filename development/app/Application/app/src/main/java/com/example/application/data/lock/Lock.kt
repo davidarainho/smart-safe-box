@@ -1,4 +1,4 @@
-package com.example.es_database.lock
+package com.example.application.data.lock
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

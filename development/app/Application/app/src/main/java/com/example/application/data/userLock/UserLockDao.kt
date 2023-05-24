@@ -1,8 +1,9 @@
-package com.example.es_database.userlock
+package com.example.application.data.userLock
 
 import androidx.room.*
-import com.example.es_database.lock.Lock
-import com.example.es_database.user.User
+import com.example.application.data.lock.Lock
+import com.example.application.data.user.User
+
 
 @Dao
 interface UserLockDao {

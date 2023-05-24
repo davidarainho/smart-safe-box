@@ -1,4 +1,5 @@
-package com.example.es_database.user
+package com.example.application.data.user
+
 import androidx.room.*
 import kotlin.collections.List as List
 

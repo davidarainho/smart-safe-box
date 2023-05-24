@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.es_database.ui.RoomGuideAndroidTheme
 import com.example.es_database.user.*
-
+/*
 @Suppress("UNCHECKED_CAST")
 class MainActivity : ComponentActivity()
 {
@@ -44,4 +44,4 @@ class MainActivity : ComponentActivity()
 }
 
 
-
+*/

@@ -1,4 +1,4 @@
-package com.example.es_database.user
+package com.example.application.data.user
 
 import androidx.room.Entity
 import androidx.room.Index
