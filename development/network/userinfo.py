@@ -215,7 +215,7 @@ def reset_password(token, new_password):
     print("Password reset successfully")
 
 # Function to update the name for a lock
-def update_lock_name(lock_id, new_name):
+def update_lock_name(lock_id, new_name, username):
     # Check if the user has access level 0
     cursor.execute("SELECT access_level FROM users WHERE username=?", (username,))
     access_level = cursor.fetchone()[0]
@@ -229,7 +229,7 @@ def update_lock_name(lock_id, new_name):
 
 
 # Function to update the location for a lock
-def update_lock_location(lock_id, new_location):
+def update_lock_location(lock_id, new_location, username):
     # Check if the user has access level 0
     cursor.execute("SELECT access_level FROM users WHERE username=?", (username,))
     access_level = cursor.fetchone()[0]
@@ -242,7 +242,7 @@ def update_lock_location(lock_id, new_location):
     print(f"Location updated for lock {lock_id}")
 
 # Function to update the max number of users for a lock
-def update_lock_max_users(lock_id, new_max_users):
+def update_lock_max_users(lock_id, new_max_users, username):
     # Check if the user has access level 0
     cursor.execute("SELECT access_level FROM users WHERE username=?", (username,))
     access_level = cursor.fetchone()[0]
@@ -255,7 +255,7 @@ def update_lock_max_users(lock_id, new_max_users):
     print(f"Max users updated for lock {lock_id}")
 
 # Function to update the ID for a lock
-def update_lock_id(old_lock_id, new_lock_id):
+def update_lock_id(old_lock_id, new_lock_id, username):
     # Check if the user has access level 0
     cursor.execute("SELECT access_level FROM users WHERE username=?", (username,))
     access_level = cursor.fetchone()[0]
