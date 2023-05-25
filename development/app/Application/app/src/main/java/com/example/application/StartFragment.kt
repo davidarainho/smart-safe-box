@@ -38,6 +38,9 @@ class StartFragment : Fragment() {
         }
 
         binding.signIn.setOnClickListener{
+            // Miguel - chamar a funcao autenticacao
+            // usernameText.text.toString() == "batata@sopa.com" && passwordText.text.toString() == "qwerty"
+            // se flag correta passo para o proximo
             findNavController().navigate(R.id.action_startFragment_to_mainAppActivity)
         }
 
