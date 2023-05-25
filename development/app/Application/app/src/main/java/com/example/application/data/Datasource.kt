@@ -1,20 +1,19 @@
 package com.example.application.data
 
-import com.example.application.R
-import com.example.application.model.Affirmation
+import com.example.application.model.Userlockers
 
 class Datasource {
 
-    fun loadAffirmations(): List<Affirmation> {
-        return listOf<Affirmation>(
-            Affirmation("cenas"),
-            Affirmation("batata"),
-            Affirmation("lock"),
-            Affirmation("outro"),
-            Affirmation("sopa"),
-            Affirmation("Conflito"),
-            Affirmation("Miha"),
-            Affirmation("Contexto")
+    fun loadUserlockers(): List<Userlockers> {
+        return listOf<Userlockers>(
+            Userlockers("cenas"),
+            Userlockers("batata"),
+            Userlockers("lock"),
+            Userlockers("outro"),
+            Userlockers("sopa"),
+            Userlockers("Conflito"),
+            Userlockers("Miha"),
+            Userlockers("Contexto")
         )
     }
 }

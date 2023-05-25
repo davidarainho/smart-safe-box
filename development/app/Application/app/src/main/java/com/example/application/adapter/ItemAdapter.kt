@@ -1,20 +1,17 @@
 package com.example.application.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.application.MyLocksFragment
 import com.example.application.MyLocksFragmentDirections
 import com.example.application.R
-import com.example.application.model.Affirmation
+import com.example.application.model.Userlockers
 
 class ItemAdapter(
-    private val dataset: List<Affirmation>
+    private val dataset: List<Userlockers>
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     // Provide a reference to the views for each data item

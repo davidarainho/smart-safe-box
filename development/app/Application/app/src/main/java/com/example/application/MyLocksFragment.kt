@@ -6,18 +6,14 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.EditText
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.adapter.ItemAdapter
 import com.example.application.data.Datasource
 import com.example.application.databinding.FragmentMyLocksBinding
-import com.example.application.model.Affirmation
+import com.example.application.model.Userlockers
 
 class MyLocksFragment : Fragment() {
     private var _binding : FragmentMyLocksBinding? = null
@@ -36,8 +32,8 @@ class MyLocksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var myList: List<Affirmation>
-        val lockList = Datasource().loadAffirmations()
+        var myList: List<Userlockers>
+        val lockList = Datasource().loadUserlockers()
         val itemAdapter = ItemAdapter(lockList)
 
         val recyclerView:RecyclerView=view.findViewById(R.id.recycler_view)
@@ -60,7 +56,6 @@ class MyLocksFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
-
 
     }
 

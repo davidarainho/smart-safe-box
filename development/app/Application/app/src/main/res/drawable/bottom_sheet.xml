@@ -15,4 +15,9 @@
         android:top="10dp"/>
 
 
+    <stroke
+        android:width="2dp"
+        android:color="@color/whitish_blue_bottom_sheet_outline"
+        />
+
 </shape>
