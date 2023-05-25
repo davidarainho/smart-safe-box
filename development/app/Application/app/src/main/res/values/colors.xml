@@ -17,4 +17,6 @@
 
     <color name="red">#EE1616</color>
     <color name="whitish_blue">#FF70A9BC</color>
+    <color name="whitish_blue_bottom_sheet">#4480A9BC</color>
+    <color name="whitish_blue_bottom_sheet_outline">#FF80A9BC</color>
 </resources>

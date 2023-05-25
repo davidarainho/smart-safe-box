@@ -132,6 +132,12 @@
     <string name="access_history"><b>Access History</b></string>
     <string name="users_with_access"><b>Users with access</b></string>
     <string name="update_lock_pin"><b>Update Lock Pin</b></string>
+    <string name="enter_your_old_pin">Enter your <b>old</b> pin</string>
+    <string name="enter_your_new_pin">Enter your <b>new</b> pin</string>
+    <string name="confirm_your_new_pin">Confirm your <b>new</b> pin</string>
+    <string name="lock_old_pin">Old Pin</string>
+    <string name="lock_new_pin">New Pin</string>
+    <string name="confirm">Confirm</string>
 
 
 </resources>
