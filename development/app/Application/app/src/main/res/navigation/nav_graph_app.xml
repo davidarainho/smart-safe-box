@@ -24,6 +24,11 @@
         <action
             android:id="@+id/action_profilePageFragment_to_changeUsernameFragment"
             app:destination="@id/changeUsernameFragment" />
+        <action
+            android:id="@+id/xml"
+            app:destination="@id/nav_graph.xml"
+            app:popUpTo="@id/nav_graph_app.xml"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -76,5 +81,11 @@
         <argument
             android:name="lockID"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_lockerPageFragment_to_myLocksFragment"
+            app:destination="@id/myLocksFragment"
+            app:popUpTo="@id/myLocksFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
+    <include app:graph="@navigation/nav_graph" />
 </navigation>

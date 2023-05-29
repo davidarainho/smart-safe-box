@@ -139,6 +139,7 @@
     <string name="lock_new_pin">New Pin</string>
     <string name="confirm">Confirm</string>
     <string name="shared_by_n_users">This lock is currently shared by 4 other users</string>
+    <string name="share_lock">Share Lock</string>
 
 
 </resources>

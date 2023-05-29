@@ -76,6 +76,10 @@ class LockerPageFragment : Fragment() {
             botsheetPinFragment = UpdatePinFragment()
             botsheetPinFragment.show(childFragmentManager,botsheetPinFragment.tag)
         }
+
+        binding.exit.setOnClickListener {
+            findNavController().navigate(R.id.action_lockerPageFragment_to_myLocksFragment)
+        }
     }
 
     override fun onDestroyView() {

@@ -27,10 +27,22 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="16dp"
         android:text="@string/shared_by_n_users"
-        android:textSize="15sp"
         android:textColor="@color/Text_Bold"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_access"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        android:paddingTop="8dp"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_old_pin" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

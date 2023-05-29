@@ -26,38 +26,13 @@ class MainAppActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainContainer) as NavHostFragment
         navController = navHostFragment.navController
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.menu_bar)
         setupWithNavController(bottomNavigationView, navController)
-
-        //val bottomNav = findViewById<BottomNavigationView>(R.id.menu_bar)
-        //bottomNav.setOnItemSelectedListener(navListener)
-
-        // as soon as the application opens the first fragment should
-        // be shown to the user in this case it is algorithm fragment
-        //supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, MyLocksFragment()).commit()
     }
 
-
-
-    /*private val navListener = NavigationBarView.OnItemSelectedListener { item ->
-        // By using switch we can easily get the
-        // selected fragment by using there id
-        lateinit var selectedFragment: Fragment
-        when (item.itemId) {
-            R.id.action_lockers -> {
-                selectedFragment = MyLocksFragment()
-            }
-            R.id.action_settings -> {
-                selectedFragment = MyLocksFragment()
-            }
-            R.id.action_home -> {
-                selectedFragment = ProfilePageFragment()
-            }
-        }
-        // It will help to replace the
-        // one fragment to other.
-        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit()
-        true
-    }*/
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 
 }

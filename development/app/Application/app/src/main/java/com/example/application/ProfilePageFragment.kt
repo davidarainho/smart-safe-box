@@ -53,6 +53,12 @@ class ProfilePageFragment : Fragment() {
         binding.changeUsername.setOnClickListener {
             findNavController().navigate(R.id.action_profilePageFragment_to_changeUsernameFragment)
         }
+
+//        binding.logoutButton.setOnClickListener {
+//            // [REVER] - possivelmente libertar memoria e outras cenas
+//            //activity?.finish()
+//            findNavController().navigate(R.id.xml)
+//        }
     }
 
     override fun onDestroyView() {

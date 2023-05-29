@@ -42,8 +42,8 @@ class StartFragment : Fragment() {
             // usernameText.text.toString() == "batata@sopa.com" && passwordText.text.toString() == "qwerty"
             // se flag correta passo para o proximo
             findNavController().navigate(R.id.action_startFragment_to_mainAppActivity)
+            // Sera que devo manter a terminacao dentro do fragmento? Talvez passar para a atividade
         }
-
         // No Dao
     }
 
