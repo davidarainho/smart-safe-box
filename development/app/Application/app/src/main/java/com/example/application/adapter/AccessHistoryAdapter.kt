@@ -3,21 +3,17 @@ package com.example.application.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.application.MyLocksFragmentDirections
 import com.example.application.R
 import com.example.application.model.AccountInfo
-import com.example.application.model.Userlockers
 
-class InfoAccountAdapter (
+class AccessHistoryAdapter (
     private val dataset: List<AccountInfo>
-) : RecyclerView.Adapter<InfoAccountAdapter.ItemViewHolder>() {
+) : RecyclerView.Adapter<AccessHistoryAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.users_item)
+        val textView: TextView = view.findViewById(R.id.item_history)
         // Aqui adicionar para a outra caixa de texto
     }
 
@@ -27,7 +23,7 @@ class InfoAccountAdapter (
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         // create a new view
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.drop_down_item, parent, false)
+            .inflate(R.layout.list_access_history_item, parent, false)
 
         return ItemViewHolder(adapterLayout)
     }
@@ -39,7 +35,6 @@ class InfoAccountAdapter (
         val userinfo = dataset[position]
         holder.textView.text = userinfo.userName
         // Aqui adicionar depois para atribuir à caixa de texto
-        // Mais o .userEmail
     }
 
     /**
