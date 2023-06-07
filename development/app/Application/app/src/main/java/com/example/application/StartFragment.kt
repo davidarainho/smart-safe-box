@@ -6,7 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.application.data.user.User
+import com.example.application.data.user.UserDao
+import com.example.application.data.user.UserDatabase
 import com.example.application.databinding.FragmentStartBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 /**
@@ -18,6 +23,8 @@ class StartFragment : Fragment() {
     private var _binding : FragmentStartBinding? = null
 
     private val binding get() = _binding!!
+
+    private lateinit var userDao: UserDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +44,23 @@ class StartFragment : Fragment() {
             findNavController().navigate(R.id.action_startFragment_to_recoverPasswordFragment)
         }
 
+        userDao = UserDatabase.getDatabase(requireContext()).userDao()
+
         binding.signIn.setOnClickListener{
             // Miguel - chamar a funcao autenticacao
+
+
+            val username = binding.usernameText.text.toString()
+            val password = binding.passwordText.text.toString()
+
+            // para retornar o userID do user ativo
+            GlobalScope.launch {
+                val userID= userDao.getUserIdByUsername(username)
+                println(userID)
+            }
+            // guardar o userID do user que está logged in numa variavel local para saber
+
+
             // usernameText.text.toString() == "batata@sopa.com" && passwordText.text.toString() == "qwerty"
             // se flag correta passo para o proximo
             findNavController().navigate(R.id.action_startFragment_to_mainAppActivity)

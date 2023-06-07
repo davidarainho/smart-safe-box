@@ -13,6 +13,6 @@ data class User(
     val password: String,
     val allow_notifications: Int,
     @PrimaryKey (autoGenerate = true)
-    val user_id: Int=0
+    val user_id: Int = 0
 
 )

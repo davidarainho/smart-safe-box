@@ -49,6 +49,22 @@ interface LockDao {
     @Query("SELECT comment FROM Lock WHERE lock_id = :lockId")
     suspend fun getLockComment(lockId: Int): String
 
+    @Query("SELECT eKey FROM Lock")
+    suspend fun getLockEKey(): String
+
+    @Query("UPDATE Lock SET eKey = :newKey WHERE lock_id = :lockId")
+    suspend fun updateLockEKey(lockId: Int, newKey: String)
+
+    @Query("SELECT lock_state FROM Lock")
+    suspend fun getLockState(): String
+
+    @Query("UPDATE Lock SET lock_state = :newState WHERE lock_id = :lockId")
+    suspend fun updateLockState(lockId: Int, newState: String)
+
+
+
+
+
 
 
 
