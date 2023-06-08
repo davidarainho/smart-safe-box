@@ -8,10 +8,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.MyLocksFragmentDirections
 import com.example.application.R
-import com.example.application.model.Userlockers
+import com.example.application.data.lock.Lock
 
 class ItemAdapter(
-    private val dataset: List<Userlockers>
+    private val dataset: List<Lock>?
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     // Provide a reference to the views for each data item
@@ -37,20 +37,27 @@ class ItemAdapter(
      * Replace the contents of a view (invoked by the layout manager)
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset[position]
-        holder.textView.text = item.lockName
+        val item = dataset?.get(position)
+        if (item != null) {
+            holder.textView.text = item.lock_name
 
-        holder.textView.setOnClickListener {
-            // Create an action from WordList to DetailList
-            // using the required arguments
-            val action = MyLocksFragmentDirections.actionMyLocksFragmentToLockerPageFragment(name = holder.textView.text.toString(), lockID = position)
-            // Navigate using that action
-            holder.itemView.findNavController().navigate(action)
+            holder.textView.setOnClickListener {
+                // Create an action from WordList to DetailList
+                // using the required arguments
+                val action = MyLocksFragmentDirections.actionMyLocksFragmentToLockerPageFragment(name = holder.textView.text.toString(), lockID = position)
+                // Navigate using that action
+                holder.itemView.findNavController().navigate(action)
+            }
         }
     }
 
     /**
      * Return the size of your dataset (invoked by the layout manager)
      */
-    override fun getItemCount() = dataset.size
+    override fun getItemCount(): Int {
+        if(dataset != null){
+            return dataset.size
+        }
+        return -1
+    }
 }

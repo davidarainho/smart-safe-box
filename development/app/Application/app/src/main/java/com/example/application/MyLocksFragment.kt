@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.adapter.ItemAdapter
-import com.example.application.data.Datasource
+import com.example.application.data.LockDataSource
+import com.example.application.data.lock.Lock
 import com.example.application.databinding.FragmentMyLocksBinding
-import com.example.application.model.Userlockers
 
 class MyLocksFragment : Fragment() {
     private var _binding : FragmentMyLocksBinding? = null
@@ -32,8 +32,8 @@ class MyLocksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var myList: List<Userlockers>
-        val lockList = Datasource().loadUserlockers()
+        var myList: List<Lock>? = null
+        val lockList = LockDataSource().loadUserlockers(requireContext())
         val itemAdapter = ItemAdapter(lockList)
 
         val recyclerView:RecyclerView=view.findViewById(R.id.recycler_view)
@@ -44,19 +44,18 @@ class MyLocksFragment : Fragment() {
         val search : EditText = view.findViewById(R.id.username_text)
         search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                myList = if(s.isNotEmpty()) {
-                    lockList.filter { l -> l.lockName.contains(s.toString(), ignoreCase = true) }
-                }else{
-                    lockList
+                if (lockList != null) {
+                    myList = if(s.isNotEmpty()) {
+                        lockList.filter { l -> l.lock_name.contains(s.toString(), ignoreCase = true) }
+                    }else{
+                        lockList
+                    }
                 }
                 recyclerView.adapter = ItemAdapter(myList)
-
             }
-
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
-
     }
 
     override fun onDestroyView() {

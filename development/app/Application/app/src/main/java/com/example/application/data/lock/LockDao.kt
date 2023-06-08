@@ -13,17 +13,20 @@ interface LockDao {
     suspend fun deleteLock(lock: Lock)
 
     @Query("SELECT * FROM Lock ORDER BY lock_name ASC")
-    fun orderLocksByName(): kotlinx.coroutines.flow.Flow<List<Lock>>
+    fun orderLocksByName(): Flow<List<Lock>>
 
 //    @Query("SELECT lock_name, user_last_access, last_access FROM Lock ORDER BY last_access DESC")
 //    fun getLockLastAccessInfo(): kotlinx.coroutines.flow.Flow<List<Lock>>
 
 
     @Query("SELECT * FROM Lock ORDER BY number_of_users DESC")
-    fun orderLocksByUserNumber(): kotlinx.coroutines.flow.Flow<List<Lock>>
+    fun orderLocksByUserNumber(): Flow<List<Lock>>
 
     @Query("SELECT * FROM Lock ORDER BY last_access DESC")
-    fun orderLocksByLastAccess(): kotlinx.coroutines.flow.Flow<List<Lock>>
+    fun orderLocksByLastAccess(): Flow<List<Lock>>
+
+    @Query("SELECT * FROM Lock")
+    fun getAll(): List<Lock>
 
     @Query("SELECT lock_id FROM Lock LIMIT 1")
     suspend fun getFirstLockId(): Int
@@ -32,10 +35,10 @@ interface LockDao {
     suspend fun getLastLockId(): Int
 
     @Query("SELECT * FROM Lock WHERE lock_id = :lockId")
-    fun getLockByLockId(lockId: Int): kotlinx.coroutines.flow.Flow<Lock>
+    fun getLockByLockId(lockId: Int): Flow<Lock>
 
     @Query("SELECT * FROM Lock WHERE lock_name = :lockName")
-    fun getLockByLockName(lockName: String): kotlinx.coroutines.flow.Flow<Lock>
+    fun getLockByLockName(lockName: String): Flow<Lock>
 
     @Query("UPDATE Lock SET lock_name = :newLockName WHERE lock_id = :lockId")
     suspend fun updateLockName(lockId: Int, newLockName: String)

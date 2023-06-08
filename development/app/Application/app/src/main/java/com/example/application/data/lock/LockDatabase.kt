@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.application.data.user.UserDatabase
 
 @Database
     (
@@ -14,7 +13,7 @@ import com.example.application.data.user.UserDatabase
 
 abstract class LockDatabase: RoomDatabase() {
 
-    abstract val dao: LockDao
+    abstract fun lockDao(): LockDao
 
     companion object {
         @Volatile

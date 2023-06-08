@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.application.data.user.User
+import com.example.application.data.lock.LockDao
 import com.example.application.data.user.UserDao
-import com.example.application.data.user.UserDatabase
+import com.example.application.data.userLock.UserLockDao
 import com.example.application.databinding.FragmentStartBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 
 /**
@@ -25,6 +23,10 @@ class StartFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var userDao: UserDao
+    private lateinit var userLockDao: UserLockDao
+    private lateinit var lockDao: LockDao
+
+    var utilizadorIdentificador : Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,22 +46,35 @@ class StartFragment : Fragment() {
             findNavController().navigate(R.id.action_startFragment_to_recoverPasswordFragment)
         }
 
-        userDao = UserDatabase.getDatabase(requireContext()).userDao()
+//        userDao = UserDatabase.getDatabase(requireContext()).userDao()
+//        userLockDao = UserLockDatabase.getUserLockDatabase(requireContext()).userLockDao()
+//        lockDao = LockDatabase.getLockDatabase(requireContext()).lockDao()
+//
+//        val lock = Lock("Back Door", "2023-05-31", "John Doe", 1,comment="old", eKey = null, lock_state = "open")
+//
+//
+//        val username = binding.usernameText.text.toString()
+//        val password = binding.passwordText.text.toString()
+
+        // para retornar o userID do user ativo
+//        GlobalScope.launch {
+//            //userDao.upsertUser(user)
+//            //val userid= 2 // userDao.getUserIdByUsername(user.username)
+//
+////            lockDao.upsertLock(lock)
+////            val lockid= lockDao.getFirstLockId()
+//
+//            //val userLock = UserLock(666, 3, "1234", permission_level=1, 4)
+//            //userLockDao.upsertUserLock(userLock)
+//
+////            utilizadorIdentificador = userDao.getUserIdByUsername(username)
+////            println(utilizadorIdentificador)
+//        }
+        // guardar o userID do user que está logged in numa variavel local para saber
 
         binding.signIn.setOnClickListener{
             // Miguel - chamar a funcao autenticacao
-
-
-            val username = binding.usernameText.text.toString()
-            val password = binding.passwordText.text.toString()
-
-            // para retornar o userID do user ativo
-            GlobalScope.launch {
-                val userID= userDao.getUserIdByUsername(username)
-                println(userID)
-            }
-            // guardar o userID do user que está logged in numa variavel local para saber
-
+            //val user = User("johnDoe", "john@example.com", "password", allow_notifications=1)
 
             // usernameText.text.toString() == "batata@sopa.com" && passwordText.text.toString() == "qwerty"
             // se flag correta passo para o proximo
