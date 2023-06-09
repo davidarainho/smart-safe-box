@@ -15,6 +15,6 @@ data class Lock(
     val eKey: String?,
     val lock_state: String,
     @PrimaryKey(autoGenerate = true)
-    val lock_id: Int = 0
+    val lock_id: Int=0
 
 )

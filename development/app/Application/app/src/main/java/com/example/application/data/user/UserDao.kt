@@ -14,10 +14,10 @@ interface UserDao {
     suspend fun deleteUser(user: User)
 
     @Query("SELECT * FROM User ORDER BY username ASC")
-    fun getUserByUsername(): kotlinx.coroutines.flow.Flow<List<User>>
+    fun getUserByUsername(): List<User>
 
     @Query("SELECT * FROM User ORDER BY email ASC")
-    fun getUserByEmail():  kotlinx.coroutines.flow.Flow<List<User>>
+    fun getUserByEmail():  List<User>
 
     //@Query("SELECT user_id FROM User LIMIT 1")
     //suspend fun getFirstUserId(): Int
@@ -35,7 +35,7 @@ interface UserDao {
     suspend fun updateNotificationPreference(userId: Int, newPreference: Int)
 
     @Query("SELECT * FROM User WHERE user_id = :userId")
-    fun getUserByUserId(userId: Int): kotlinx.coroutines.flow.Flow<User>
+    fun getUserByUserId(userId: Int): User
 
     @Query("UPDATE User SET username = :newUsername WHERE user_id = :userId")
     suspend fun updateUsername(userId: Int, newUsername: String)

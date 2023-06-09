@@ -9,7 +9,7 @@
     <!-- activity_main -->
     <string name="app_name">GUI</string>
     <string name="hello">Hello!</string>
-    <string name="welcome">Welcome to xxx</string>
+    <string name="welcome">Welcome to <b>Smart Box</b></string>
     <string name="create_account">Don\'t have an account? <b>Create</b>!</string>
     <string name="forgotten_password">Forgot your password?</string>
     <string name="sign_in">Sign In</string>

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.application.data.lock.LockDao
 import com.example.application.data.user.UserDao
-import com.example.application.data.userLock.UserLockDao
 import com.example.application.databinding.FragmentStartBinding
 
 
@@ -23,7 +22,6 @@ class StartFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var userDao: UserDao
-    private lateinit var userLockDao: UserLockDao
     private lateinit var lockDao: LockDao
 
     var utilizadorIdentificador : Int? = null
@@ -47,7 +45,6 @@ class StartFragment : Fragment() {
         }
 
 //        userDao = UserDatabase.getDatabase(requireContext()).userDao()
-//        userLockDao = UserLockDatabase.getUserLockDatabase(requireContext()).userLockDao()
 //        lockDao = LockDatabase.getLockDatabase(requireContext()).lockDao()
 //
 //        val lock = Lock("Back Door", "2023-05-31", "John Doe", 1,comment="old", eKey = null, lock_state = "open")
@@ -58,14 +55,11 @@ class StartFragment : Fragment() {
 
         // para retornar o userID do user ativo
 //        GlobalScope.launch {
-//            //userDao.upsertUser(user)
-//            //val userid= 2 // userDao.getUserIdByUsername(user.username)
+//
 //
 ////            lockDao.upsertLock(lock)
 ////            val lockid= lockDao.getFirstLockId()
-//
-//            //val userLock = UserLock(666, 3, "1234", permission_level=1, 4)
-//            //userLockDao.upsertUserLock(userLock)
+
 //
 ////            utilizadorIdentificador = userDao.getUserIdByUsername(username)
 ////            println(utilizadorIdentificador)

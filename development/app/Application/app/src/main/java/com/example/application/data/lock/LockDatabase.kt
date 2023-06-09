@@ -2,35 +2,27 @@ package com.example.application.data.lock
 
 import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
+import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
 
-@Database
-    (
-    entities = [Lock::class],
-    version = 1
-)
-
-abstract class LockDatabase: RoomDatabase() {
-
-    abstract fun lockDao(): LockDao
+@Database(entities = [Lock::class], version = 2)
+abstract class LockDatabase : RoomDatabase() {
+    abstract fun lockDao(): LockDao?
 
     companion object {
-        @Volatile
         private var instance: LockDatabase? = null
-
-        fun getLockDatabase(context: Context): LockDatabase {
-            return instance ?: synchronized(this) {
-                val newInstance = Room.databaseBuilder(
+        @Synchronized
+        fun getLockDatabase(context: Context): LockDatabase? {
+            if (instance == null) {
+                instance = databaseBuilder(
                     context.applicationContext,
                     LockDatabase::class.java,
                     "lock_database"
-                ).build()
-                instance = newInstance
-                newInstance
+                )
+                    .fallbackToDestructiveMigration() // Use this to handle migrations
+                    .build()
             }
+            return instance
         }
     }
-
-
 }

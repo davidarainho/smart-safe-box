@@ -23,7 +23,7 @@ interface LockDao {
     fun orderLocksByUserNumber(): Flow<List<Lock>>
 
     @Query("SELECT * FROM Lock ORDER BY last_access DESC")
-    fun orderLocksByLastAccess(): Flow<List<Lock>>
+    fun orderLocksByLastAccess(): List<Lock>
 
     @Query("SELECT * FROM Lock")
     fun getAll(): List<Lock>

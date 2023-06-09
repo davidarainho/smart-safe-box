@@ -12,7 +12,7 @@ data class User(
     val email: String,
     val password: String,
     val allow_notifications: Int,
-    @PrimaryKey (autoGenerate = true)
-    val user_id: Int = 0
+    @PrimaryKey (autoGenerate = false)
+    val user_id: Int
 
 )
