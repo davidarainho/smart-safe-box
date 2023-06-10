@@ -19,6 +19,7 @@ import com.example.application.data.user.User
 import com.example.application.data.user.UserDatabase
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentCreateAccountBinding
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
@@ -50,6 +51,8 @@ class CreateAccountFragment : Fragment() {
         }
 
 
+        // FAZER ISTO PARA CADA FRAGEMENTO ONDE VAMOS CHAMAR UMA FUNÇÃO DA BASE DE DADOS
+
         val lockDatabase = LockDBSingleton.getInstance(requireContext())
         val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
 
@@ -60,30 +63,35 @@ class CreateAccountFragment : Fragment() {
         val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
 
-        val lock = Lock(lock_name="logan", last_access="2027-06-31", user_last_access = "John Doe", number_of_users = 1,comment="old", eKey = null, lock_state = "open", lock_id=32678)
+        val lock = Lock(lock_name="CARLOTA", last_access= "2027-06-31", user_last_access =  "Logan", number_of_users = 2,comment="new", eKey = null, lock_state = "open", lock_id=5658)
+        val  lock1= Lock(lock_name="RUCA", last_access="2027-04-10", user_last_access =  "Logan", number_of_users = 1,comment="old", eKey = null, lock_state = "open", lock_id=863)
 
         binding.signUp.setOnClickListener {
             val username = binding.usernameText.text.toString()
             val email = binding.emailText.text.toString()
             val password = binding.passwordText.text.toString()
             val allowNotifications = 1
-            val userID= 745
+            val userID= 4444
 
             val user = User(username, email, password, allowNotifications, userID)
             val userLock_association= UserAndLock(user_id = 741258, 7, userLockId = 91, permission_level = 4, lock_access_pin= "1234" )
             val userLock_association1= UserAndLock(user_id = 741258, 9, userLockId = 94, permission_level = 4, lock_access_pin= "1234" )
 
 
-            viewLifecycleOwner.lifecycleScope.launch {
-                userDao.upsertUser(user)
+            GlobalScope.launch {
+//            viewLifecycleOwner.lifecycleScope.launch {
+
 //                if (lockDao != null) {
 //                    lockDao.upsertLock(lock)
+//                    lockDao.upsertLock(lock1)
 //                }
+//
+//                userDao.upsertUser(user)
 
-                if (userLockDao != null) {
-                    userLockDao.upsertUserAndLock(userLock_association)
-                    userLockDao.upsertUserAndLock(userLock_association1)
-                }
+//                if (userLockDao != null) {
+//                    userLockDao.upsertUserAndLock(userLock_association)
+//                    userLockDao.upsertUserAndLock(userLock_association1)
+//                }
 
 
             }

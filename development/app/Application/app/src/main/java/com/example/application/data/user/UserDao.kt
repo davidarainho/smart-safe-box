@@ -12,6 +12,8 @@ interface UserDao {
 
     @Delete
     suspend fun deleteUser(user: User)
+    @Query("DELETE FROM User")
+    fun deleteUserData()
 
     @Query("SELECT * FROM User ORDER BY username ASC")
     fun getUserByUsername(): List<User>
