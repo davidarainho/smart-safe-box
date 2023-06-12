@@ -1,5 +1,6 @@
 package com.example.application.adapter
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ class ItemAdapter(
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just an Affirmation object.
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val textView: Button = view.findViewById(R.id.item_title)
+        val button: Button = view.findViewById(R.id.item)
     }
 
     /**
@@ -39,12 +40,13 @@ class ItemAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset?.get(position)
         if (item != null) {
-            holder.textView.text = item.lock_name
+            val name = item.lock_name + "\n" + item.comment
+            holder.button.text = name
 
-            holder.textView.setOnClickListener {
+            holder.button.setOnClickListener {
                 // Create an action from WordList to DetailList
                 // using the required arguments
-                val action = MyLocksFragmentDirections.actionMyLocksFragmentToLockerPageFragment(name = holder.textView.text.toString(), lockID = position)
+                val action = MyLocksFragmentDirections.actionMyLocksFragmentToLockerPageFragment(name = item.lock_name.toString(), lockID = item.lock_id)
                 // Navigate using that action
                 holder.itemView.findNavController().navigate(action)
             }

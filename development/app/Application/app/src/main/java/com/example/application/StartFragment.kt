@@ -11,11 +11,6 @@ import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentStartBinding
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [StartFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class StartFragment : Fragment() {
     private var _binding : FragmentStartBinding? = null
 

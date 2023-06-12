@@ -53,21 +53,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/wave" />
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/donotdisturb"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="18dp"
-        android:background="@color/white"
-        android:paddingHorizontal="24dp"
-        android:paddingVertical="15dp"
-        android:text="@string/do_not_disturb"
-        android:textColor="@color/blue_buttons"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/allownotifications" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.R
+import com.example.application.data.lock.Lock
 import com.example.application.model.AccountInfo
 
 class AccessHistoryAdapter (
-    private val dataset: List<AccountInfo>
+    private val dataset: List<Lock>?
 ) : RecyclerView.Adapter<AccessHistoryAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
@@ -32,13 +33,21 @@ class AccessHistoryAdapter (
      * Replace the contents of a view (invoked by the layout manager)
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val userinfo = dataset[position]
-        holder.textView.text = userinfo.userName
+        val userinfo = dataset?.get(position)
+        if (userinfo != null) {
+            holder.textView.text = userinfo.user_last_access
+            // userinfo.last_access
+        }
         // Aqui adicionar depois para atribuir à caixa de texto
     }
 
     /**
      * Return the size of your dataset (invoked by the layout manager)
      */
-    override fun getItemCount() = dataset.size
+    override fun getItemCount() : Int {
+        if(dataset != null){
+            return dataset.size
+        }
+        return -1
+    }
 }

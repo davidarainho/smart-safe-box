@@ -90,6 +90,8 @@ class LockerPageFragment : Fragment() {
 
 
     private fun setLockState(imageView: ImageView){
+        // state = Ir buscar valor do estado na base de dados
+        // state == 1 fechado
         state = if(state){
             imageView.setImageResource(R.drawable.lock_closed)
             /// [REVER]!! /// Adicionar mais logica antes de prosseguir para o popup

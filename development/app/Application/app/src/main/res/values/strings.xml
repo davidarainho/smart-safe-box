@@ -2,7 +2,7 @@
     <!-- Hints -->
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="your_email">Your E-mail: X</string>
+    <string name="your_email">Your E-mail</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="search">Search</string>
 

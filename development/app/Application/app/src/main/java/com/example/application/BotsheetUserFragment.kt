@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.adapter.InfoAccountAdapter
-import com.example.application.data.DataInfo
+import com.example.application.data.LockDataSource
+import com.example.application.data.UserDataSource
 import com.example.application.databinding.FragmentBotsheetUserBinding
-import com.example.application.model.AccountInfo
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BotsheetUserFragment : BottomSheetDialogFragment() {
@@ -28,7 +28,7 @@ class BotsheetUserFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val lockList = DataInfo().loadUserInfo()
+        val lockList = UserDataSource().loadUserInfo((requireContext()))
         val itemAdapter = InfoAccountAdapter(lockList)
 
         val recyclerView: RecyclerView =view.findViewById(R.id.recycler_view_access)

@@ -67,35 +67,35 @@ class CreateAccountFragment : Fragment() {
         val  lock1= Lock(lock_name="RUCA", last_access="2027-04-10", user_last_access =  "Logan", number_of_users = 1,comment="old", eKey = null, lock_state = "open", lock_id=863)
 
         binding.signUp.setOnClickListener {
-            val username = binding.usernameText.text.toString()
-            val email = binding.emailText.text.toString()
-            val password = binding.passwordText.text.toString()
-            val allowNotifications = 1
-            val userID= 4444
-
-            val user = User(username, email, password, allowNotifications, userID)
-            val userLock_association= UserAndLock(user_id = 741258, 7, userLockId = 91, permission_level = 4, lock_access_pin= "1234" )
-            val userLock_association1= UserAndLock(user_id = 741258, 9, userLockId = 94, permission_level = 4, lock_access_pin= "1234" )
-
-
-            GlobalScope.launch {
-//            viewLifecycleOwner.lifecycleScope.launch {
-
-//                if (lockDao != null) {
-//                    lockDao.upsertLock(lock)
-//                    lockDao.upsertLock(lock1)
-//                }
+//            val username = binding.usernameText.text.toString()
+//            val email = binding.emailText.text.toString()
+//            val password = binding.passwordText.text.toString()
+//            val allowNotifications = 1
+//            val userID= 4444
 //
-//                userDao.upsertUser(user)
-
-//                if (userLockDao != null) {
-//                    userLockDao.upsertUserAndLock(userLock_association)
-//                    userLockDao.upsertUserAndLock(userLock_association1)
+//            val user = User(username, email, password, allowNotifications, userID)
+//            val userLock_association= UserAndLock(user_id = 741258, 7, userLockId = 91, permission_level = 4, lock_access_pin= "1234" )
+//            val userLock_association1= UserAndLock(user_id = 741258, 9, userLockId = 94, permission_level = 4, lock_access_pin= "1234" )
+//
+//
+//            GlobalScope.launch {
+//                viewLifecycleOwner.lifecycleScope.launch {
+//
+//                    if (lockDao != null) {
+//                        lockDao.upsertLock(lock)
+//                        lockDao.upsertLock(lock1)
+//                    }
+//
+//                    userDao.upsertUser(user)
+//
+//                    if (userLockDao != null) {
+//                        userLockDao.upsertUserAndLock(userLock_association)
+//                        userLockDao.upsertUserAndLock(userLock_association1)
+//                    }
+//
+//
 //                }
-
-
-            }
-
+//            }
             findNavController().navigate(R.id.action_createAccountFragment_to_startFragment)
         }
     }

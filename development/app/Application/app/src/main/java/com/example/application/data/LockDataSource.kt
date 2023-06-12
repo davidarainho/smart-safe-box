@@ -40,9 +40,9 @@ class LockDataSource {
         val lockDatabaseSingleton = LockDBSingleton.getInstance(context)
         val lockDao: LockDao? = lockDatabaseSingleton!!.getAppDatabase().lockDao()
 
-        var listOfLock: List<Lock>? = null
+        var listOfLock: List<Lock>?
         withContext(Dispatchers.IO) {
-            listOfLock = lockDao?.orderLocksByLastAccess()
+            listOfLock = lockDao?.orderLocksByLastAccess() //orderLocksByLastAccess
         }
         println(listOfLock)
 
