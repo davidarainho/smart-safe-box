@@ -20,9 +20,15 @@ class MainAppActivity : AppCompatActivity() {
     //private lateinit var binding : ActivityMainBinding
 
     private lateinit var navController : NavController
+
+    private lateinit var name : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_app)
+
+//        arguments?.let {
+//            name = it.getString("userName").toString()
+//        }
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainContainer) as NavHostFragment
         navController = navHostFragment.navController

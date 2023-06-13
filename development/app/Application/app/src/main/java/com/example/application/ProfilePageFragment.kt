@@ -17,23 +17,23 @@ import java.util.jar.Attributes.Name
  */
 class ProfilePageFragment : Fragment() {
 
-    companion object {
-        const val NAME = "name"
-    }
+//    companion object {
+//        const val NAME = "name"
+//    }
 
 
     private var _binding : FragmentProfilePageBinding? = null
 
     private val binding get() = _binding!!
 
-    private lateinit var name: String
+//    private lateinit var name: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            name = it.getString(NAME).toString()
-        }
+//        arguments?.let {
+//            name = it.getString(NAME).toString()
+//        }
     }
 
     override fun onCreateView(

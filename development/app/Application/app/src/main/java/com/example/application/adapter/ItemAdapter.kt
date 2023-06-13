@@ -46,7 +46,7 @@ class ItemAdapter(
             holder.button.setOnClickListener {
                 // Create an action from WordList to DetailList
                 // using the required arguments
-                val action = MyLocksFragmentDirections.actionMyLocksFragmentToLockerPageFragment(name = item.lock_name.toString(), lockID = item.lock_id)
+                val action = MyLocksFragmentDirections.actionMyLocksFragmentToLockerPageFragment(name = item.lock_name, lockID = item.lock_id)
                 // Navigate using that action
                 holder.itemView.findNavController().navigate(action)
             }

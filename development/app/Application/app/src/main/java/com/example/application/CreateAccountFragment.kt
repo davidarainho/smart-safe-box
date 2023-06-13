@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.application.data.LockDBSingleton
@@ -66,7 +67,36 @@ class CreateAccountFragment : Fragment() {
         val lock = Lock(lock_name="CARLOTA", last_access= "2027-06-31", user_last_access =  "Logan", number_of_users = 2,comment="new", eKey = null, lock_state = "open", lock_id=5658)
         val  lock1= Lock(lock_name="RUCA", last_access="2027-04-10", user_last_access =  "Logan", number_of_users = 1,comment="old", eKey = null, lock_state = "open", lock_id=863)
 
+        var flagAllowNewAccount : Boolean = false
+        var username : String
+        var email : String
+        var password : String
+        var passwordConfirmed : String
         binding.signUp.setOnClickListener {
+            username = binding.usernameText.text.toString()
+            email = binding.emailText.text.toString()
+            password = binding.passwordText.text.toString()
+            passwordConfirmed = binding.passwordConfirmationText.text.toString()
+            if(username.isEmpty() ||
+                email.isEmpty() ||
+                password.isEmpty() ||
+                passwordConfirmed.isEmpty()){
+                    // Mostrar erro
+                    Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
+            }else if(password != passwordConfirmed){
+                // Mostrar erro
+                Toast.makeText(context, "Error: password and confirmation don't match", Toast.LENGTH_SHORT).show()
+            }else if(!binding.checkBox.isChecked){
+                // Mostrar erro
+                Toast.makeText(context, "Error: Check Box", Toast.LENGTH_SHORT).show()
+            }else{
+                flagAllowNewAccount = true
+            }
+
+            ////////// Verificar se e' uma conta permitida [Miguel] //////////
+
+
+
 //            val username = binding.usernameText.text.toString()
 //            val email = binding.emailText.text.toString()
 //            val password = binding.passwordText.text.toString()
@@ -74,8 +104,8 @@ class CreateAccountFragment : Fragment() {
 //            val userID= 4444
 //
 //            val user = User(username, email, password, allowNotifications, userID)
-//            val userLock_association= UserAndLock(user_id = 741258, 7, userLockId = 91, permission_level = 4, lock_access_pin= "1234" )
-//            val userLock_association1= UserAndLock(user_id = 741258, 9, userLockId = 94, permission_level = 4, lock_access_pin= "1234" )
+//            val userLock_association= UserAndLock(user_id = 21, 7, userLockId = 91, permission_level = 4, lock_access_pin= "1234" )
+//            val userLock_association1= UserAndLock(user_id = 21, 9, userLockId = 94, permission_level = 4, lock_access_pin= "1234" )
 //
 //
 //            GlobalScope.launch {
@@ -96,7 +126,14 @@ class CreateAccountFragment : Fragment() {
 //
 //                }
 //            }
-            findNavController().navigate(R.id.action_createAccountFragment_to_startFragment)
+
+
+            if(flagAllowNewAccount){
+                // Mostrar algo que confirme o sucesso da criação da conta
+                println("SUCESSO: An email was sent to confirm")
+                flagAllowNewAccount = false
+            }
+
         }
     }
 

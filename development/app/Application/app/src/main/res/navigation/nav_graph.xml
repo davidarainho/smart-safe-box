@@ -35,7 +35,11 @@
         android:id="@+id/mainAppActivity"
         android:name="com.example.application.MainAppActivity"
         android:label="activity_main_app"
-        tools:layout="@layout/activity_main_app" />
+        tools:layout="@layout/activity_main_app" >
+        <argument
+            android:name="userName"
+            app:argType="string" />
+    </activity>
     <fragment
         android:id="@+id/recoverPasswordFragment"
         android:name="com.example.application.RecoverPasswordFragment"
