@@ -12,7 +12,7 @@ import com.example.application.data.UserDataSource
 import com.example.application.databinding.FragmentBotsheetUserBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BotsheetUserFragment : BottomSheetDialogFragment() {
+class BotsheetUserFragment(private val lockID : Int) : BottomSheetDialogFragment() {
     private var _binding : FragmentBotsheetUserBinding? = null
 
     private val binding get() = _binding!!
@@ -28,7 +28,7 @@ class BotsheetUserFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val lockList = UserDataSource().loadUserInfo((requireContext()))
+        val lockList = UserDataSource().loadUserInfo(requireContext(), lockID)
         val itemAdapter = InfoAccountAdapter(lockList)
 
         val recyclerView: RecyclerView =view.findViewById(R.id.recycler_view_access)

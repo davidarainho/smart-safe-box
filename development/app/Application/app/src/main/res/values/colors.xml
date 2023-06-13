@@ -19,4 +19,8 @@
     <color name="whitish_blue">#FF70A9BC</color>
     <color name="whitish_blue_bottom_sheet">#4480A9BC</color>
     <color name="whitish_blue_bottom_sheet_outline">#FF80A9BC</color>
+
+    <color name="gradient1">#40798C</color>
+    <color name="gradient2">#70A9A1</color>
+    <color name="gradient3">#F6F1D1</color>
 </resources>

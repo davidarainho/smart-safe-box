@@ -71,7 +71,7 @@ class LockerPageFragment : Fragment() {
         }
 
         binding.moreInfoNumber.setOnClickListener {
-            botsheetUserFragment = BotsheetUserFragment()
+            botsheetUserFragment = BotsheetUserFragment(lockID.toInt())
             botsheetUserFragment.show(childFragmentManager,botsheetUserFragment.tag)
         }
 

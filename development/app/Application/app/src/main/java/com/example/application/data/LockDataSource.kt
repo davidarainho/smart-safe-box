@@ -63,7 +63,6 @@ class LockDataSource {
                 if (lockDao != null) {
                     listOfLock = lockID.stream().map{l -> lockDao.getLockByLockId(l)}.toList()
                 }
-
             }
         }
 

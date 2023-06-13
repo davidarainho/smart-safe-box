@@ -6,8 +6,8 @@
         />
 
     <gradient
-        android:startColor="@color/blue_buttons"
-        android:endColor="@color/whitish_blue"
+        android:startColor="#4D91A8"
+        android:endColor="#CFD7C7"
         android:angle="0"
         />
 

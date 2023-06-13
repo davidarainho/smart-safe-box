@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.AppCompatButton
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="50dp"
-    android:layout_marginBottom="16dp"
-    android:background="@drawable/locker_options"
-    android:paddingVertical="20dp"
-    android:textSize="24sp"
-    android:paddingHorizontal="16dp"
-    android:gravity="start"
-    android:textColor="@color/white"
-    tools:text="Options\ncenas"
-    />
+    android:layout_height="wrap_content">
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:background="@drawable/locker_options"
+        android:gravity="start"
+        android:paddingHorizontal="27dp"
+        android:paddingVertical="20dp"
+        android:textColor="@color/Text_Bold"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Options\ncenas" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
