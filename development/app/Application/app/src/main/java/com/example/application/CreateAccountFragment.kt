@@ -81,8 +81,8 @@ class CreateAccountFragment : Fragment() {
                 email.isEmpty() ||
                 password.isEmpty() ||
                 passwordConfirmed.isEmpty()){
-                    // Mostrar erro
-                    Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
+                // Mostrar erro
+                Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
             }else if(password != passwordConfirmed){
                 // Mostrar erro
                 Toast.makeText(context, "Error: password and confirmation don't match", Toast.LENGTH_SHORT).show()
