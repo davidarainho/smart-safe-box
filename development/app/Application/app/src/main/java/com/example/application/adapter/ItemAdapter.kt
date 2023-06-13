@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.MyLocksFragmentDirections
@@ -41,8 +42,13 @@ class ItemAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset?.get(position)
         if (item != null) {
-            val name = item.lock_name + "\n" + item.comment
-            holder.button.text = name
+//            val name = item.lock_name + "\n" + item.comment
+//            holder.button.text = name
+            val nameTextView: TextView = holder.itemView.findViewById(R.id.nameTextView)
+            val commentTextView: TextView = holder.itemView.findViewById(R.id.commentTextView)
+
+            nameTextView.text = item.lock_name
+            commentTextView.text = item.comment
 
             holder.button.setOnClickListener {
                 // Create an action from WordList to DetailList
@@ -53,6 +59,8 @@ class ItemAdapter(
             }
         }
     }
+
+
 
     /**
      * Return the size of your dataset (invoked by the layout manager)
