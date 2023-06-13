@@ -12,7 +12,8 @@ import com.example.application.R
 import com.example.application.data.lock.Lock
 
 class ItemAdapter(
-    private val dataset: List<Lock>?
+    private val dataset: List<Lock>?,
+    private val username : String
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     // Provide a reference to the views for each data item
@@ -46,7 +47,7 @@ class ItemAdapter(
             holder.button.setOnClickListener {
                 // Create an action from WordList to DetailList
                 // using the required arguments
-                val action = MyLocksFragmentDirections.actionMyLocksFragmentToLockerPageFragment(name = item.lock_name, lockID = item.lock_id)
+                val action = MyLocksFragmentDirections.actionMyLocksFragmentToLockerPageFragment(name = item.lock_name, lockID = item.lock_id, username = username)
                 // Navigate using that action
                 holder.itemView.findNavController().navigate(action)
             }

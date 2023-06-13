@@ -1,5 +1,6 @@
 package com.example.application
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -54,10 +55,9 @@ class StartFragment : Fragment() {
 
             // se flag correta passo para o proximo
             if (validAccount){
-                val action = StartFragmentDirections.actionStartFragmentToMainAppActivity(userName = "TESTE") //userName = "cenas"
-                // Navigate using that action
-                binding.signIn.findNavController().navigate(action)
                 validAccount = false
+                val action = StartFragmentDirections.actionStartFragmentToMainAppActivity(userName = username!!) //userName = "cenas"
+                binding.signIn.findNavController().navigate(action)
             }
 
         }

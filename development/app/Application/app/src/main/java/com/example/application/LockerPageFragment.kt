@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.application.databinding.FragmentLockerPageBinding
 import com.example.application.databinding.FragmentMyLocksBinding
@@ -18,6 +19,7 @@ class LockerPageFragment : Fragment() {
 
     private lateinit var name : String
     private lateinit var lockID : String
+    private lateinit var username : String
 
     private var _binding : FragmentLockerPageBinding? = null
 
@@ -29,6 +31,7 @@ class LockerPageFragment : Fragment() {
         arguments?.let {
             name = it.getString("name").toString()
             lockID = it.getInt("lockID").toString()
+            username = it.getString("username").toString()
         }
 
     }
@@ -63,7 +66,7 @@ class LockerPageFragment : Fragment() {
         }
 
         binding.moreInfoAccesses.setOnClickListener {
-            botsheetAccessFragment = BotsheetAccessFragment()
+            botsheetAccessFragment = BotsheetAccessFragment(username)
             botsheetAccessFragment.show(childFragmentManager,botsheetAccessFragment.tag)
         }
 
@@ -77,9 +80,12 @@ class LockerPageFragment : Fragment() {
             botsheetPinFragment.show(childFragmentManager,botsheetPinFragment.tag)
         }
 
-        binding.exit.setOnClickListener {
-            findNavController().navigate(R.id.action_lockerPageFragment_to_myLocksFragment)
-        }
+//        binding.exit.setOnClickListener {
+//            val action = LockerPageFragmentDirections.actionLockerPageFragmentToMyLocksFragment(name = username)
+//            // Navigate using that action
+//            binding.exit.findNavController().navigate(action)
+//            findNavController().navigate(R.id.action_lockerPageFragment_to_myLocksFragment)
+//        }
     }
 
     override fun onDestroyView() {

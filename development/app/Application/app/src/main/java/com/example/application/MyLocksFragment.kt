@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.adapter.ItemAdapter
@@ -19,6 +20,8 @@ class MyLocksFragment : Fragment() {
     private var _binding : FragmentMyLocksBinding? = null
 
     private val binding get() = _binding!!
+
+    private val args by navArgs<MyLocksFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +35,12 @@ class MyLocksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val username = args.userName
+
+
         var myList: List<Lock>? = null
-        val lockList = LockDataSource().loadUserlockers(requireContext())
-        val itemAdapter = ItemAdapter(lockList)
+        val lockList = LockDataSource().loadUserlockers(requireContext(), username)
+        val itemAdapter = ItemAdapter(lockList, username)
 
         val recyclerView:RecyclerView=view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -51,11 +57,12 @@ class MyLocksFragment : Fragment() {
                         lockList
                     }
                 }
-                recyclerView.adapter = ItemAdapter(myList)
+                recyclerView.adapter = ItemAdapter(myList, username)
             }
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
+
     }
 
     override fun onDestroyView() {

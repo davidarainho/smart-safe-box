@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.adapter.AccessHistoryAdapter
@@ -11,10 +13,11 @@ import com.example.application.data.LockDataSource
 import com.example.application.databinding.FragmentBotsheetAccessBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BotsheetAccessFragment : BottomSheetDialogFragment() {
+class BotsheetAccessFragment(private val username : String) : BottomSheetDialogFragment() {
     private var _binding : FragmentBotsheetAccessBinding? = null
 
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +30,7 @@ class BotsheetAccessFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val lockList = LockDataSource().loadUserlockers(requireContext())
+        val lockList = LockDataSource().loadUserlockers(requireContext(), username)
         val itemAdapter = AccessHistoryAdapter(lockList)
 
         val recyclerView: RecyclerView =view.findViewById(R.id.recycler_view_history)

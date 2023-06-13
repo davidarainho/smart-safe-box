@@ -12,6 +12,10 @@
         <action
             android:id="@+id/action_myLocksFragment_to_lockerPageFragment"
             app:destination="@id/lockerPageFragment" />
+        <argument
+            android:name="userName"
+            app:argType="string" />
+
     </fragment>
     <fragment
         android:id="@+id/profilePageFragment"
@@ -86,6 +90,9 @@
             app:destination="@id/myLocksFragment"
             app:popUpTo="@id/myLocksFragment"
             app:popUpToInclusive="true"/>
+        <argument
+            android:name="username"
+            app:argType="string" />
     </fragment>
     <include app:graph="@navigation/nav_graph" />
 </navigation>
