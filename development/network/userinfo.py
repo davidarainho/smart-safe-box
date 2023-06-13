@@ -354,4 +354,3 @@ def deallocate_expired_locks():
 
 # Close the connection
 conn.close()
-

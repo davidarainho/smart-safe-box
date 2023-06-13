@@ -1,6 +1,7 @@
-# app.py
+# appConnectLayer.py
 import json
 from flask import Flask, request, jsonify
+from OpenSSL import SSL
 
 app = Flask(__name__)
 users = []
@@ -64,8 +65,8 @@ def get_active_lock_array():
             return jsonify(users[i].get("active_locks"))
         
 # Get User Object Specific Lcoker - Args = username, lockerID
-@app.get("/user/get_lock")
-def get_lock():
+@app.get("/user/lock")
+def lock():
     args = request.args
 
     for i in range(len(users)):
@@ -127,6 +128,8 @@ def update_email():
 # Add Locker to User - Args = username, lock
 @app.post("/user/openLock")
 def addLock():
+    args = request.args
+
     if request.is_json:
         newLock = request.get_json()
         for i in range(len(users)):
@@ -151,4 +154,10 @@ def openLock():
 # --------------------------------------------------------------------------------- Main Function -----------------------------------------------------------------------------------
 
 if __name__ == '__main__':
-   app.run(host = "0.0.0.0", debug = True)
+    app.run(host='0.0.0.0', port=443, ssl_context=('cert.pem', 'key.pem'), debug = True)
+
+#http://127.0.0.1:5000/user/lock?username=user2&lockerID=Lock1
+#http://127.0.0.1:5000/user/active_locks?username=user1
+
+#https://blog.miguelgrinberg.com/post/running-your-flask-application-over-https
+#https://www.section.io/engineering-education/implementing-totp-2fa-using-flask/
