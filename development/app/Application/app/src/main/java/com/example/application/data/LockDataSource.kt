@@ -54,25 +54,18 @@ class LockDataSource {
 
         var userId : Int
         var lockID : List<Int>
-        var listOfLock: List<Lock>?
+        var listOfLock: List<Lock>? = null
         withContext(Dispatchers.IO) {
-//            println("1")
-//            println("2")
-//            userId = userDao.getUserIdByUsername(username)
-//            if (userLockDao != null) {
-//                println("3")
-//                lockID = userLockDao.getLocksIDByUserId(userId)
-//
-//                if (lockDao != null) {
-//                    println("4")
-//                    listOfLock = lockID.stream().map{l -> lockDao.getLockByLockId(l)}.toList()
-//                }
-//
-//            }
-            println(username)
-            listOfLock = lockDao?.getAll()
+            userId = userDao.getUserIdByUsername(username)
+            if (userLockDao != null) {
+                lockID = userLockDao.getLocksIDByUserId(userId)
+
+                if (lockDao != null) {
+                    listOfLock = lockID.stream().map{l -> lockDao.getLockByLockId(l)}.toList()
+                }
+
+            }
         }
-        //println(listOfLock)
 
         listOfLock
     }

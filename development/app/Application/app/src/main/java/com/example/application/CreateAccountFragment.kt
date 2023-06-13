@@ -102,30 +102,30 @@ class CreateAccountFragment : Fragment() {
 //            val password = binding.passwordText.text.toString()
 //            val allowNotifications = 1
 //            val userID= 4444
-//
-//            val user = User(username, email, password, allowNotifications, userID)
-//            val userLock_association= UserAndLock(user_id = 21, 7, userLockId = 91, permission_level = 4, lock_access_pin= "1234" )
-//            val userLock_association1= UserAndLock(user_id = 21, 9, userLockId = 94, permission_level = 4, lock_access_pin= "1234" )
-//
-//
-//            GlobalScope.launch {
-//                viewLifecycleOwner.lifecycleScope.launch {
-//
+
+            //val user = User(username, email, password, allowNotifications, userID)
+            val userLock_association= UserAndLock(user_id = 4444, 863, userLockId = 101, permission_level = 4, lock_access_pin= "1234" )
+            //val userLock_association1= UserAndLock(user_id = 21, 9, userLockId = 94, permission_level = 4, lock_access_pin= "1234" )
+
+
+            GlobalScope.launch {
+                viewLifecycleOwner.lifecycleScope.launch {
+
 //                    if (lockDao != null) {
 //                        lockDao.upsertLock(lock)
 //                        lockDao.upsertLock(lock1)
 //                    }
-//
+
 //                    userDao.upsertUser(user)
 //
-//                    if (userLockDao != null) {
-//                        userLockDao.upsertUserAndLock(userLock_association)
-//                        userLockDao.upsertUserAndLock(userLock_association1)
-//                    }
-//
-//
-//                }
-//            }
+                    if (userLockDao != null) {
+                        userLockDao.upsertUserAndLock(userLock_association)
+                        //userLockDao.upsertUserAndLock(userLock_association1)
+                    }
+
+
+                }
+            }
 
 
             if(flagAllowNewAccount){
