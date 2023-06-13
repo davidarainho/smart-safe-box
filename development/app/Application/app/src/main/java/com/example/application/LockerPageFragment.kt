@@ -66,7 +66,7 @@ class LockerPageFragment : Fragment() {
         }
 
         binding.moreInfoAccesses.setOnClickListener {
-            botsheetAccessFragment = BotsheetAccessFragment(username)
+            botsheetAccessFragment = BotsheetAccessFragment(lockID.toInt())
             botsheetAccessFragment.show(childFragmentManager,botsheetAccessFragment.tag)
         }
 

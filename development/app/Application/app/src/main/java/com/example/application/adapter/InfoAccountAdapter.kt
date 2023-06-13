@@ -53,6 +53,6 @@ class InfoAccountAdapter (
         if(dataset != null){
             return dataset.size
         }
-        return -1
+        return 0
     }
 }

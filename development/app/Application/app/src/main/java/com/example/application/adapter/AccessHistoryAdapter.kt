@@ -10,11 +10,12 @@ import com.example.application.data.lock.Lock
 import com.example.application.model.AccountInfo
 
 class AccessHistoryAdapter (
-    private val dataset: List<Lock>?
+    private val dataset: Pair<List<String>?,List<String>?>
 ) : RecyclerView.Adapter<AccessHistoryAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.item_history)
+        val textName: TextView = view.findViewById(R.id.item_history)
+        val textDate: TextView = view.findViewById(R.id.date)
         // Aqui adicionar para a outra caixa de texto
     }
 
@@ -33,9 +34,11 @@ class AccessHistoryAdapter (
      * Replace the contents of a view (invoked by the layout manager)
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val userinfo = dataset?.get(position)
-        if (userinfo != null) {
-            holder.textView.text = userinfo.user_last_access
+        val lastAccessedUser = dataset.first?.get(position)
+        val lastAccessedDate = dataset.second?.get(position)
+        if (lastAccessedUser != null && lastAccessedDate != null) {
+            holder.textName.text = lastAccessedUser
+            holder.textDate.text = lastAccessedDate
             // userinfo.last_access
         }
         // Aqui adicionar depois para atribuir à caixa de texto
@@ -45,9 +48,9 @@ class AccessHistoryAdapter (
      * Return the size of your dataset (invoked by the layout manager)
      */
     override fun getItemCount() : Int {
-        if(dataset != null){
-            return dataset.size
+        if(dataset.first != null && dataset.second != null){
+            return dataset.first!!.size
         }
-        return -1
+        return 0
     }
 }

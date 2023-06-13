@@ -65,7 +65,7 @@ class CreateAccountFragment : Fragment() {
 
 
         val lock = Lock(lock_name="CARLOTA", last_access= "2027-06-31", user_last_access =  "Logan", number_of_users = 2,comment="new", eKey = null, lock_state = "open", lock_id=5658)
-        val  lock1= Lock(lock_name="RUCA", last_access="2027-04-10", user_last_access =  "Logan", number_of_users = 1,comment="old", eKey = null, lock_state = "open", lock_id=863)
+        val  lock1= Lock(lock_name="RUCA", last_access="2027-04-10,2001-09-10,2001-09-04,2024-04-01", user_last_access =  "Logan,Batata,Camarao,Baioneta", number_of_users = 1,comment="old", eKey = null, lock_state = "open", lock_id=863)
 
         var flagAllowNewAccount : Boolean = false
         var username : String
@@ -111,10 +111,10 @@ class CreateAccountFragment : Fragment() {
             GlobalScope.launch {
                 viewLifecycleOwner.lifecycleScope.launch {
 
-//                    if (lockDao != null) {
-//                        lockDao.upsertLock(lock)
-//                        lockDao.upsertLock(lock1)
-//                    }
+                    if (lockDao != null) {
+                        //lockDao.upsertLock(lock)
+                        lockDao.upsertLock(lock1)
+                    }
 
 //                    userDao.upsertUser(user)
 //

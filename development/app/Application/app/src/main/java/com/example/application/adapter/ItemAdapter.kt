@@ -61,6 +61,6 @@ class ItemAdapter(
         if(dataset != null){
             return dataset.size
         }
-        return -1
+        return 0
     }
 }
