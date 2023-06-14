@@ -20,6 +20,7 @@ import com.example.application.data.user.UserDao
 import androidx.navigation.navGraphViewModels
 import com.example.application.databinding.FragmentProfilePageBinding
 import com.example.application.model.AppViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.jar.Attributes.Name
 
 /**
@@ -41,8 +42,6 @@ class ProfilePageFragment : Fragment() {
 
     private lateinit var username: String
     private lateinit var name : String
-    private val args by navArgs<ProfilePageFragmentArgs>()
-
 //    private lateinit var name: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,12 +82,22 @@ class ProfilePageFragment : Fragment() {
         }
 
        binding.logoutButton.setOnClickListener {
-//            // [REVER] - possivelmente libertar memoria e outras cenas
-//            //activity?.finish()
-//            findNavController().navigate(R.id.xml)
+           MaterialAlertDialogBuilder(requireContext())
+               .setTitle(resources.getString(R.string.title_logout_account))
+               .setMessage(resources.getString(R.string.supporting_text_logout_account))
+               .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                   // Respond to neutral button press
+               }
+//                .setNegativeButton(resources.getString(R.string.decline)) { dialog, which ->
+//                    // Respond to negative button press
+//                }
+               .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
+                   // Respond to positive button press
+                   activity?.finish()
+               }
+               .show()
 
            // apaga os dados de todas as tabelas
-
 //           if (lockDao != null) {
 //               lockDao.deleteLockData()
 //           }

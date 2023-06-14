@@ -141,5 +141,16 @@
     <string name="shared_by_n_users">This lock is currently shared with %1$s other users</string>
     <string name="share_lock">Share Lock</string>
 
+    <!-- Dialogs -->
+    <string name="cancel">Cancel</string>
+    <string name="decline">Decline</string>
+    <string name="accept">Accept</string>
+
+    <string name="title_delete_account">Delete Account</string>
+    <string name="supporting_text_delete_account">Are you sure you want to delete your account? You won\'t get it back! We know where you live!</string>
+
+    <string name="title_logout_account">Logout</string>
+    <string name="supporting_text_logout_account">Are you sure you want to logout from your account?</string>
+
 
 </resources>
