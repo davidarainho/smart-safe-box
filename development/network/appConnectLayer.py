@@ -4,11 +4,11 @@ from flask import Flask, request, jsonify
 from OpenSSL import SSL
 
 app = Flask(__name__)
-users = []
+vectors = []
 
 # -------------------------------------------------------------------------- Load Testing Structure -------------------------------------------------------------------------------
 f = open('testingStructure.json')
-users = json.load(f)
+vectors = json.load(f)
 f.close()
 # -------------------------------------------------------------------------- Load Testing Structure -------------------------------------------------------------------------------
 
@@ -24,23 +24,27 @@ def hello_world():
 def get_user():
     args = request.args
 
+    users = vectors.get("user")
+
     for i in range(len(users)):
         if(users[i].get("username") == args.get("username", default = "", type = str)):
             return jsonify(users[i])
 
-# Get User Object Username - Args = username
-@app.get("/user/username")
+# Get User All Usernams
+@app.get("/usernames")
 def get_username():
-    args = request.args
+    users = vectors.get("users")
 
-    for i in range(len(users)):
-        if(users[i].get("username") == args.get("username", default = "", type = str)):
-            return jsonify(users[i].get("username"))
+    usernamesList = [obj['username'] for obj in users]
+
+    return jsonify(usernamesList)
     
 # Get User Object Password - Args = username
 @app.get("/user/password")
 def get_password():
     args = request.args
+    
+    users = vectors.get("users")
 
     for i in range(len(users)):
         if(users[i].get("username") == args.get("username", default = "", type = str)):
@@ -50,6 +54,8 @@ def get_password():
 @app.get("/user/email")
 def get_email():
     args = request.args
+    
+    users = vectors.get("users")
 
     for i in range(len(users)):
         if(users[i].get("username") == args.get("username", default = "", type = str)):
@@ -59,30 +65,44 @@ def get_email():
 @app.get("/user/active_locks")
 def get_active_lock_array():
     args = request.args
+    
+    users = vectors.get("users")
 
     for i in range(len(users)):
         if(users[i].get("username") == args.get("username", default = "", type = str)):
             return jsonify(users[i].get("active_locks"))
         
-# Get User Object Specific Lcoker - Args = username, lockerID
-@app.get("/user/lock")
+# Get User Object Specific Locker - Args = lockID, accessLevel
+@app.get("/lock")
 def lock():
     args = request.args
+    locks = vectors.get("activatedLocks")
 
-    for i in range(len(users)):
-        if(users[i].get("username") == args.get("username", default = "", type = str)):
-            for j in range(len(users[i].get("active_locks"))):
-                if(users[i].get("active_locks")[j].get("lockID") == args.get("lockerID", default = "", type = str)):
-                    return jsonify(users[i].get("active_locks")[j])
+    if args.get("accessLevel", type=int) == 0:
+        for i in range(len(locks)):
+            if(locks[i].get("lockID") == args.get("lockID", default = "", type = str)):
+                return jsonify(locks[i])
 
 # -------------------------------------------------------------------------- Update and Create Variables ----------------------------------------------------------------------------
 
 # Add New User to the System
 @app.post("/user")
 def add_user():
+    users = vectors.get("users")
+
+    args = request.args
+
     if request.is_json:
-        newUser = request.get_json()
+        newUser = {
+            "username": args.get("username", default = "", type = str),
+            "password": args.get("password", default = "", type = str),
+            "email": args.get("email", default = "", type = str),
+            "accessLevel0": args.get("accessLevel0", default = "", type = int),
+            "active_locks": []
+        }
+
         users.append(newUser)
+
         return newUser, 201
     return {"error": "Request must be JSON"}, 415
 
@@ -90,6 +110,8 @@ def add_user():
 @app.post("/user/username")
 def update_username():
     args = request.args
+
+    users = vectors.get("users")
 
     if request.is_json:
         newUsername = args.get("newUsername", default = "", type = str)
@@ -104,6 +126,8 @@ def update_username():
 def update_password():
     args = request.args
 
+    users = vectors.get("users")
+
     if request.is_json:
         newPassword = args.get("newPassword", default = "", type = str)
         for i in range(len(users)):
@@ -117,6 +141,8 @@ def update_password():
 def update_email():
     args = request.args
 
+    users = vectors.get("users")
+
     if request.is_json:
         newEmail = args.get("newEmail", default = "", type = str)
         for i in range(len(users)):
@@ -125,30 +151,146 @@ def update_email():
         return newEmail, 201
     return {"error": "Request must be JSON"}, 415
 
-# Add Locker to User - Args = username, lock
-@app.post("/user/openLock")
+#-------------------------------------------------------------------------- Lockers ----------------------------------------------------------------------------
+
+# Add Locker to User - Args = username, lockID
+@app.post("/user/addLock")
 def addLock():
     args = request.args
 
-    if request.is_json:
-        newLock = request.get_json()
-        for i in range(len(users)):
-            if(users[i].get("email") == args.get("oldEmail", default = "", type = str)):
-                users[i].get("active_locks").append(newLock)
-        return newLock, 201
-    return {"error": "Request must be JSON"}, 415
+    users = vectors.get("users")
 
-# Open Locker - Args = username, lockID
-@app.post("/user/openLock")
-def openLock():
-    args = request.args
+    toAddLock = {
+                    "lockId": args.get("lockId", default = "", type = str),
+                    "statusUser": args.get("accessLevel", default = "", type = str),
+                }
 
     if request.is_json:
         for i in range(len(users)):
             if(users[i].get("username") == args.get("username", default = "", type = str)):
-                print("I just don't want errors")
-                # Call open SafeBox Function
-        return "open", 201
+                users[i].get("active_locks").append(toAddLock)
+        return toAddLock, 201
+    return {"error": "Request must be JSON"}, 415
+
+# Remove Locker to User - Args = username, lockID
+@app.post("/user/removeLock")
+def addLock():
+    args = request.args
+
+    users = vectors.get("users")
+
+    if request.is_json:
+        for i in range(len(users)):
+            if(users[i].get("username") == args.get("username", default = "", type = str)):
+                users[i].get("active_locks").remove(args.get("lockID", default = "", type = str))
+        return {"success": "Locker Removed Successfully"}, 201
+    return {"error": "Request must be JSON"}, 415
+
+# Update Lock Access Level of a specific User - Args = username, lockID, newAccessLevel
+@app.post("/user/lockAccessLevel")
+def updateLockAccessLevel():
+    args = request.args
+
+    users = vectors.get("users")
+
+    if request.is_json:
+        newAccessLevel = args.get("newAccessLevel", default = "", type = int)
+        for i in range(len(users)):
+            if(users[i].get("username") == args.get("username", default = "", type = str)):
+                for j in range(len(users[i].get("active_locks"))):
+                    if(users[i].get("active_locks")[j].get("lockID") == args.get("lockID", default = "", type = str)):
+                        users[i].get("active_locks")[j].update({"accessLevel": newAccessLevel})
+        return newAccessLevel, 201
+    return {"error": "Request must be JSON"}, 415
+
+# Update Pin of a specified Lock - Args = lockID, oldPin, newPin
+@app.post("/lockPin")
+def updateLockPin():
+    args = request.args
+
+    locks = vectors.get("activatedLocks")
+
+    if request.is_json:
+        newPin = args.get("newPin", default = "", type = int)
+        for i in range(len(locks)):
+            if(locks[i].get("lockID") == args.get("lockID", default = "", type = str)):
+                if(locks[i].get("pinLock") == args.get("oldPin", default = "", type = int)):
+                    locks[i].update({"pin": newPin})
+        return newPin, 201
+    return {"error": "Request must be JSON"}, 415
+
+# Update Location of a specified Lock - Args = lockID, newLocation
+@app.post("/lockLocation")
+def updateLockLocation():
+    args = request.args
+
+    locks = vectors.get("activatedLocks")
+
+    if request.is_json:
+        newLocation = args.get("newLocation", default = "", type = str)
+        for i in range(len(locks)):
+            if(locks[i].get("lockID") == args.get("lockID", default = "", type = str)):
+                locks[i].update({"location": newLocation})
+        return newLocation, 201
+    return {"error": "Request must be JSON"}, 415
+
+# Update Name of a specified Lock - Args = lockID, newName
+@app.post("/lockName")
+def updateLockName():
+    args = request.args
+
+    locks = vectors.get("activatedLocks")
+
+    if request.is_json:
+        newName = args.get("newName", default = "", type = str)
+        for i in range(len(locks)):
+            if(locks[i].get("lockID") == args.get("lockID", default = "", type = str)):
+                locks[i].update({"name": newName})
+        return newName, 201
+    return {"error": "Request must be JSON"}, 415
+
+# First Interaction - Args = username, lockID, accessLevel
+@app.post("/firstInteraction")
+def firstInteraction():
+    args = request.args
+
+    unactivatedLocks = vectors.get("activatedLocks")
+    activatedLocks = vectors.get("activatedLocks")
+    users = vectors.get("users")
+
+    if request.is_json:
+        for i in range(len(unactivatedLocks)):
+            if(unactivatedLocks[i].get("lockID") == args.get("lockID", default = "", type = str)):
+                toActivateLock = unactivatedLocks[i]
+                activatedLocks.append(toActivateLock)
+                unactivatedLocks.remove(toActivateLock)
+
+    toAddLock = {
+                    "lockId": toActivateLock.get("lockID"),
+                    "statusUser": args.get("accessLevel", default = "", type = str),
+                }
+
+    if request.is_json:
+        for i in range(len(users)):
+            if(users[i].get("username") == args.get("username", default = "", type = str)):
+                users[i].get("active_locks").append(toAddLock)
+
+    return {"success": "Locker Activated Successfully"}, 201
+
+
+# Open Locker - Args = lockID
+@app.post("/user/openLock")
+def openLock():
+    args = request.args
+
+    locks = vectors.get("activatedLocks")
+
+    if request.is_json:
+        for i in range(len(locks)):
+            if(locks[i].get("lockID") == args.get("lockID", default = "", type = str)):
+                locks[i].update({"State": 1})
+                #Function to Open Lock
+                return {"success": "Locker Opened Successfully"}, 201
     return {"error": "Request must be JSON"}, 415
 
 # --------------------------------------------------------------------------------- Main Function -----------------------------------------------------------------------------------
