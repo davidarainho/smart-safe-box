@@ -1,5 +1,6 @@
 # appConnectLayer.py
 import json
+import userinfo
 from flask import Flask, request, jsonify
 from OpenSSL import SSL
 
@@ -103,6 +104,8 @@ def add_user():
 
         users.append(newUser)
 
+        userinfo.add_user(newUser.get("username"), newUser.get("password"), newUser.get("email"), newUser.get("accessLevel0"))
+
         return newUser, 201
     return {"error": "Request must be JSON"}, 415
 
@@ -118,6 +121,7 @@ def update_username():
         for i in range(len(users)):
             if(users[i].get("username") == args.get("oldUsername", default = "", type = str)):
                 users[i].update({"username": newUsername})
+                userinfo.update_username_function(args.get("oldUsername", default = "", type = str), args.get("newUsername", default = "", type = str))
         return newUsername, 201
     return {"error": "Request must be JSON"}, 415
 
@@ -133,6 +137,7 @@ def update_password():
         for i in range(len(users)):
             if(users[i].get("password") == args.get("oldPassword", default = "", type = str)):
                 users[i].update({"username": newPassword})
+                userinfo.update_password_function(args.get("username", default = "", type = str), args.get("newPassword", default = "", type = str))
         return newPassword, 201
     return {"error": "Request must be JSON"}, 415
 
@@ -148,6 +153,7 @@ def update_email():
         for i in range(len(users)):
             if(users[i].get("email") == args.get("oldEmail", default = "", type = str)):
                 users[i].update({"username": newEmail})
+                userinfo.update_email_function(args.get("username", default = "", type = str), args.get("newEmail", default = "", type = str))
         return newEmail, 201
     return {"error": "Request must be JSON"}, 415
 
@@ -162,13 +168,14 @@ def addLock():
 
     toAddLock = {
                     "lockId": args.get("lockId", default = "", type = str),
-                    "statusUser": args.get("accessLevel", default = "", type = str),
+                    "accessLevel": args.get("accessLevel", default = "", type = str),
                 }
 
     if request.is_json:
         for i in range(len(users)):
             if(users[i].get("username") == args.get("username", default = "", type = str)):
                 users[i].get("active_locks").append(toAddLock)
+                userinfo.allocate_lock_for_user(args.get("lockId", default = "", type = str), args.get("username", default = "", type = str), args.get("accessLevel", default = "", type = str))
         return toAddLock, 201
     return {"error": "Request must be JSON"}, 415
 
@@ -183,6 +190,7 @@ def addLock():
         for i in range(len(users)):
             if(users[i].get("username") == args.get("username", default = "", type = str)):
                 users[i].get("active_locks").remove(args.get("lockID", default = "", type = str))
+                userinfo.deallocate_lock(args.get("username", default = "", type = str), args.get("lockID", default = "", type = str))
         return {"success": "Locker Removed Successfully"}, 201
     return {"error": "Request must be JSON"}, 415
 
@@ -200,6 +208,7 @@ def updateLockAccessLevel():
                 for j in range(len(users[i].get("active_locks"))):
                     if(users[i].get("active_locks")[j].get("lockID") == args.get("lockID", default = "", type = str)):
                         users[i].get("active_locks")[j].update({"accessLevel": newAccessLevel})
+                        #Function to update access level on database
         return newAccessLevel, 201
     return {"error": "Request must be JSON"}, 415
 
@@ -216,6 +225,7 @@ def updateLockPin():
             if(locks[i].get("lockID") == args.get("lockID", default = "", type = str)):
                 if(locks[i].get("pinLock") == args.get("oldPin", default = "", type = int)):
                     locks[i].update({"pin": newPin})
+                    #Function to update safe pin on database
         return newPin, 201
     return {"error": "Request must be JSON"}, 415
 
@@ -231,6 +241,7 @@ def updateLockLocation():
         for i in range(len(locks)):
             if(locks[i].get("lockID") == args.get("lockID", default = "", type = str)):
                 locks[i].update({"location": newLocation})
+                userinfo.update_lock_location(args.get("lockID", default = "", type = str), args.get("newLocation", default = "", type = str)
         return newLocation, 201
     return {"error": "Request must be JSON"}, 415
 
@@ -246,6 +257,7 @@ def updateLockName():
         for i in range(len(locks)):
             if(locks[i].get("lockID") == args.get("lockID", default = "", type = str)):
                 locks[i].update({"name": newName})
+                userinfo.update_lock_name(args.get("lockID", default = "", type = str), args.get("newName", default = "", type = str))
         return newName, 201
     return {"error": "Request must be JSON"}, 415
 
@@ -264,16 +276,18 @@ def firstInteraction():
                 toActivateLock = unactivatedLocks[i]
                 activatedLocks.append(toActivateLock)
                 unactivatedLocks.remove(toActivateLock)
+                #Function do add lock to database
 
     toAddLock = {
                     "lockId": toActivateLock.get("lockID"),
-                    "statusUser": args.get("accessLevel", default = "", type = str),
+                    "accessLevel": args.get("accessLevel", default = "", type = str),
                 }
 
     if request.is_json:
         for i in range(len(users)):
             if(users[i].get("username") == args.get("username", default = "", type = str)):
                 users[i].get("active_locks").append(toAddLock)
+                #Link lock to specific user 
 
     return {"success": "Locker Activated Successfully"}, 201
 
