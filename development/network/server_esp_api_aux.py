@@ -4,14 +4,18 @@ import json
 
 
 def retrieve_data(json_dict, lock_id):
-    if lock_id in json_dict:
-        response_code = 200
-        request_data = remove_and_return_data(json_dict, lock_id)
-    else:
-        response_code = 400
-        request_data = {
-            "error_message": "invalid id " + str(lock_id)
-        }
+
+
+    # if lock_is_valid:
+    #     response_code = 200
+    #     request_data = remove_and_return_data(json_dict, lock_id)
+    # else:
+    #     response_code = 400
+    #     request_data = {
+    #         "error_message": "invalid id " + str(lock_id)
+    #     }
+
+    
 
     if request_data is None:
         response_code = 400
@@ -61,17 +65,17 @@ def get_app_request():
     return request_type, new_password, lock_id
 
 
-def create_request_json(request_type, new_password, access_token):
+def create_request_json(request_type, new_password):
     if 'change_password' == request_type:
         request_data = {
             'request_type': request_type,
             'new_password': new_password,
-            'access_token': access_token
+            # 'access_token': access_token
         }
     else:
         request_data = {
             'request_type': request_type,
-            'access_token': access_token
+            # 'access_token': access_token
         }
 
     return json.dumps(request_data)

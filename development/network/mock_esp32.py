@@ -6,7 +6,7 @@ import datetime
 import tkinter as tk
 from tkinter import messagebox
 from server_esp_api_aux import generate_access_token, check_access_token
-from server_esp_api_config import secret_key
+from server_configuration import secret_key
 
 # Server information
 server_host = "localhost"
@@ -59,7 +59,7 @@ def check_for_server_api():
                     print("Opening lock")
                     status_label.config(text="Lock is open")
 
-                elif json_data_dict["request_type"] == "close_vault":
+                elif json_data_dict["reqcheck_access_tokenuest_type"] == "close_vault":
                     print("Closing lock")
                     status_label.config(text="Lock is closed")
                 elif json_data_dict["request_type"] == "change_password":

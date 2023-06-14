@@ -1,5 +1,7 @@
 hostName = "localhost"
-serverPort = 8080
+espApiPort = 8083
+appApiPort = 8081
+
 
 secret_key = "smart_safe_lock"
 

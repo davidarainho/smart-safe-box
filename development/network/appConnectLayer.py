@@ -3,6 +3,7 @@ import json
 import userinfo
 from flask import Flask, request, jsonify
 from OpenSSL import SSL
+import server_configuration
 
 app = Flask(__name__)
 vectors = []
@@ -159,25 +160,25 @@ def update_email():
 
 #-------------------------------------------------------------------------- Lockers ----------------------------------------------------------------------------
 
-# Add Locker to User - Args = username, lockID
-@app.post("/user/addLock")
-def addLock():
-    args = request.args
+# # Add Locker to User - Args = username, lockID
+# @app.post("/user/addLock")
+# def addLock():
+#     args = request.args
 
-    users = vectors.get("users")
+#     users = vectors.get("users")
 
-    toAddLock = {
-                    "lockId": args.get("lockId", default = "", type = str),
-                    "accessLevel": args.get("accessLevel", default = "", type = str),
-                }
+#     toAddLock = {
+#                     "lockId": args.get("lockId", default = "", type = str),
+#                     "accessLevel": args.get("accessLevel", default = "", type = str),
+#                 }
 
-    if request.is_json:
-        for i in range(len(users)):
-            if(users[i].get("username") == args.get("username", default = "", type = str)):
-                users[i].get("active_locks").append(toAddLock)
-                userinfo.allocate_lock_for_user(args.get("lockId", default = "", type = str), args.get("username", default = "", type = str), args.get("accessLevel", default = "", type = str))
-        return toAddLock, 201
-    return {"error": "Request must be JSON"}, 415
+#     if request.is_json:
+#         for i in range(len(users)):
+#             if(users[i].get("username") == args.get("username", default = "", type = str)):
+#                 users[i].get("active_locks").append(toAddLock)
+#                 userinfo.allocate_lock_for_user(args.get("lockId", default = "", type = str), args.get("username", default = "", type = str), args.get("accessLevel", default = "", type = str))
+#         return toAddLock, 201
+#     return {"error": "Request must be JSON"}, 415
 
 # Remove Locker to User - Args = username, lockID
 @app.post("/user/removeLock")
@@ -241,7 +242,7 @@ def updateLockLocation():
         for i in range(len(locks)):
             if(locks[i].get("lockID") == args.get("lockID", default = "", type = str)):
                 locks[i].update({"location": newLocation})
-                userinfo.update_lock_location(args.get("lockID", default = "", type = str), args.get("newLocation", default = "", type = str)
+                userinfo.update_lock_location(args.get("lockID", default = "", type = str), args.get("newLocation", default = "", type = str))
         return newLocation, 201
     return {"error": "Request must be JSON"}, 415
 
@@ -310,7 +311,8 @@ def openLock():
 # --------------------------------------------------------------------------------- Main Function -----------------------------------------------------------------------------------
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=443, ssl_context=('cert.pem', 'key.pem'), debug = True)
+    # app.run(host='0.0.0.0', port=443, ssl_context=('cert.pem', 'key.pem'), debug = True)
+    target=app.run(host=server_configuration.hostName, port=server_configuration.appApiPort, ssl_context=('cert.pem', 'key.pem'), debug = True)
 
 #http://127.0.0.1:5000/user/lock?username=user2&lockerID=Lock1
 #http://127.0.0.1:5000/user/active_locks?username=user1

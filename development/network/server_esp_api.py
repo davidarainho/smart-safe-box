@@ -3,12 +3,17 @@ import json
 import threading
 import time
 from server_esp_api_aux import *
-from server_esp_api_config import *
+import server_configuration
+from end_points import *
 import time
 
 
 is_to_send = False
 json_data_dict = {}
+opening_report_dict = {}
+
+send_messages_last_time = 0
+get_requests_from_app_last_time = 0
 
 
 class MyServer(BaseHTTPRequestHandler):
@@ -21,37 +26,30 @@ class MyServer(BaseHTTPRequestHandler):
     def do_POST(self):
         global is_to_send
 
-        if is_to_send == False:
-            print("Nothing to send")
-            return
         # reading message from the client
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length).decode('utf-8')
         json_data = json.loads(post_data)
 
-        error_response, check_message = check_lock_message(json_data)
+        # error_response, check_message = check_lock_message(json_data)
 
-        if check_message == False:
+        # if check_message == False:
 
-            print(json_data)
+        #     print(json_data)
 
-            self.send_response(400)
-            self.send_header('Content-type', 'application/json')
-            self.end_headers()
-            error_json = json.dumps(error_response)
-            self.wfile.write(error_json.encode('utf-8'))
+        #     self.send_response(400)
+        #     self.send_header('Content-type', 'application/json')
+        #     self.end_headers()
+        #     error_json = json.dumps(error_response)
+        #     self.wfile.write(error_json.encode('utf-8'))
+        #     return
+
+        if is_to_send == False:
+            print("Nothing to send")
             return
-
-        lock_id = json_data['locker_id']
-        access_token = json_data['access_token']
-        master_key = get_master_key(lock_id)
-
-        if check_access_token(lock_id, master_key, access_token) == False:
-            print("Invalid access token")
-            return
-
-        data_to_send, response_code = retrieve_data(
-            json_data_dict, lock_id)
+        
+        if self.path != '/opening_request':
+            data_to_send, response_code = opening_report(json_data, opening_report_dict)
 
         # Send a JSON response
         self.send_response(response_code)
@@ -60,12 +58,13 @@ class MyServer(BaseHTTPRequestHandler):
         response_json = json.dumps(data_to_send)
         self.wfile.write(response_json.encode('utf-8'))
         is_to_send = False
+        
 
 
 def control_refresh_rates(refresh_dict):
-    global send_messages_refresh_rate
-    global new_access_token_refresh_rate
-    global get_requests_from_app_refresh_rate
+    # global send_messages_refresh_rate
+    # global new_access_token_refresh_rate
+    # global get_requests_from_app_refresh_rate
 
     global send_messages_last_time
     global last_access_token_update_time
@@ -73,11 +72,11 @@ def control_refresh_rates(refresh_dict):
 
     current_time = time.monotonic()
 
-    if current_time - send_messages_last_time > send_messages_refresh_rate:
+    if current_time - send_messages_last_time > server_configuration.send_messages_refresh_rate:
         refresh_dict['is_to_send'] = True
         send_messages_last_time = current_time
 
-    if current_time - get_requests_from_app_last_time > get_requests_from_app_refresh_rate:
+    if current_time - get_requests_from_app_last_time > server_configuration.get_requests_from_app_refresh_rate:
         refresh_dict['get_requests_from_app'] = True
         get_requests_from_app_last_time = current_time
 
@@ -86,6 +85,7 @@ def control_refresh_rates(refresh_dict):
 
 def output_control():
     global is_to_send
+    global opening_report_dict
     global json_data_dict
     global secret_key
 
@@ -101,25 +101,28 @@ def output_control():
 
         if refresh_dict['get_requests_from_app']:
             request_type, new_password, lock_id = get_app_request()
-            access_token = generate_access_token(
-                get_master_key(lock_id), lock_id)
-            data_to_send = create_request_json(
-                request_type, new_password, access_token)
 
-            json_data_dict = insert_new_request(
-                json_data_dict, lock_id, data_to_send)
+
+            # access_token = generate_access_token(
+            #     get_master_key(lock_id), lock_id)
+            data_to_send = create_request_json(
+                request_type, new_password)
+            
+            if(request_type == 'open_vault'):
+                opening_report_dict = insert_new_request(
+                    opening_report_dict, lock_id, data_to_send)
 
             refresh_dict['get_requests_from_app'] = False
 
 
 if __name__ == "__main__":
-    send_messages_last_time = time.monotonic()
-    get_requests_from_app_last_time = time.monotonic()
 
-    webServer = HTTPServer((hostName, serverPort), MyServer)
-    print("Server started http://%s:%s" % (hostName, serverPort))
 
-    threading.Thread(target=webServer.serve_forever).start()
+    lockWebServer = HTTPServer((server_configuration.hostName, server_configuration.espApiPort), MyServer)
+    print("Esp api opened at http://%s:%s" % (server_configuration.hostName, server_configuration.espApiPort))
+    lockThread = threading.Thread(target=lockWebServer.serve_forever)
+
+    threading.Thread(target=lockWebServer.serve_forever).start()
 
     api_control_thread = threading.Thread(
         target=output_control, args=())

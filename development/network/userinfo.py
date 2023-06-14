@@ -4,6 +4,7 @@ import secrets
 import smtplib
 from email.mime.text import MIMEText
 import datetime
+import json
 #import schedule
 
 
@@ -18,7 +19,7 @@ cursor = conn.cursor()
 
 # Create a table to store user information if it doesn't already exist
 cursor.execute('''CREATE TABLE IF NOT EXISTS users
-                 (id INTEGER PRIMARY KEY,
+                 (user_id INTEGER PRIMARY KEY,
                  username TEXT,
                  password_hash TEXT,
                  email TEXT,
@@ -31,27 +32,62 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS locks
                  name TEXT,
                  location TEXT,
                  state INTEGER,
+                 user_last_access TEXT,
                  max_users INTEGER)''')
 
 # Create a table to store the relationship between locks and users
 cursor.execute('''CREATE TABLE IF NOT EXISTS lock_users
-                 (lock_id INTEGER,
+                 (lock_users_id INTEGER PRIMARY KEY,
+                 lock_id INTEGER,
                  username TEXT,
                  access_level INTEGER,
                  start_time TIMESTAMP,
                  end_time TIMESTAMP,
+                 access_pin TEXT,
                  FOREIGN KEY(lock_id) REFERENCES locks(id),
-                 FOREIGN KEY(username) REFERENCES users(id))''')
+                 FOREIGN KEY(username) REFERENCES users(user_id))''')
 
 # Create a table to store password reset tokens
 cursor.execute('''CREATE TABLE IF NOT EXISTS password_reset_tokens
                  (token TEXT PRIMARY KEY,
                  username TEXT,
-                 FOREIGN KEY(username) REFERENCES users(id))''')
+                 FOREIGN KEY(username) REFERENCES users(user_id))''')
 
 
 # Function to add a user to the database
-def add_user(username, password, email, access_level, locks,start_time=None, end_time=None):
+def add_user(json_input):
+
+    try:
+    # Attempt to load the JSON data
+        data = json.loads(json_input)
+    except json.JSONDecodeError:
+        return "Error: Invalid JSON input"
+
+    # Check that all necessary fields are in the data
+    required_fields = ['username', 'password', 'email', 'access_level', 'locks']
+    for field in required_fields:
+        if field not in data:
+            return f"Error: Missing required field '{field}'"
+
+    # Check that each lock has the necessary fields
+    for lock in data['locks']:
+        if not all(key in lock for key in ['lock_id', 'access_level']):
+            return f"Error: Each 'lock' must contain 'lock_id' and 'access_level'"
+
+    # Extract the data
+    username = data['username']
+    password = data['password']
+    email = data['email']
+    access_level = data['access_level']
+    locks = [(lock['lock_id'], lock['access_level']) for lock in data['locks']]
+    start_time = data['start_time']
+    end_time = data['end_time']
+
+    if start_time is None:
+        start_time = datetime.datetime.now()
+    if end_time is None:
+        end_time = None  # None represents an indefinite allocation
+
     # Generate the password hash
     password_hash = hashlib.sha256(password.encode()).hexdigest()
     for lock_id, access_level in locks:
@@ -71,19 +107,56 @@ def add_user(username, password, email, access_level, locks,start_time=None, end
             conn.commit()
 
 # Function to allocate a lock to a specific user for a time duration
-def allocate_lock(username, lock_id, access_level, start_time=None, end_time=None):
+def allocate_lock(json_input):
+
+    try:
+    # Attempt to load the JSON data
+        data = json.loads(json_input)
+    except json.JSONDecodeError:
+        return "Error: Invalid JSON input"
+
+    # Check that all necessary fields are in the data
+    required_fields = ['username', 'lock_id', 'access_level', 'start_time', 'end_time', 'access_pin']
+    for field in required_fields:
+        if field not in data:
+            return f"Error: Missing required field '{field}'"
+
+    # Extract the data
+    username = data['username']
+    lock_id = data['lock_id']
+    access_level = data['access_level']
+    start_time = data['start_time']
+    end_time = data['end_time']
+    access_pin = data['access_pin']
+
     if start_time is None:
         start_time = datetime.datetime.now()
     if end_time is None:
         end_time = None  # None represents an indefinite allocation
 
-    cursor.execute("INSERT INTO lock_users (lock_id, username, access_level, start_time, end_time) VALUES (?, ?, ?, ?, ?)",
-                   (lock_id, username, access_level, start_time, end_time))
+    cursor.execute("INSERT INTO lock_users (lock_id, username, access_level, start_time, end_time, access_pin) VALUES (?, ?, ?, ?, ?, ?)",
+                   (lock_id, username, access_level, start_time, end_time, access_pin))
     conn.commit()
     print(f"Lock {lock_id} allocated to user {username} from {start_time} to {end_time}")
 
 # Function to deallocate a lock from a specific user   
-def deallocate_lock(username, lock_id):
+def deallocate_lock(json_input):
+    try:
+    # Attempt to load the JSON data
+        data = json.loads(json_input)
+    except json.JSONDecodeError:
+        return "Error: Invalid JSON input"
+
+    # Check that all necessary fields are in the data
+    required_fields = ['username', 'lock_id']
+    for field in required_fields:
+        if field not in data:
+            return f"Error: Missing required field '{field}'"
+
+    # Extract the data
+    username = data['username']
+    lock_id = data['lock_id']
+
     cursor.execute("DELETE FROM lock_users WHERE lock_id=? AND username=?", (lock_id, username))
     conn.commit()
     print(f"Lock {lock_id} deallocated from user {username}")
