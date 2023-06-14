@@ -5,8 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import com.example.application.data.UserDBSingleton
+import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentChangeEmailBinding
 import com.example.application.databinding.FragmentNotificationsBinding
+import kotlinx.coroutines.launch
 
 
 class ChangeEmailFragment : Fragment() {
@@ -21,6 +26,41 @@ class ChangeEmailFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentChangeEmailBinding.inflate(inflater,container,false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val userDatabase = UserDBSingleton.getInstance(requireContext())
+        val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
+        val userId: Int = 1234
+
+        binding.changeemailbutton.setOnClickListener {
+            val oldEmail = binding.oldEmailText.text.toString()
+            val newEmail = binding.newEmailText.text.toString()
+
+
+            viewLifecycleOwner.lifecycleScope.launch {
+                val userEmail = userDao.getEmailByUserId(userId)
+
+                if (oldEmail.isEmpty() ||
+                    newEmail.isEmpty()
+                ) {
+                    Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
+                } else if (oldEmail != userEmail) {
+                    Toast.makeText(context, "Error: Old e-mail is not correct", Toast.LENGTH_SHORT)
+                        .show()
+                }  /*else if ( /* VERFICAR NO SERVIDOR SE EXISTE UM EMAIL IGUAL NA DB DO SERVIDOR */ ) {
+                    Toast.makeText(context, "Error: This e-mail is already registered", Toast.LENGTH_SHORT)
+                        .show()
+                } */
+                else {
+                    userDao.updateEmail(userId, newEmail)
+                    Toast.makeText(context, "SUCCESS: Your e-mail was updated", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

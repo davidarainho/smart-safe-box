@@ -80,12 +80,12 @@ class LockerPageFragment : Fragment() {
             botsheetPinFragment.show(childFragmentManager,botsheetPinFragment.tag)
         }
 
-//        binding.exit.setOnClickListener {
-//            val action = LockerPageFragmentDirections.actionLockerPageFragmentToMyLocksFragment(name = username)
-//            // Navigate using that action
-//            binding.exit.findNavController().navigate(action)
-//            findNavController().navigate(R.id.action_lockerPageFragment_to_myLocksFragment)
-//        }
+        binding.exit.setOnClickListener {
+            val action = LockerPageFragmentDirections.actionLockerPageFragmentToMyLocksFragment(userName = username)
+           // Navigate using that action
+            binding.exit.findNavController().navigate(action)
+            //findNavController().navigate(R.id.action_lockerPageFragment_to_myLocksFragment)
+        }
     }
 
     override fun onDestroyView() {

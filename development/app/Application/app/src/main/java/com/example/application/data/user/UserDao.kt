@@ -30,6 +30,12 @@ interface UserDao {
     @Query("SELECT user_id FROM User WHERE email = :Email")
     suspend fun getUserIdByEmail(Email: String): Int
 
+    @Query("SELECT email FROM User WHERE user_id = :userID")
+    suspend fun getEmailByUserId(userID: Int): String
+
+    @Query("SELECT password FROM User WHERE user_id = :userID")
+    suspend fun getPasswordByUserID(userID: Int): String
+
     @Query("SELECT allow_notifications FROM User WHERE user_id = :userId")
     suspend fun getNotificationPreferenceByUserId(userId: Int): Int
 

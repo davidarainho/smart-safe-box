@@ -56,6 +56,8 @@ class StartFragment : Fragment() {
             // se flag correta passo para o proximo
             if (validAccount){
                 validAccount = false
+                binding.usernameText.text?.clear()
+                binding.passwordText.text?.clear()
                 val action = StartFragmentDirections.actionStartFragmentToMainAppActivity(userName = username!!) //userName = "cenas"
                 binding.signIn.findNavController().navigate(action)
             }

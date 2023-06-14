@@ -7,6 +7,7 @@
     android:background="@color/background_color"
     tools:context=".MyLocksFragment">
 
+
     <TextView
         android:id="@+id/myLocks"
         android:layout_width="wrap_content"

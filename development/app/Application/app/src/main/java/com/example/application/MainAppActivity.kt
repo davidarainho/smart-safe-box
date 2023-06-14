@@ -7,13 +7,16 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+
 class MainAppActivity : AppCompatActivity() {
 
-    //private lateinit var binding : ActivityMainBinding
 
     private lateinit var navController : NavController
 
     private lateinit var name : String
+
+    //private val sharedViewModel: AppViewModel by activityViewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_app)
@@ -30,5 +33,4 @@ class MainAppActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
 }

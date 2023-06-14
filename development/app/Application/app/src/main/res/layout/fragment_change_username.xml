@@ -79,7 +79,7 @@
         android:background="@drawable/rounded_view"
         android:paddingHorizontal="24dp"
         android:paddingVertical="10dp"
-        android:text="@string/confirm_change_button"
+        android:text="Confirm"
         android:textAllCaps="false"
         android:textColor="#F6F1D1"
         android:textSize="25sp"
