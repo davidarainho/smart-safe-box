@@ -44,6 +44,9 @@ interface UserAndLockDao {
     @Query("UPDATE UserAndLock SET lock_access_pin = :newLockPin WHERE user_id = :userId AND lock_id = :lockId")
     suspend fun updateLockPin(userId: Int, lockId: Int, newLockPin: String)
 
+    @Query("SELECT lock_access_pin FROM UserAndLock WHERE user_id = :userId AND lock_id = :lockId")
+    suspend fun getLockPin(userId: Int, lockId: Int): String
+
     @Query("SELECT permission_level FROM UserAndLock WHERE user_id = :userId AND lock_id = :lockId")
     suspend fun getUserLockPermissionLevel(userId: Int, lockId: Int): Int
 

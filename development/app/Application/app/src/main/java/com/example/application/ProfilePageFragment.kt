@@ -7,6 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.example.application.data.LockDBSingleton
+import com.example.application.data.UserAndLock.UserAndLockDao
+import com.example.application.data.UserAndLockDBSingleton
+import com.example.application.data.UserDBSingleton
+import com.example.application.data.lock.LockDao
+import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentProfilePageBinding
 import java.util.jar.Attributes.Name
 
@@ -26,14 +33,17 @@ class ProfilePageFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private lateinit var name : String
+    private val args by navArgs<ProfilePageFragmentArgs>()
+
 //    private lateinit var name: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        arguments?.let {
-//            name = it.getString(NAME).toString()
-//        }
+        arguments?.let {
+            name = it.getString("userName").toString()
+        }
     }
 
     override fun onCreateView(
@@ -46,6 +56,20 @@ class ProfilePageFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val lockDatabase = LockDBSingleton.getInstance(requireContext())
+        val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
+
+        val userDatabase = UserDBSingleton.getInstance(requireContext())
+        val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
+
+        val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
+        val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
+
+        println(name)
+        //val username = args.userName
+        //println(username)
+
         binding.changePassword.setOnClickListener {
             findNavController().navigate(R.id.action_profilePageFragment_to_changePasswordFragment)
         }
@@ -54,12 +78,25 @@ class ProfilePageFragment : Fragment() {
             findNavController().navigate(R.id.action_profilePageFragment_to_changeUsernameFragment)
         }
 
-//        binding.logoutButton.setOnClickListener {
+       binding.logoutButton.setOnClickListener {
 //            // [REVER] - possivelmente libertar memoria e outras cenas
 //            //activity?.finish()
 //            findNavController().navigate(R.id.xml)
-//        }
+
+           // apaga os dados de todas as tabelas
+
+//           if (lockDao != null) {
+//               lockDao.deleteLockData()
+//           }
+//           userDao.deleteUserData()
+//           if (userLockDao != null) {
+//               userLockDao.deleteUserLockData()
+//           }
+
+        }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
