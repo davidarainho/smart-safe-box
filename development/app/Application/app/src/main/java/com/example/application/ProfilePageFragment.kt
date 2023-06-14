@@ -59,6 +59,8 @@ class ProfilePageFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // Obter valor do user neste fragmento
+        //println(sharedViewModel.username.value)
 
         val lockDatabase = LockDBSingleton.getInstance(requireContext())
         val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
@@ -69,9 +71,6 @@ class ProfilePageFragment : Fragment() {
         val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
         val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
-        //println(name)
-        //val username = args.userName
-        //println(username)
 
         binding.changePassword.setOnClickListener {
             findNavController().navigate(R.id.action_profilePageFragment_to_changePasswordFragment)
