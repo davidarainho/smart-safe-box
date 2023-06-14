@@ -34,7 +34,6 @@ class MyLocksFragment : Fragment() {
 
     private lateinit var username: String
 
-    private val sharedViewModel: AppViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

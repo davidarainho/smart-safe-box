@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.application.data.LockDBSingleton
 import com.example.application.data.UserAndLock.UserAndLockDao
@@ -15,6 +16,7 @@ import com.example.application.data.lock.LockDao
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentBotsheetAccessBinding
 import com.example.application.databinding.FragmentUpdatePinBinding
+import com.example.application.model.AppViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.launch
 
@@ -22,6 +24,8 @@ class UpdatePinFragment : BottomSheetDialogFragment() {
     private var _binding : FragmentUpdatePinBinding? = null
 
     private val binding get() = _binding!!
+
+    private val sharedViewModel: AppViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +51,8 @@ class UpdatePinFragment : BottomSheetDialogFragment() {
         val lockId: Int = 863
         val userLockID: Int = 104
         var userLockPin: String=""
+
+        println(sharedViewModel.lockID)
 
         binding.confirm.setOnClickListener {
             val oldPin = binding.oldPinText.text.toString()

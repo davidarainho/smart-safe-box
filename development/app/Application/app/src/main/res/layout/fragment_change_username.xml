@@ -68,7 +68,8 @@
             android:layout_height="match_parent"
             android:background="@drawable/rounded_view"
             android:hint="@string/new_display_name"
-            android:inputType="text" />
+            android:inputType="text"
+            android:maxLength="18"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
