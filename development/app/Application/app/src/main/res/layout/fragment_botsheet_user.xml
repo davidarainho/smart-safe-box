@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginTop="16dp"
-        android:text="@string/shared_by_n_users"
+        tools:text="@string/shared_by_n_users"
         android:textColor="@color/Text_Bold"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/title"

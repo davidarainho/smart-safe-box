@@ -7,21 +7,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.adapter.ItemAdapter
 import com.example.application.data.LockDataSource
 import com.example.application.data.lock.Lock
 import com.example.application.databinding.FragmentMyLocksBinding
+import com.example.application.model.AppViewModel
 
 class MyLocksFragment : Fragment() {
     private var _binding : FragmentMyLocksBinding? = null
 
     private val binding get() = _binding!!
 
-    private val args by navArgs<MyLocksFragmentArgs>()
+    private lateinit var username: String
+
+    private val sharedViewModel: AppViewModel by activityViewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            username = it.getString("userName").toString()
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,8 +51,7 @@ class MyLocksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val username = args.userName
-
+        sharedViewModel.setUsername(username)
 
         var myList: List<Lock>? = null
         val lockList = LockDataSource().loadUserlockers(requireContext(), username)

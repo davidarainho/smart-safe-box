@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,7 +17,9 @@ import com.example.application.data.UserAndLockDBSingleton
 import com.example.application.data.UserDBSingleton
 import com.example.application.data.lock.LockDao
 import com.example.application.data.user.UserDao
+import androidx.navigation.navGraphViewModels
 import com.example.application.databinding.FragmentProfilePageBinding
+import com.example.application.model.AppViewModel
 import java.util.jar.Attributes.Name
 
 /**
@@ -28,11 +33,13 @@ class ProfilePageFragment : Fragment() {
 //        const val NAME = "name"
 //    }
 
-
     private var _binding : FragmentProfilePageBinding? = null
 
     private val binding get() = _binding!!
 
+    private val sharedViewModel: AppViewModel by activityViewModels()
+
+    private lateinit var username: String
     private lateinit var name : String
     private val args by navArgs<ProfilePageFragmentArgs>()
 
@@ -41,9 +48,6 @@ class ProfilePageFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            name = it.getString("userName").toString()
-        }
     }
 
     override fun onCreateView(
@@ -66,7 +70,7 @@ class ProfilePageFragment : Fragment() {
         val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
         val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
-        println(name)
+        //println(name)
         //val username = args.userName
         //println(username)
 

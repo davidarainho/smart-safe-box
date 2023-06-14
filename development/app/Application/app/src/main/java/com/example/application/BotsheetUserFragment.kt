@@ -31,6 +31,8 @@ class BotsheetUserFragment(private val lockID : Int) : BottomSheetDialogFragment
         val lockList = UserDataSource().loadUserInfo(requireContext(), lockID)
         val itemAdapter = InfoAccountAdapter(lockList)
 
+        binding.enterOldPin.text = getString(R.string.shared_by_n_users, (itemAdapter.itemCount-1).toString());
+
         val recyclerView: RecyclerView =view.findViewById(R.id.recycler_view_access)
         recyclerView.layoutManager = LinearLayoutManager(context)
 

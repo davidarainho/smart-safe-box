@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.R
 import com.example.application.data.lock.Lock
-import com.example.application.model.AccountInfo
 
 class AccessHistoryAdapter (
     private val dataset: Pair<List<String>?,List<String>?>

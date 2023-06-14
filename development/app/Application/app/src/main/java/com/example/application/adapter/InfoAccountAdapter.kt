@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.application.MyLocksFragmentDirections
 import com.example.application.R
 import com.example.application.data.user.User
-import com.example.application.model.AccountInfo
-import com.example.application.model.Userlockers
 import java.util.concurrent.locks.Lock
 
 class InfoAccountAdapter (
