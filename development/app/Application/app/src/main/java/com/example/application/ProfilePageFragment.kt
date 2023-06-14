@@ -22,6 +22,7 @@ import androidx.navigation.navGraphViewModels
 import com.example.application.databinding.FragmentProfilePageBinding
 import com.example.application.model.AppViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.runBlocking
 import java.util.jar.Attributes.Name
 
 /**
@@ -63,14 +64,10 @@ class ProfilePageFragment : Fragment() {
         // Obter valor do user neste fragmento
         //println(sharedViewModel.username.value)
 
-        val lockDatabase = LockDBSingleton.getInstance(requireContext())
-        val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
+        val email : String = emailFetch(sharedViewModel.username.value.toString())
 
-        val userDatabase = UserDBSingleton.getInstance(requireContext())
-        val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
-
-        val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
-        val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
+        binding.welcomeAccount.text = getString(R.string.welcome_to_account, sharedViewModel.username.value.toString())
+        binding.yourEmail.text = getString(R.string.your_email, email)
 
 
         binding.changePassword.setOnClickListener {
@@ -99,17 +96,18 @@ class ProfilePageFragment : Fragment() {
                .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
                    // Respond to positive button press
                    activity?.finish()
+                   // apaga os dados de todas as tabelas
+        //           if (lockDao != null) {
+        //               lockDao.deleteLockData()
+        //           }
+        //           userDao.deleteUserData()
+        //           if (userLockDao != null) {
+        //               userLockDao.deleteUserLockData()
+        //           }
                }
                .show()
 
-           // apaga os dados de todas as tabelas
-//           if (lockDao != null) {
-//               lockDao.deleteLockData()
-//           }
-//           userDao.deleteUserData()
-//           if (userLockDao != null) {
-//               userLockDao.deleteUserLockData()
-//           }
+
 
         }
 
@@ -119,8 +117,15 @@ class ProfilePageFragment : Fragment() {
         }
     }
 
+    private fun emailFetch(username : String) : String = runBlocking {
+        val userDatabase = UserDBSingleton.getInstance(requireContext())
+        val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
 
 
+        val email : String = userDao.getEmailByUsername(username)
+
+        email
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

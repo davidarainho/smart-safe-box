@@ -2,7 +2,7 @@
     <!-- Hints -->
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="your_email">Your E-mail</string>
+    <string name="your_email">Your E-mail: %1$s</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="search">Search</string>
 
@@ -23,7 +23,7 @@
 
     <!-- my_locks -->
     <string name="my_locks">My Locks!</string>
-    <string name="active_locks">Currently you have X locks active</string>
+    <string name="active_locks">Currently you have %1$s locks active</string>
 
     <!-- settings -->
     <string name="share_multiple_locks">Share Multiple Locks</string>
@@ -69,7 +69,7 @@
 
     <!-- Profile Page -->
     <string name="change_password">Change Password</string>
-    <string name="welcome_to_account">XXX account</string>
+    <string name="welcome_to_account">%1$s account</string>
     <string name="change_display_name">Change Username</string>
     <string name="logout">Log out</string>
 

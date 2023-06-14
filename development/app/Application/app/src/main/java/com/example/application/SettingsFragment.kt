@@ -66,17 +66,18 @@ class SettingsFragment : Fragment() {
                 .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
                     // Respond to positive button press
                     activity?.finish()
+                    // apaga os dados de todas as tabelas
+        //           if (lockDao != null) {
+        //               lockDao.deleteLockData()
+        //           }
+        //           userDao.deleteUserData()
+        //           if (userLockDao != null) {
+        //               userLockDao.deleteUserLockData()
+        //           }
                 }
                 .show()
 
-            // apaga os dados de todas as tabelas
-//           if (lockDao != null) {
-//               lockDao.deleteLockData()
-//           }
-//           userDao.deleteUserData()
-//           if (userLockDao != null) {
-//               userLockDao.deleteUserLockData()
-//           }
+
         }
     }
 
