@@ -1,26 +1,28 @@
 {
     "users": [
         {
-            "username": "smart-safe-box.fabric-admin", 
-            "password": "mW!)u!Y7T3T^%d+L", 
-            "email": "email1", 
+            "username": "smart-safe-box.fabric-admin",
+            "password": "mW!)u!Y7T3T^%d+L",
+            "email": "email1",
             "accessLevel0": "1",
+            "allow_notications": true,
             "active_locks": [
                 {
                     "lockId": "Lock1",
                     "accessLevel": "1"
-                  },
-                  {
+                },
+                {
                     "lockId": "Lock2",
                     "accessLevel": "0"
-                  }
+                }
             ]
         },
         {
-            "username": "user2", 
+            "username": "user2",
             "password": "pass2",
-            "email": "email2", 
+            "email": "email2",
             "accessLevel0": "0",
+            "allow_notications": false,
             "active_locks": [
                 {
                     "lockId": "Lock2",
@@ -29,39 +31,32 @@
             ]
         },
         {
-            "username": "user3", 
-            "password": "pass3", 
-            "email": "email3", 
+            "username": "user3",
+            "password": "pass3",
+            "email": "email3",
             "accessLevel0": "0",
+            "allow_notications": false,
             "active_locks": [
                 {
                     "lockId": "Lock2",
                     "accessLevel": "2"
-                  },
-                  {
+                },
+                {
                     "lockId": "Lock3",
                     "accessLevel": "3"
-                  }
+                }
             ]
         }
     ],
-    "activatedLocks":[
-
-    ],
-    "unactivatedLocks":[
+    "activatedLocks": [],
+    "unactivatedLocks": [
         {
             "lockID": "Lock1",
             "Name": "Lock1Name",
             "Location": "Porto",
             "State": "0",
             "pinLock": "1234",
-            "maxNumUsers": 3,
-            "lastAccess":[
-                {
-                    "username": "José",
-                    "date": "14-06-2023 02:20"
-                }
-            ]
+            "lastAccess": []
         },
         {
             "lockID": "Lock2",
@@ -69,13 +64,7 @@
             "Location": "Viseu",
             "State": "0",
             "pinLock": "6716",
-            "maxNumUsers": 4,
-            "lastAccess":[
-                {
-                    "username": "Alex",
-                    "date": "26-07-2023 19:40"
-                }
-            ]
+            "lastAccess": []
         },
         {
             "lockID": "Lock3",
@@ -83,13 +72,7 @@
             "Location": "Compostela",
             "State": "0",
             "pinLock": "1927",
-            "maxNumUsers": 4,
-            "lastAccess":[
-                {
-                    "username": "Filipe",
-                    "date": "16-02-2022 04:10"
-                }
-            ]
+            "lastAccess": []
         }
     ]
 }

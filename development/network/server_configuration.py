@@ -1,5 +1,7 @@
-hostName = "localhost"
-espApiPort = 8083
+hostName = "10.182.0.2"
+# hostName = "localhost"
+
+espApiPort = 8080
 appApiPort = 8081
 
 
