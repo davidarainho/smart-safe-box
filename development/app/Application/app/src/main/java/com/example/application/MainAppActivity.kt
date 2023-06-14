@@ -1,14 +1,11 @@
 package com.example.application
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.example.application.model.AppViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.fragment.app.activityViewModels
 
 
 class MainAppActivity : AppCompatActivity() {
@@ -36,5 +33,4 @@ class MainAppActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
 }

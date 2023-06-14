@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -53,6 +54,10 @@ class MyLocksFragment : Fragment() {
 
         sharedViewModel.setUsername(username)
 
+        val callback = object : OnBackPressedCallback(true ) { override fun handleOnBackPressed(){}}
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,callback)
+
+
         var myList: List<Lock>? = null
         val lockList = LockDataSource().loadUserlockers(requireContext(), username)
         val itemAdapter = ItemAdapter(lockList, username)
@@ -84,5 +89,6 @@ class MyLocksFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 
 }
