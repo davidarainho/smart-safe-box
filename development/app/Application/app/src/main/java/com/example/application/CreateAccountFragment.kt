@@ -91,6 +91,10 @@ class CreateAccountFragment : Fragment() {
                 Toast.makeText(context, "Error: Check Box", Toast.LENGTH_SHORT).show()
             } else if (!validateEmail(email)) {
                 Toast.makeText(context, "Error: invalid email format", Toast.LENGTH_SHORT).show()
+                binding.usernameText.text?.clear()
+                binding.emailText.text?.clear()
+                binding.passwordText.text?.clear()
+                binding.passwordConfirmationText.text?.clear()
             } else{
                 flagAllowNewAccount = true
             }

@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigator
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.application.data.LockDBSingleton
@@ -73,12 +74,17 @@ class ProfilePageFragment : Fragment() {
 
 
         binding.changePassword.setOnClickListener {
-            findNavController().navigate(R.id.action_profilePageFragment_to_changePasswordFragment)
+
+            val action = ProfilePageFragmentDirections.actionProfilePageFragmentToChangePasswordFragment(username = sharedViewModel.username.value.toString())
+            binding.changePassword.findNavController().navigate(action)
         }
 
         binding.changeUsername.setOnClickListener {
-            findNavController().navigate(R.id.action_profilePageFragment_to_changeUsernameFragment)
+
+            val action = ProfilePageFragmentDirections.actionProfilePageFragmentToChangeUsernameFragment(previousUsername = sharedViewModel.username.value.toString())
+            binding.changeUsername.findNavController().navigate(action)
         }
+
 
        binding.logoutButton.setOnClickListener {
            MaterialAlertDialogBuilder(requireContext())
@@ -106,7 +112,13 @@ class ProfilePageFragment : Fragment() {
 //           }
 
         }
+
+        binding.addNewLock.setOnClickListener {
+            findNavController().navigate(R.id.action_profilePageFragment_to_addNewLockFragment)
+
+        }
     }
+
 
 
 

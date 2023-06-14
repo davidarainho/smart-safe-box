@@ -19,6 +19,16 @@ class ChangeEmailFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private lateinit var username : String
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            username = it.getString("username").toString()
+        }
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,7 +43,7 @@ class ChangeEmailFragment : Fragment() {
 
         val userDatabase = UserDBSingleton.getInstance(requireContext())
         val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
-        val userId: Int = 1234
+        var userId: Int = 0
 
         binding.changeemailbutton.setOnClickListener {
             val oldEmail = binding.oldEmailText.text.toString()
@@ -41,6 +51,7 @@ class ChangeEmailFragment : Fragment() {
 
 
             viewLifecycleOwner.lifecycleScope.launch {
+                userId=userDao.getUserIdByUsername(username)
                 val userEmail = userDao.getEmailByUserId(userId)
 
                 if (oldEmail.isEmpty() ||
@@ -58,6 +69,10 @@ class ChangeEmailFragment : Fragment() {
                     userDao.updateEmail(userId, newEmail)
                     Toast.makeText(context, "SUCCESS: Your e-mail was updated", Toast.LENGTH_SHORT)
                         .show()
+
+                    binding.oldEmailText.text?.clear()
+                    binding.newEmailText.text?.clear()
+
                 }
             }
         }

@@ -19,7 +19,16 @@ class ChangePasswordFragment : Fragment() {
     private var _binding: FragmentChangePasswordBinding? = null
 
     private val binding get() = _binding!!
+    private lateinit var username : String
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            username = it.getString("username").toString()
+        }
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +43,7 @@ class ChangePasswordFragment : Fragment() {
 
         val userDatabase = UserDBSingleton.getInstance(requireContext())
         val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
-        val userId: Int = 1234
+        var userId: Int = 0
 
         binding.changepasswordbutton.setOnClickListener {
             val oldPassword = binding.oldPasswordText.text.toString()
@@ -42,6 +51,7 @@ class ChangePasswordFragment : Fragment() {
             val newPasswordConfirmed = binding.confirmedNewPasswordText.text.toString()
 
             viewLifecycleOwner.lifecycleScope.launch {
+                userId=userDao.getUserIdByUsername(username)
                 val userPassword = userDao.getPasswordByUserID(userId)
 
                 if (oldPassword.isEmpty() ||
@@ -62,6 +72,10 @@ class ChangePasswordFragment : Fragment() {
                     userDao.updatePassword(userId, newPassword)
                     Toast.makeText(context, "SUCCESS: Your password was updated", Toast.LENGTH_SHORT)
                         .show()
+
+                    binding.oldPasswordText.text?.clear()
+                    binding.newPasswordText.text?.clear()
+                    binding.confirmedNewPasswordText.text?.clear()
                 }
             }
         }

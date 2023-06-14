@@ -18,6 +18,15 @@ class ChangeUsernameFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private lateinit var previousUername : String
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            previousUername = it.getString("username").toString()
+        }
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,12 +41,14 @@ class ChangeUsernameFragment : Fragment() {
 
         val userDatabase = UserDBSingleton.getInstance(requireContext())
         val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
-        val userId: Int = 1234
+        var userId: Int = 0
 
         binding.changeusernamebutto.setOnClickListener {
             val newUsername = binding.usernameText.text.toString()
 
             viewLifecycleOwner.lifecycleScope.launch {
+
+                userId=userDao.getUserIdByUsername(previousUername)
 
                 if (newUsername.isEmpty()) {
                     Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
@@ -48,6 +59,9 @@ class ChangeUsernameFragment : Fragment() {
                     userDao.updateUsername(userId, newUsername)
                     Toast.makeText(context, "SUCCESS: Your username was updated", Toast.LENGTH_SHORT)
                         .show()
+
+                    binding.usernameText.text?.clear()
+
                 }
             }
         }
