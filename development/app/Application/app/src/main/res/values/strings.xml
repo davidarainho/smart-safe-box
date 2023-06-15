@@ -160,5 +160,8 @@
     <string name="share_lock1"><b>Share Lock</b></string>
     <string name="add_new_lock">Add New Lock</string>
 
+    <string name="title_remove_account">Remove User</string>
+    <string name="supporting_text_remove_account">Are you sure you want to remove the <b>%1$s</b> from this lock?</string>
+    <string name="supporting_text_remove_self">Are you sure you want to remove yourself from this lock?</string>
 
 </resources>

@@ -12,7 +12,7 @@ import com.example.application.data.UserDataSource
 import com.example.application.databinding.FragmentBotsheetUserBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BotsheetUserFragment(private val lockID : Int) : BottomSheetDialogFragment() {
+class BotsheetUserFragment(private val lockID : Int, private val username : String) : BottomSheetDialogFragment() {
     private var _binding : FragmentBotsheetUserBinding? = null
 
     private val binding get() = _binding!!
@@ -29,7 +29,7 @@ class BotsheetUserFragment(private val lockID : Int) : BottomSheetDialogFragment
         super.onViewCreated(view, savedInstanceState)
 
         val lockList = UserDataSource().loadUserInfo(requireContext(), lockID)
-        val itemAdapter = InfoAccountAdapter(lockList)
+        val itemAdapter = InfoAccountAdapter(lockList, requireContext(), binding, username, lockID)
 
         binding.enterOldPin.text = getString(R.string.shared_by_n_users, (itemAdapter.itemCount-1).toString());
 
