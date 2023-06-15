@@ -63,6 +63,7 @@ class LockerPageFragment : Fragment() {
     private lateinit var botsheetAccessFragment : BotsheetAccessFragment
     private lateinit var botsheetUserFragment : BotsheetUserFragment
     private lateinit var botsheetPinFragment: UpdatePinFragment
+    private lateinit var botsheetShareLockFragment: BotsheetShareLockFragment
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,6 +71,11 @@ class LockerPageFragment : Fragment() {
 
         imageView.setOnClickListener{
             setLockState(imageView)
+        }
+
+        binding.shareLock.setOnClickListener {
+            botsheetShareLockFragment = BotsheetShareLockFragment(lockID.toInt())
+            botsheetShareLockFragment.show(childFragmentManager,botsheetShareLockFragment.tag)
         }
 
         binding.moreInfoAccesses.setOnClickListener {
