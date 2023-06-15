@@ -42,7 +42,6 @@ class MyLocksFragment : Fragment() {
         arguments?.let {
             username = it.getString("userName").toString()
         }
-
         sharedViewModel.setUsername(username)
     }
 

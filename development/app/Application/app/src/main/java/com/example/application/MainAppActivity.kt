@@ -58,11 +58,10 @@ class MainAppActivity : AppCompatActivity() {
         var flagWrongPin : Boolean = false
         var flagChangedLockState : Boolean = false
 
-        var lockname : String
+        var lockname : String = "default"
         printRunnable = object : Runnable {
             override fun run() {
                 // Pedidos para verificar alteracoes (Pin Errado / Estado Lock)
-                lockname = "Camarao"
 
                 if (flagWrongPin){
                     sendNotificationWrongPin(lockname)

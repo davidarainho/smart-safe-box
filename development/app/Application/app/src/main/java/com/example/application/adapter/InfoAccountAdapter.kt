@@ -73,14 +73,7 @@ class InfoAccountAdapter (
                         }
                         .show()
                 }
-
-
-                println(level)
-
-
             }
-
-
         }
         // Aqui adicionar depois para atribuir à caixa de texto
         // Mais o .userEmail

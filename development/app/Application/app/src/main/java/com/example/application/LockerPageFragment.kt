@@ -11,9 +11,14 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.application.data.UserAndLock.UserAndLockDao
+import com.example.application.data.UserAndLockDBSingleton
+import com.example.application.data.UserDBSingleton
+import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentLockerPageBinding
 import com.example.application.databinding.FragmentMyLocksBinding
 import com.example.application.model.AppViewModel
+import kotlinx.coroutines.runBlocking
 
 class LockerPageFragment : Fragment() {
     // IDLE is closed - should come from a flag/request
@@ -28,6 +33,7 @@ class LockerPageFragment : Fragment() {
     private val sharedViewModel: AppViewModel by activityViewModels()
 
     private val binding get() = _binding!!
+    private var level : Int = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +45,13 @@ class LockerPageFragment : Fragment() {
         }
 
         sharedViewModel.setLockID(lockID.toInt())
-
+        level = getPermissionLevel(username, lockID.toInt())
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentLockerPageBinding.inflate(inflater,container,false)
 
@@ -74,8 +80,10 @@ class LockerPageFragment : Fragment() {
         }
 
         binding.shareLock.setOnClickListener {
-            botsheetShareLockFragment = BotsheetShareLockFragment(lockID.toInt())
-            botsheetShareLockFragment.show(childFragmentManager,botsheetShareLockFragment.tag)
+            if(level <= 2){
+                botsheetShareLockFragment = BotsheetShareLockFragment(lockID.toInt())
+                botsheetShareLockFragment.show(childFragmentManager,botsheetShareLockFragment.tag)
+            }
         }
 
         binding.moreInfoAccesses.setOnClickListener {
@@ -106,7 +114,22 @@ class LockerPageFragment : Fragment() {
         _binding = null
     }
 
+    private fun getPermissionLevel(user : String, lockID : Int) : Int = runBlocking {
+        val userDatabaseSingleton = UserDBSingleton.getInstance(requireContext())
+        val userDao : UserDao = userDatabaseSingleton!!.getAppDatabase().userDao()
 
+        val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
+        val userLockDao : UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
+
+        val userId : Int = userDao.getUserIdByUsername(user)
+
+        var lev : Int = 3
+        if (userLockDao != null){
+            lev = userLockDao.getUserLockPermissionLevel(userId, lockID)
+        }
+
+        lev
+    }
 
     private fun setLockState(imageView: ImageView){
         // state = Ir buscar valor do estado na base de dados

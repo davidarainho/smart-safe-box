@@ -30,6 +30,7 @@ class ProfilePageFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+
     private val sharedViewModel: AppViewModel by activityViewModels()
 
     private lateinit var username: String
