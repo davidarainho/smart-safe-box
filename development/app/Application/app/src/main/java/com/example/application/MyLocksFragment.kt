@@ -18,9 +18,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.adapter.ItemAdapter
 import com.example.application.data.LockDataSource
+import com.example.application.data.UserAndLock.UserAndLockDao
+import com.example.application.data.UserAndLockDBSingleton
+import com.example.application.data.UserDBSingleton
 import com.example.application.data.lock.Lock
+import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentMyLocksBinding
 import com.example.application.model.AppViewModel
+import kotlinx.coroutines.runBlocking
 
 class MyLocksFragment : Fragment() {
     private var _binding : FragmentMyLocksBinding? = null
@@ -29,7 +34,6 @@ class MyLocksFragment : Fragment() {
 
     private lateinit var username: String
 
-    private val sharedViewModel: AppViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,12 +56,16 @@ class MyLocksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedViewModel.setUsername(username)
-
+        // Remove Back button option
         val callback = object : OnBackPressedCallback(true ) { override fun handleOnBackPressed(){}}
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,callback)
 
+        println(username)
+        // Set string
+        val count : String = lockCount(username).toString()
+        binding.welcomeText.text = getString(R.string.active_locks, count)
 
+        // Set List of Locks
         var myList: List<Lock>? = null
         val lockList = LockDataSource().loadUserlockers(requireContext(), username)
         val itemAdapter = ItemAdapter(lockList, username)
@@ -82,7 +90,19 @@ class MyLocksFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
+    }
 
+    private fun lockCount(name : String) : Int? = runBlocking {
+        val userDatabaseSingleton = UserDBSingleton.getInstance(requireContext())
+        val userDao : UserDao = userDatabaseSingleton!!.getAppDatabase().userDao()
+
+        val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
+        val userLockDao : UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
+
+        val idUser : Int = userDao.getUserIdByUsername(name)
+        val count : Int? = userLockDao?.getLocksIDCountByUserId(idUser)
+
+        count
     }
 
     override fun onDestroyView() {

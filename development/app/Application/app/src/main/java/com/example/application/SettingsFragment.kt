@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.application.databinding.FragmentSettingsBinding
 import com.example.application.databinding.FragmentStartBinding
@@ -21,6 +22,8 @@ class SettingsFragment : Fragment() {
 
     private lateinit var username: String
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,13 +38,19 @@ class SettingsFragment : Fragment() {
         //println(sharedViewModel.username.value)
 
         binding.changeEmail.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_changeEmailFragment)
+
+            val action = SettingsFragmentDirections.actionSettingsFragmentToChangeEmailFragment(username = sharedViewModel.username.value.toString())
+            binding.changeEmail.findNavController().navigate(action)
         }
         binding.manageNotifications.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_notificationsFragment)
+
+            val action = SettingsFragmentDirections.actionSettingsFragmentToNotificationsFragment(username = sharedViewModel.username.value.toString())
+            binding.manageNotifications.findNavController().navigate(action)
         }
         binding.changeLockName.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_changeLockNameFragment)
+
+            val action = SettingsFragmentDirections.actionSettingsFragmentToChangeLockNameFragment(username = sharedViewModel.username.value.toString())
+            binding.changeLockName.findNavController().navigate(action)
         }
 
         binding.deleteaccount.setOnClickListener {
@@ -57,17 +66,18 @@ class SettingsFragment : Fragment() {
                 .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
                     // Respond to positive button press
                     activity?.finish()
+                    // apaga os dados de todas as tabelas
+        //           if (lockDao != null) {
+        //               lockDao.deleteLockData()
+        //           }
+        //           userDao.deleteUserData()
+        //           if (userLockDao != null) {
+        //               userLockDao.deleteUserLockData()
+        //           }
                 }
                 .show()
 
-            // apaga os dados de todas as tabelas
-//           if (lockDao != null) {
-//               lockDao.deleteLockData()
-//           }
-//           userDao.deleteUserData()
-//           if (userLockDao != null) {
-//               userLockDao.deleteUserLockData()
-//           }
+
         }
     }
 

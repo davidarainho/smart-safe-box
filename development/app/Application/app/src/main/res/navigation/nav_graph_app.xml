@@ -36,6 +36,9 @@
         <argument
             android:name="userName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_profilePageFragment_to_addNewLockFragment"
+            app:destination="@id/addNewLockFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -56,27 +59,47 @@
         android:id="@+id/changePasswordFragment"
         android:name="com.example.application.ChangePasswordFragment"
         android:label="fragment_change_password"
-        tools:layout="@layout/fragment_change_password" />
+        tools:layout="@layout/fragment_change_password" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/changeEmailFragment"
         android:name="com.example.application.ChangeEmailFragment"
         android:label="fragment_change_email"
-        tools:layout="@layout/fragment_change_email" />
+        tools:layout="@layout/fragment_change_email" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/changeUsernameFragment"
         android:name="com.example.application.ChangeUsernameFragment"
         android:label="fragment_change_username"
-        tools:layout="@layout/fragment_change_username" />
+        tools:layout="@layout/fragment_change_username" >
+        <argument
+            android:name="previous_username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="com.example.application.NotificationsFragment"
         android:label="fragment_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/changeLockNameFragment"
         android:name="com.example.application.ChangeLockNameFragment"
         android:label="fragment_change_lock_name"
-        tools:layout="@layout/fragment_change_lock_name" />
+        tools:layout="@layout/fragment_change_lock_name" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/lockerPageFragment"
         android:name="com.example.application.LockerPageFragment"
@@ -98,4 +121,11 @@
             app:argType="string" />
     </fragment>
     <include app:graph="@navigation/nav_graph" />
+    <fragment
+        android:id="@+id/addNewLockFragment"
+        android:name="com.example.application.AddNewLockFragment"
+        android:label="AddNewLockFragment"
+        tools:layout="@layout/fragment_add_new_lock"/>
+
+
 </navigation>

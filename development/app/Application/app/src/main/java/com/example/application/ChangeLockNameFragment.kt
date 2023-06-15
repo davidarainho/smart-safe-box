@@ -30,6 +30,16 @@ class ChangeLockNameFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private lateinit var username : String
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            username = it.getString("username").toString()
+        }
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,15 +47,17 @@ class ChangeLockNameFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentChangeLockNameBinding.inflate(inflater,container,false)
 
-        var userID= 1234;
+        //var userID= 0;
 
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, loadLockIds(requireContext(), userID))
+
+
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, loadLockIds(requireContext()))
         binding.dropdownItems.setAdapter(arrayAdapter)
 
         return binding.root
     }
 
-    fun loadLockIds(context: Context, userID : Int): List<Int> = runBlocking {
+    fun loadLockIds(context: Context): List<Int> = runBlocking {
         val lockDatabaseSingleton = LockDBSingleton.getInstance(context)
         val lockDao : LockDao? = lockDatabaseSingleton!!.getAppDatabase().lockDao()
 
@@ -55,10 +67,13 @@ class ChangeLockNameFragment : Fragment() {
         val userAndLockDatabase = UserAndLockDBSingleton.getInstance(context)
         val userLockDao : UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
+        var userID: Int=0
+
         var listOfLockIDs: List<Int> = emptyList()
 
 
         withContext(Dispatchers.IO) {
+            userID=userDao.getUserIdByUsername(username)
             if (userLockDao != null) {
                 listOfLockIDs = userLockDao.getLocksIDByUserId(userID)
             }
@@ -92,6 +107,7 @@ class ChangeLockNameFragment : Fragment() {
                     if (lockDao != null) {
                         lockDao.updateLockName(lockId, newLockName)
                         Toast.makeText(context, "SUCCESS: Your lock name was updated", Toast.LENGTH_SHORT).show()
+                        binding.newLockNameText.text?.clear()
                     }
 
                 }

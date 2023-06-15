@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.application.databinding.FragmentLockerPageBinding
 import com.example.application.databinding.FragmentMyLocksBinding
+import com.example.application.model.AppViewModel
 
 class LockerPageFragment : Fragment() {
     // IDLE is closed - should come from a flag/request
@@ -22,6 +24,8 @@ class LockerPageFragment : Fragment() {
     private lateinit var username : String
 
     private var _binding : FragmentLockerPageBinding? = null
+
+    private val sharedViewModel: AppViewModel by activityViewModels()
 
     private val binding get() = _binding!!
 
@@ -59,8 +63,10 @@ class LockerPageFragment : Fragment() {
     lateinit var botsheetUserFragment : BotsheetUserFragment
     lateinit var botsheetPinFragment: UpdatePinFragment
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val imageView: ImageView = binding.imageView
+
         imageView.setOnClickListener{
             setLockState(imageView)
         }
@@ -86,6 +92,8 @@ class LockerPageFragment : Fragment() {
             binding.exit.findNavController().navigate(action)
             //findNavController().navigate(R.id.action_lockerPageFragment_to_myLocksFragment)
         }
+
+        sharedViewModel.setLockID(lockID.toInt())
     }
 
     override fun onDestroyView() {

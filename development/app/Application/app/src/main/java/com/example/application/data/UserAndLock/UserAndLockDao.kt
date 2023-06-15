@@ -26,6 +26,8 @@ interface UserAndLockDao {
     @Query("SELECT lock_id FROM UserAndLock WHERE user_id = :userId")
     suspend fun getLocksIDByUserId(userId: Int): List<Int>
 
+    @Query("SELECT COUNT(user_id) FROM UserAndLock WHERE user_id = :userId")
+    suspend fun getLocksIDCountByUserId(userId: Int): Int
 
 // exemplo para usar esta funçao:
 

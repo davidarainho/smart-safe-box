@@ -54,6 +54,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/rounded_view"
             android:hint="@string/username"
+            android:maxLength="18"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 

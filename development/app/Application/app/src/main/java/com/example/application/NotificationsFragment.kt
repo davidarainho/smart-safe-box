@@ -20,6 +20,15 @@ class NotificationsFragment : Fragment() {
     private var _binding : FragmentNotificationsBinding? = null
 
     private val binding get() = _binding!!
+    private lateinit var username : String
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            username = it.getString("username").toString()
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +44,7 @@ class NotificationsFragment : Fragment() {
 
         val userDatabase = UserDBSingleton.getInstance(requireContext())
         val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
-        val userId: Int = 1234
+        var userId: Int = 0
         var notifications: Int = 1
 
         val switchCompat = view.findViewById<SwitchCompat>(R.id.allownotifications)
@@ -43,6 +52,7 @@ class NotificationsFragment : Fragment() {
             notifications = if (isChecked) 1 else 0
             viewLifecycleOwner.lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
+                    userId=userDao.getUserIdByUsername(username)
                     userDao.updateNotificationPreference(userId, notifications)
                     println("New Notification Preference"+ notifications)
                 }

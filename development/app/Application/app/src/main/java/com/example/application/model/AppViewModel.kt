@@ -14,8 +14,15 @@ class AppViewModel : ViewModel() {
     private val _username = MutableLiveData<String>()
     val username: LiveData<String> = _username
 
+    private val _lockID = MutableLiveData<Int>()
+    val lockID: LiveData<Int> = _lockID
+
     fun setUsername(name : String){
         _username.value = name
+    }
+
+    fun setLockID(name : Int){
+        _lockID.value = name
     }
 
     init {
