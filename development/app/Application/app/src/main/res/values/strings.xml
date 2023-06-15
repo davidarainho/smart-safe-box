@@ -2,7 +2,8 @@
     <!-- Hints -->
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="your_email">Your E-mail: %1$s</string>
+    <string name="your_email_show">Your E-mail: %1$s</string>
+    <string name="your_email">Your E-mail</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="search">Search</string>
 
@@ -151,6 +152,7 @@
 
     <string name="title_logout_account">Logout</string>
     <string name="supporting_text_logout_account">Are you sure you want to logout from your account?</string>
+    <string name="add_new_lock">Add New Lock</string>
 
 
 </resources>

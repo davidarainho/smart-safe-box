@@ -38,6 +38,8 @@ class LockerPageFragment : Fragment() {
             username = it.getString("username").toString()
         }
 
+        sharedViewModel.setLockID(lockID.toInt())
+
     }
 
     override fun onCreateView(
@@ -47,21 +49,20 @@ class LockerPageFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentLockerPageBinding.inflate(inflater,container,false)
 
-        /////////////////////// [REVER]!! /////////////////////
+
         binding.lockerName.text = name
         lockID = lockID.padStart(5, '0')
         val idLock = "#$lockID"
         binding.lockerUserIdentifier.text = idLock
-        /////////////////////// [REVER]!! /////////////////////
 
         setLockState(binding.imageView)
 
         return binding.root
     }
 
-    lateinit var botsheetAccessFragment : BotsheetAccessFragment
-    lateinit var botsheetUserFragment : BotsheetUserFragment
-    lateinit var botsheetPinFragment: UpdatePinFragment
+    private lateinit var botsheetAccessFragment : BotsheetAccessFragment
+    private lateinit var botsheetUserFragment : BotsheetUserFragment
+    private lateinit var botsheetPinFragment: UpdatePinFragment
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,8 +93,6 @@ class LockerPageFragment : Fragment() {
             binding.exit.findNavController().navigate(action)
             //findNavController().navigate(R.id.action_lockerPageFragment_to_myLocksFragment)
         }
-
-        sharedViewModel.setLockID(lockID.toInt())
     }
 
     override fun onDestroyView() {

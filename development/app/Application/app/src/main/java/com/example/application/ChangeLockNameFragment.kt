@@ -43,13 +43,11 @@ class ChangeLockNameFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentChangeLockNameBinding.inflate(inflater,container,false)
 
         //var userID= 0;
-
-
 
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, loadLockIds(requireContext()))
         binding.dropdownItems.setAdapter(arrayAdapter)
@@ -58,8 +56,6 @@ class ChangeLockNameFragment : Fragment() {
     }
 
     fun loadLockIds(context: Context): List<Int> = runBlocking {
-        val lockDatabaseSingleton = LockDBSingleton.getInstance(context)
-        val lockDao : LockDao? = lockDatabaseSingleton!!.getAppDatabase().lockDao()
 
         val userDatabaseSingleton = UserDBSingleton.getInstance(context)
         val userDao : UserDao = userDatabaseSingleton!!.getAppDatabase().userDao()
@@ -67,7 +63,7 @@ class ChangeLockNameFragment : Fragment() {
         val userAndLockDatabase = UserAndLockDBSingleton.getInstance(context)
         val userLockDao : UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
-        var userID: Int=0
+        var userID: Int
 
         var listOfLockIDs: List<Int> = emptyList()
 
@@ -89,7 +85,7 @@ class ChangeLockNameFragment : Fragment() {
         val lockDao : LockDao? = lockDatabaseSingleton!!.getAppDatabase().lockDao()
         var lockId: Int = 0
 
-        binding.dropdownItems.setOnItemClickListener { parent, view, position, id ->
+        binding.dropdownItems.setOnItemClickListener { parent, _, position, id ->
             val selectedItem = parent.getItemAtPosition(position)
             lockId = selectedItem as Int
 

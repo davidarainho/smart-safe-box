@@ -54,7 +54,7 @@ class ProfilePageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentProfilePageBinding.inflate(inflater,container,false)
         return binding.root
@@ -62,12 +62,12 @@ class ProfilePageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Obter valor do user neste fragmento
-        //println(sharedViewModel.username.value)
+        println(sharedViewModel.username.value)
 
         val email : String = emailFetch(sharedViewModel.username.value.toString())
 
         binding.welcomeAccount.text = getString(R.string.welcome_to_account, sharedViewModel.username.value.toString())
-        binding.yourEmail.text = getString(R.string.your_email, email)
+        binding.yourEmail.text = getString(R.string.your_email_show, email)
 
 
         binding.changePassword.setOnClickListener {

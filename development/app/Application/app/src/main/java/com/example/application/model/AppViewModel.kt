@@ -21,8 +21,8 @@ class AppViewModel : ViewModel() {
         _username.value = name
     }
 
-    fun setLockID(name : Int){
-        _lockID.value = name
+    fun setLockID(ID : Int){
+        _lockID.value = ID
     }
 
     init {
@@ -32,6 +32,7 @@ class AppViewModel : ViewModel() {
 
     private fun resetOrder() {
         _username.value = ""
+        _lockID.value = 0
     }
 
 }

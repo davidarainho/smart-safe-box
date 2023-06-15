@@ -33,6 +33,7 @@ class MyLocksFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var username: String
+    private val sharedViewModel: AppViewModel by activityViewModels() // Tem de estar aqui!
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +43,7 @@ class MyLocksFragment : Fragment() {
             username = it.getString("userName").toString()
         }
 
+        sharedViewModel.setUsername(username)
     }
 
     override fun onCreateView(
@@ -60,7 +62,7 @@ class MyLocksFragment : Fragment() {
         val callback = object : OnBackPressedCallback(true ) { override fun handleOnBackPressed(){}}
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,callback)
 
-        println(username)
+        // println(username)
         // Set string
         val count : String = lockCount(username).toString()
         binding.welcomeText.text = getString(R.string.active_locks, count)

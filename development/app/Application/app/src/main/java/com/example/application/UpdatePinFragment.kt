@@ -33,7 +33,8 @@ class UpdatePinFragment : BottomSheetDialogFragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentUpdatePinBinding.inflate(inflater,container,false)
-        return binding.root    }
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,7 +53,7 @@ class UpdatePinFragment : BottomSheetDialogFragment() {
         val userLockID: Int = 104
         var userLockPin: String=""
 
-        println(sharedViewModel.lockID)
+        //println(sharedViewModel.lockID.value)
 
         binding.confirm.setOnClickListener {
             val oldPin = binding.oldPinText.text.toString()
