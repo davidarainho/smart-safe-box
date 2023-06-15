@@ -95,7 +95,7 @@
     <string name="instructions_pass_recover">Email to send password recovery</string>
 
     <!-- Menu Options -->
-    <string name="home">Home</string>
+    <string name="home">User</string>
 
     <!-- Recover password -->
     <string name="go_back">Return to <b>Login Page</b>!</string>

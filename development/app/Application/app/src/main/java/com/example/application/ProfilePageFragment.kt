@@ -6,24 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.Navigator
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.example.application.data.LockDBSingleton
-import com.example.application.data.UserAndLock.UserAndLockDao
-import com.example.application.data.UserAndLockDBSingleton
 import com.example.application.data.UserDBSingleton
-import com.example.application.data.lock.LockDao
 import com.example.application.data.user.UserDao
-import androidx.navigation.navGraphViewModels
 import com.example.application.databinding.FragmentProfilePageBinding
 import com.example.application.model.AppViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.runBlocking
-import java.util.jar.Attributes.Name
 
 /**
  * A simple [Fragment] subclass.
@@ -62,7 +52,7 @@ class ProfilePageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Obter valor do user neste fragmento
-        println(sharedViewModel.username.value)
+        //println(sharedViewModel.username.value)
 
         val email : String = emailFetch(sharedViewModel.username.value.toString())
 
