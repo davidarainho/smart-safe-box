@@ -8,7 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.application.data.LockDBSingleton
+import com.example.application.data.UserAndLock.UserAndLockDao
+import com.example.application.data.UserAndLockDBSingleton
 import com.example.application.data.UserDBSingleton
+import com.example.application.data.lock.LockDao
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentProfilePageBinding
 import com.example.application.model.AppViewModel
@@ -54,6 +58,14 @@ class ProfilePageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Obter valor do user neste fragmento
         //println(sharedViewModel.username.value)
+        val lockDatabase = LockDBSingleton.getInstance(requireContext())
+        val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
+
+        val userDatabase = UserDBSingleton.getInstance(requireContext())
+        val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
+
+        val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
+        val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
         val email : String = emailFetch(sharedViewModel.username.value.toString())
 
@@ -88,13 +100,13 @@ class ProfilePageFragment : Fragment() {
                    // Respond to positive button press
                    activity?.finish()
                    // apaga os dados de todas as tabelas
-        //           if (lockDao != null) {
-        //               lockDao.deleteLockData()
-        //           }
-        //           userDao.deleteUserData()
-        //           if (userLockDao != null) {
-        //               userLockDao.deleteUserLockData()
-        //           }
+//                   if (lockDao != null) {
+//                       lockDao.deleteLockData()
+//                   }
+//                   userDao.deleteUserData()
+//                  if (userLockDao != null) {
+//                       userLockDao.deleteUserLockData()
+//                   }
                }
                .show()
 

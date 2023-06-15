@@ -64,14 +64,21 @@ class CreateAccountFragment : Fragment() {
         val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
 
-        val lock = Lock(lock_name="CARLOTA", last_access= "2027-06-31", user_last_access =  "Logan", number_of_users = 2,comment="new", eKey = null, lock_state = "open", lock_id=5658)
-//        val  lock1= Lock(lock_name="RUCA", last_access="2027-04-10,2001-09-10,2001-09-04,2024-04-01", user_last_access =  "Logan,Batata,Camarao,Baioneta", number_of_users = 1,comment="old", eKey = null, lock_state = "open", lock_id=863)
 
         var flagAllowNewAccount : Boolean = false
+
+//        val lock = Lock(lock_name="GYM", last_access= "2022-06-31", user_last_access =  "Logan", number_of_users = 2,comment="New gym lock", eKey = null, lock_state = "open", lock_id=12)
+//        val  lock1= Lock(lock_name="HOME", last_access="2023-04-10,2022-09-10,2022-09-04", user_last_access =  "Logan,Manuel,Pedro", number_of_users = 3,comment="Garage", eKey = null, lock_state = "open", lock_id=14)
+//
+//        val user1= User(username = "pedro01", email= "pedro@gmail.com", allow_notifications = 1, password = "wasd", user_id = 5656)
+//        val user2= User(username = "miguelAlmeida", email= "miguel@gmail.com", allow_notifications = 1, password = "wasd", user_id = 7777)
+
+
         var username : String
         var email : String
         var password : String
         var passwordConfirmed : String
+        val allowNotifications = 1
         binding.signUp.setOnClickListener {
             username = binding.usernameText.text.toString()
             email = binding.emailText.text.toString()
@@ -101,46 +108,21 @@ class CreateAccountFragment : Fragment() {
 
             ////////// Verificar se e' uma conta permitida [Miguel] //////////
 
-
-
-            val username = binding.usernameText.text.toString()
-            val email = binding.emailText.text.toString()
-            val password = binding.passwordText.text.toString()
-            val allowNotifications = 1
-            val userID= 1234
-
-            val user = User(username, email, password, allowNotifications, userID)
-            val userLock_association= UserAndLock(user_id = 1234, 5658, userLockId = 1048, permission_level = 4, lock_access_pin= "1234" )
-            //val userLock_association1= UserAndLock(user_id = 21, 9, userLockId = 94, permission_level = 4, lock_access_pin= "1234" )
-
+            //val user = User(username, email, password, allowNotifications, userid)
 
 
             GlobalScope.launch {
                 viewLifecycleOwner.lifecycleScope.launch {
-
-                    if (lockDao != null) {
-                        lockDao.upsertLock(lock)
-                       // lockDao.upsertLock(lock1)
-                    }
-
-                   userDao.upsertUser(user)
-//
-                    if (userLockDao != null) {
-                        userLockDao.upsertUserAndLock(userLock_association)
-                        //userLockDao.upsertUserAndLock(userLock_association1)
-                    }
-
-
+                   //userDao.upsertUser(user)
                 }
             }
 
 
             if(flagAllowNewAccount){
                 // Mostrar algo que confirme o sucesso da criação da conta
-                println("SUCESSO: An email was sent to confirm")
+                Toast.makeText(context, "SUCESSO: An email was sent to confirm", Toast.LENGTH_SHORT).show()
                 flagAllowNewAccount = false
             }
-
         }
     }
 

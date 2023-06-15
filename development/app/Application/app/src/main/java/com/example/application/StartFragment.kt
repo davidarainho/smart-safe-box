@@ -48,7 +48,7 @@ class StartFragment : Fragment() {
 
             // Miguel - chamar a funcao autenticacao
             // recebe a informacao, transfere para a base de dados, altera validAccount para true
-            if (username == "teste" && password == "pass"){
+            if (username == "pedro01" && password == "pass"){
                 validAccount = true
             }
 
