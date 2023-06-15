@@ -2,7 +2,7 @@
     "users": [
         {
             "username": "smart-safe-box.fabric-admin",
-            "password": "mW!)u!Y7T3T^%d+L",
+            "password": "mW!)u!Y7T3T^%dL",
             "email": "email1",
             "accessLevel0": "1",
             "allow_notications": true,
@@ -55,6 +55,7 @@
             "Name": "Lock1Name",
             "Location": "Porto",
             "State": "0",
+            "openLock": "0",
             "pinLock": "1234",
             "lastAccess": []
         },
@@ -63,6 +64,7 @@
             "Name": "Lock2Name",
             "Location": "Viseu",
             "State": "0",
+            "openLock": "0",
             "pinLock": "6716",
             "lastAccess": []
         },
@@ -71,6 +73,7 @@
             "Name": "Lock3Name",
             "Location": "Compostela",
             "State": "0",
+            "openLock": "0",
             "pinLock": "1927",
             "lastAccess": []
         }

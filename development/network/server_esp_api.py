@@ -24,10 +24,12 @@ class MyServer(BaseHTTPRequestHandler):
         self.client_port = 8080
 
     def do_GET(self):
-        if self.path == '/report_init': 
-            data_to_send = {"UnicID": "123456", "APPCode": "111222"}
+        if self.path == '/report_init':
+            code, lockId, app_code = register_lock()
 
-            self.send_response(200)
+            data_to_send = {"UnicID": lockId, "APPCode": app_code}
+
+            self.send_response(code)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
             response_json = json.dumps(data_to_send)
@@ -82,10 +84,8 @@ class MyServer(BaseHTTPRequestHandler):
                 '''
             self.wfile.write(html_content.encode('utf-8'))
 
-
     def do_POST(self):
         global is_to_send
-        print("jkdlaç")
 
         # error_response, check_message = check_lock_message(json_data)
 
@@ -103,7 +103,7 @@ class MyServer(BaseHTTPRequestHandler):
         if is_to_send == False:
             print("Nothing to send")
             return False
-        
+
         if self.path == '/opening_request':
             request_type = 'opening_request'
         elif self.path == '/user_update':
@@ -112,10 +112,10 @@ class MyServer(BaseHTTPRequestHandler):
             request_type = 'opening_report'
         elif self.path == '/change_password':
             request_type = 'change_password'
-    
 
         else:
-            self.send_response(404)  # Set the HTTP response code (e.g., 404 for "Not Found")
+            # Set the HTTP response code (e.g., 404 for "Not Found")
+            self.send_response(404)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
             error_message = "Endpoint not found"
@@ -126,10 +126,8 @@ class MyServer(BaseHTTPRequestHandler):
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length).decode('utf-8')
         json_data = json.loads(post_data)
-        
-        response_code, data_to_send = get_data_to_send(request_type, json_data)
 
-            
+        response_code, data_to_send = get_data_to_send(request_type, json_data)
 
         # Send a JSON response
         self.send_response(response_code)
@@ -138,7 +136,6 @@ class MyServer(BaseHTTPRequestHandler):
         response_json = json.dumps(data_to_send)
         self.wfile.write(response_json.encode('utf-8'))
         is_to_send = False
-        
 
 
 def control_refresh_rates(refresh_dict):
@@ -173,7 +170,7 @@ def output_control():
         'is_to_send': True,
         'get_requests_from_app': True
     }
-
+check_for_opening_request
     while True:
         refresh_dict = control_refresh_rates(refresh_dict)
 
@@ -182,13 +179,12 @@ def output_control():
         if refresh_dict['get_requests_from_app']:
             request_type, new_password, lock_id = get_app_request()
 
-
             # access_token = generate_access_token(
             #     get_master_key(lock_id), lock_id)
             data_to_send = create_request_json(
                 request_type, new_password)
-            
-            if(request_type == 'open_vault'):
+
+            if (request_type == 'open_vault'):
                 opening_report_dict = insert_new_request(
                     opening_report_dict, lock_id, data_to_send)
 
@@ -197,9 +193,10 @@ def output_control():
 
 if __name__ == "__main__":
 
-
-    lockWebServer = HTTPServer((server_configuration.hostName, server_configuration.espApiPort), MyServer)
-    print("Esp api opened at http://%s:%s" % (server_configuration.hostName, server_configuration.espApiPort))
+    lockWebServer = HTTPServer(
+        (server_configuration.hostName, server_configuration.espApiPort), MyServer)
+    print("Esp api opened at http://%s:%s" %
+          (server_configuration.hostName, server_configuration.espApiPort))
     lockThread = threading.Thread(target=lockWebServer.serve_forever)
 
     threading.Thread(target=lockWebServer.serve_forever).start()
