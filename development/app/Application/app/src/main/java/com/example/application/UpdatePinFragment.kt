@@ -48,9 +48,9 @@ class UpdatePinFragment : BottomSheetDialogFragment() {
         val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
         val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
-        val userId: Int = 1234
-        val lockId: Int = 863
-        val userLockID: Int = 104
+        val userId: Int = 8777
+        val lockId: Int = 12
+        val userLockID: Int = 5
         var userLockPin: String=""
 
         //println(sharedViewModel.lockID.value)
@@ -71,7 +71,7 @@ class UpdatePinFragment : BottomSheetDialogFragment() {
                     newPinConfirmed.isEmpty()
                 ) {
                     Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
-                }else if (newPin.length != 4) {
+                }else if (newPin.length != 6) {
                     Toast.makeText(context, "Error: The pin must have four characters", Toast.LENGTH_SHORT)
                         .show()
                 }
