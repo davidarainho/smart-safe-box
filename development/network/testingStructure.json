@@ -6,6 +6,7 @@
             "email": "email1",
             "accessLevel0": "1",
             "allow_notications": true,
+            "pinLock": "1234",
             "active_locks": [
                 {
                     "lockId": "Lock1",
@@ -23,6 +24,7 @@
             "email": "email2",
             "accessLevel0": "0",
             "allow_notications": false,
+            "pinLock": "6716",
             "active_locks": [
                 {
                     "lockId": "Lock2",
@@ -36,6 +38,7 @@
             "email": "email3",
             "accessLevel0": "0",
             "allow_notications": false,
+            "pinLock": "1927",
             "active_locks": [
                 {
                     "lockId": "Lock2",
@@ -56,7 +59,6 @@
             "Location": "Porto",
             "State": "0",
             "openLock": "0",
-            "pinLock": "1234",
             "lastAccess": []
         },
         {
@@ -65,7 +67,6 @@
             "Location": "Viseu",
             "State": "0",
             "openLock": "0",
-            "pinLock": "6716",
             "lastAccess": []
         },
         {
@@ -74,7 +75,6 @@
             "Location": "Compostela",
             "State": "0",
             "openLock": "0",
-            "pinLock": "1927",
             "lastAccess": []
         }
     ]

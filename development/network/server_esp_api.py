@@ -25,7 +25,7 @@ class MyServer(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == '/report_init':
-            code, lockId, app_code = register_lock()
+            code, lockId, app_code = report_init()
 
             data_to_send = {"UnicID": lockId, "APPCode": app_code}
 
@@ -170,7 +170,7 @@ def output_control():
         'is_to_send': True,
         'get_requests_from_app': True
     }
-check_for_opening_request
+# check_for_opening_request
     while True:
         refresh_dict = control_refresh_rates(refresh_dict)
 

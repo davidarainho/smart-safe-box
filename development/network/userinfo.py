@@ -21,7 +21,8 @@ def initializeDatabase():
                     password_hash TEXT,
                     email TEXT,
                     notifications INTEGER,
-                    access_level INTEGER)''')
+                    access_level INTEGER,
+                    access_pin TEXT)''')
 
     # Create a table to store lock information if it doesn't already exist
     cursor.execute('''CREATE TABLE IF NOT EXISTS locks
@@ -31,8 +32,9 @@ def initializeDatabase():
                     location TEXT,
                     state INTEGER,
                     lock_request INTEGER,
-                    access_pin TEXT,
-                    user_last_access TEXT)''')
+                    user_last_access TEXT,
+                    appcode INTEGER,
+                    active_users TEXT)''')
 
     # Create a table to store active locks information if it doesn't already exist
     cursor.execute('''CREATE TABLE IF NOT EXISTS active_locks
@@ -42,8 +44,9 @@ def initializeDatabase():
                     location TEXT,
                     state INTEGER,
                     lock_request INTEGER,
-                    access_pin TEXT,
-                    user_last_access TEXT)''')
+                    user_last_access TEXT,
+                    appcode INTEGER,
+                    active_users TEXT)''')
 
     # Create a table to store the relationship between locks and users
     cursor.execute('''CREATE TABLE IF NOT EXISTS lock_users
@@ -68,8 +71,8 @@ def add_user(json_input):
         return "Error: Invalid JSON input"
 
     # Check that all necessary fields are in the data
-    required_fields = ['username', 'password',
-                       'email', 'notifications', 'access_level']
+    required_fields = ['username', 'password_hash',
+                       'email', 'notifications', 'access_level', 'access_pin']
     for field in required_fields:
         if field not in data:
             conn.close()
@@ -78,16 +81,17 @@ def add_user(json_input):
 
     # Extract the data
     username = data['username']
-    password = data['password']
+    password = data['password_hash']
     email = data['email']
     notifications = data['notifications']
     access_level = data['access_level']
+    access_pin = data['access_pin']
 
     # Generate the password hash
     password_hash = hashlib.sha256(password.encode()).hexdigest()
 
-    cursor.execute("INSERT INTO users (username, password_hash, email, notifications, access_level) VALUES (?, ?, ?, ?, ?)",
-                   (username, password_hash, email, notifications, access_level))
+    cursor.execute("INSERT INTO users (username, password_hash, email, notifications, access_level, access_pin) VALUES (?, ?, ?, ?, ?, ?)",
+                   (username, password_hash, email, notifications, access_level, access_pin))
     user_id = cursor.lastrowid
 
     print("Created User " + username)
@@ -96,6 +100,8 @@ def add_user(json_input):
     return True
 
 # Function to deallocate a lock from a specific user
+
+
 def deallocate_lock(json_input):
     conn = sqlite3.connect('users.db')
     cursor = conn.cursor()
@@ -207,7 +213,10 @@ def get_users_for_lock(json_input):
     cursor.execute(
         "SELECT username, access_level FROM lock_users WHERE lock_id=?", (lock_id,))
     users = cursor.fetchall()
-    users = [user[0] for user in users]
+    if not users:
+        users = None
+    else:
+        users = [user[0] for user in users]
     json_users = json.dumps(users)
     conn.close()
     return json_users
@@ -237,17 +246,24 @@ def get_locks_for_user(json_input):
     username = data['username']
 
     cursor.execute(
-        "SELECT lock_id FROM lock_users WHERE username=?", (username,))
-    lock_id = cursor.fetchone()[0]
-    cursor.execute(
-        "SELECT access_level FROM lock_users WHERE username=?", (username,))
-    access_level = cursor.fetchone()[0]
+        "SELECT lock_id, access_level FROM lock_users WHERE username=?", (username,))
+    # lock_id = cursor.fetchone()[0]
+    locks = cursor.fetchall()
+    # lock_id = [lock[0] for lock in lock_id]
+    # cursor.execute(
+    #    "SELECT access_level FROM lock_users WHERE username=?", (username,))
+    # access_level = cursor.fetchone()[0]
     # locks = [lock[0] for lock in locks]
+    # access_level = cursor.fetchall()
+    # access_level = [level[0] for level in access_level]
+    if not locks:
+        lock_dict = []
 
-    lock_dict = {
-        "lock_id": lock_id,
-        "access_level": access_level
-    }
+    else:
+        lock_dict = [{
+            "lock_id": str(lock_id),
+            "access_level": str(access_level)
+        } for lock_id, access_level in locks]
     json_locks = json.dumps(lock_dict)
     conn.close()
     return json_locks
@@ -505,6 +521,8 @@ def list_all_usernames():
     # Extract usernames from the results and return them as a list
     usernames = [result[0] for result in results]
 
+    print(usernames)
+
     json_usernames = json.dumps(usernames)
 
     conn.close()
@@ -537,12 +555,25 @@ def user_object(json_input):
     cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
     user = cursor.fetchone()
 
-    user_dict = {
-        "username": user[1],
-        "password_hash": user[2],
-        "email": user[3],
-        "access_level": user[4]
-    }
+    if user is None:
+        return None
+        #user_dict = {
+        #    "username": None,
+        #    "password_hash": None,
+        #    "email": None,
+        #    "access_level": None,
+        #    "notifications": None,
+        #    "access_pin": None
+        #}
+    else:
+        user_dict = {
+            "username": user[1],
+            "password_hash": user[2],
+            "email": user[3],
+            "access_level": user[4],
+            "notifications": user[5],
+            "access_pin": user[6]
+        }
 
     user_dict["active_locks"] = json.loads(data_locks)
 
@@ -607,18 +638,34 @@ def lock_object(json_input):
     # Extract the data
     lock_id = data['lock_id']
 
+    data_users = get_users_for_lock(json.dumps({"lock_id": lock_id}))
+
     cursor.execute("SELECT * FROM active_locks WHERE lock_id = ?", (lock_id,))
     lock = cursor.fetchone()
 
-    lock_dict = {
-        "lockID": lock[1],
-        "Name": lock[2],
-        "Location": lock[3],
-        "State": lock[4],
-        "lock_request": lock[5],
-        "pinLock": lock[6],
-        "lastAccess": lock[7]
-    }
+    if not lock:
+        lock_dict = {
+            "lockID": None,
+            "Name": None,
+            "Location": None,
+            "State": None,
+            "lock_request": None,
+            "lastAccess": [],
+            "appcode": None
+        }
+
+    else:
+        lock_dict = {
+            "lockID": lock[1],
+            "Name": lock[2],
+            "Location": lock[3],
+            "State": lock[4],
+            "lock_request": lock[5],
+            "lastAccess": lock[6],
+            "appcode": lock[7]
+        }
+
+    lock_dict["active_users"] = json.loads(data_users)
 
     lock_ret = json.dumps(lock_dict)
 
@@ -635,6 +682,7 @@ def activate_lock(json_input):
         data = json.loads(json_input)
     except json.JSONDecodeError:
         conn.close()
+        print("Error: Invalid JSON input")
         return "Error: Invalid JSON input"
 
     # Check that all necessary fields are in the data
@@ -642,6 +690,7 @@ def activate_lock(json_input):
     for field in required_fields:
         if field not in data:
             conn.close()
+            print()
             return f"Error: Missing required field '{field}'"
 
     # Extract the data
@@ -650,9 +699,9 @@ def activate_lock(json_input):
     # Get the lock details from the locks table
     cursor.execute("SELECT * FROM locks WHERE lock_id = ?", (lock_id,))
     lock = cursor.fetchone()
-
+    
     # Add the lock to the active_locks table
-    cursor.execute("INSERT INTO active_locks (lock_id, name, location, state, lock_request, access_pin, user_last_access) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    cursor.execute("INSERT INTO active_locks (lock_id, name, location, state, lock_request, user_last_access, appcode) VALUES (?, ?, ?, ?, ?, ?, ?)",
                    (lock[1], lock[2], lock[3], lock[4], lock[5], lock[6], lock[7]))
     conn.commit()
 
@@ -690,7 +739,7 @@ def deactivate_lock(json_input):
     lock = cursor.fetchone()
 
     # Add the lock to the locks table
-    cursor.execute("INSERT INTO locks (lock_id, name, location, state, lock_request, access_pin, user_last_access) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    cursor.execute("INSERT INTO locks (lock_id, name, location, state, lock_request, user_last_access, appcode) VALUES (?, ?, ?, ?, ?, ?, ?)",
                    (lock[1], lock[2], lock[3], lock[4], lock[5], lock[6], lock[7]))
     conn.commit()
 
@@ -716,7 +765,7 @@ def update_pin_app2server(json_input):
         return "Error: Invalid JSON input"
 
     # Check that all necessary fields are in the data
-    required_fields = ['lock_id', 'new_access_pin']
+    required_fields = ['username', 'new_access_pin']
     for field in required_fields:
         if field not in data:
             conn.close()
@@ -724,16 +773,16 @@ def update_pin_app2server(json_input):
             return f"Error: Missing required field '{field}'"
 
     # Extract the data
-    lock_id = data['lock_id']
+    username = data['username']
     new_access_pin = data['new_access_pin']
 
     # Update the access_pin in the active_locks table
     cursor.execute("UPDATE active_locks SET access_pin=? WHERE lock_id=?",
-                   (new_access_pin, lock_id,))
+                   (new_access_pin, username,))
     conn.commit()
 
     conn.close()
-    print("Updated Lock Pin")
+    print("Updated Lock Pin for user {username}")
     return True
 
 
@@ -756,13 +805,13 @@ def list_unactivated_locks():
     return json_locks
 
 
-def pin2esp(lock_id):
+def pin2esp(username):
 
     conn = sqlite3.connect('users.db')
     cursor = conn.cursor()
 
     cursor.execute(
-        "SELECT access_pin FROM active_locks WHERE lock_id=?", (lock_id,))
+        "SELECT access_pin FROM users WHERE username=?", (username,))
 
     pin = cursor.fetchone()[0]
 
@@ -780,6 +829,7 @@ def update_lock_request(lock_id):
     conn.close()
 
     return True
+
 
 def last_acess_update(json_input):
 
@@ -813,7 +863,8 @@ def last_acess_update(json_input):
     timestamped_username = f"{timestamp}: {username}"
 
     # Get the current last_access_user string
-    cursor.execute("SELECT user_last_access FROM locks WHERE lock_id=?", (lock_id,))
+    cursor.execute(
+        "SELECT user_last_access FROM locks WHERE lock_id=?", (lock_id,))
     result = cursor.fetchone()
 
     if result is None:
@@ -823,11 +874,42 @@ def last_acess_update(json_input):
     if result[0] is None:
         new_last_access_user = timestamped_username
     else:
-    # Otherwise, append the new access at the end of the current string
+        # Otherwise, append the new access at the end of the current string
         new_last_access_user = result[0] + ', ' + timestamped_username
 
     # Update the last_access_user string for the lock
-    cursor.execute("UPDATE locks SET user_last_access=? WHERE lock_id=?", (new_last_access_user, lock_id))
+    cursor.execute("UPDATE locks SET user_last_access=? WHERE lock_id=?",
+                   (new_last_access_user, lock_id))
 
     conn.commit()
     conn.close()
+    
+def get_appcode(json_input):
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    
+    try:
+        # Attempt to load the JSON data
+        data = json.loads(json_input)
+    except json.JSONDecodeError:
+        conn.close()
+        print("Error: Invalid JSON input")
+        return "Error: Invalid JSON input"
+
+    # Check that all necessary fields are in the data
+    required_fields = ['lock_id']
+    for field in required_fields:
+        if field not in data:
+            conn.close()
+            print("Error: Missing required field")
+            return f"Error: Missing required field '{field}'"
+
+    # Extract the data
+    lock_id = data['lock_id']
+
+    cursor.execute("SELECT appcode FROM locks WHERE lock_id = ?", (lock_id,))
+    appcode = cursor.fetchone()[0]
+    
+    json_appcode = json.dumps({"appcode": appcode})
+    
+    return json_appcode
