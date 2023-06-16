@@ -1,6 +1,7 @@
 package com.example.application
 
 import android.os.Bundle
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,7 @@ import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentProfilePageBinding
 import com.example.application.model.AppViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 /**
  * A simple [Fragment] subclass.
@@ -98,7 +99,7 @@ class ProfilePageFragment : Fragment() {
 //                }
                .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
                    // Respond to positive button press
-                   activity?.finish()
+
                    // apaga os dados de todas as tabelas
 //                   if (lockDao != null) {
 //                       lockDao.deleteLockData()
@@ -107,6 +108,12 @@ class ProfilePageFragment : Fragment() {
 //                  if (userLockDao != null) {
 //                       userLockDao.deleteUserLockData()
 //                   }
+                   GlobalScope.launch{
+                       deleteLockData();
+                   }
+
+                   activity?.finish()
+
                }
                .show()
 
@@ -128,6 +135,30 @@ class ProfilePageFragment : Fragment() {
         val email : String = userDao.getEmailByUsername(username)
 
         email
+    }
+
+    suspend fun deleteLockData() {
+        val lockDatabase = LockDBSingleton.getInstance(requireContext())
+        val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
+
+        val userDatabase = UserDBSingleton.getInstance(requireContext())
+        val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
+
+        val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
+        val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
+
+        withContext(Dispatchers.IO) {
+
+            if (lockDao != null) {
+                lockDao.deleteLockData()
+            }
+            userDao.deleteUserData()
+
+            if (userLockDao != null) {
+                userLockDao.deleteUserLockData()
+            }
+
+        }
     }
 
     override fun onDestroyView() {
