@@ -131,6 +131,7 @@
     <string name="last_accessed">Last Accessed:</string>
     <string name="number_of_users">Number of users:</string>
     <string name="info"><u>+ info:</u></string>
+    <string name="changepin"><u>Change Lock Pin</u></string>
     <string name="change_lock_password">Change User #ID Lock Password</string>
     <string name="exit">exit</string>
     <string name="old_email">Old email</string>

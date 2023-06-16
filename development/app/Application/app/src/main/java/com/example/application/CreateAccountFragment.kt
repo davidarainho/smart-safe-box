@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.room.PrimaryKey
 import com.example.application.data.LockDBSingleton
 import com.example.application.data.UserAndLock.UserAndLock
 import com.example.application.data.UserAndLock.UserAndLockDao
@@ -69,9 +70,19 @@ class CreateAccountFragment : Fragment() {
 
 //        val lock = Lock(lock_name="GYM", last_access= "2022-06-31", user_last_access =  "Logan", number_of_users = 2,comment="New gym lock", eKey = null, lock_state = "open", lock_id=12)
 //        val  lock1= Lock(lock_name="HOME", last_access="2023-04-10,2022-09-10,2022-09-04", user_last_access =  "Logan,Manuel,Pedro", number_of_users = 3,comment="Garage", eKey = null, lock_state = "open", lock_id=14)
-//
+////
 //        val user1= User(username = "pedro01", email= "pedro@gmail.com", allow_notifications = 1, password = "wasd", user_id = 5656)
 //        val user2= User(username = "miguelAlmeida", email= "miguel@gmail.com", allow_notifications = 1, password = "wasd", user_id = 7777)
+   //       val user2= User(username = "beatriz", email= "beatriz@gmail.com", allow_notifications = 1, password = "wasd", user_id = 8777)
+
+//
+//
+//        val userLock1=UserAndLock(user_id=8777, lock_id=12, lock_access_pin="0123", permission_level = 1, userLockId = 5)
+//        val userLock2=UserAndLock(user_id=8777, lock_id=14, lock_access_pin="0123", permission_level = 1, userLockId = 52)
+//        val userLock3=UserAndLock(user_id=7777, lock_id=12, lock_access_pin="0123", permission_level = 3, userLockId = 53)
+//        val userLock4=UserAndLock(user_id=7777, lock_id=12, lock_access_pin="0123", permission_level = 3, userLockId = 54)
+
+
 
 
         var username : String
@@ -113,7 +124,23 @@ class CreateAccountFragment : Fragment() {
 
             GlobalScope.launch {
                 viewLifecycleOwner.lifecycleScope.launch {
-                   //userDao.upsertUser(user)
+                   //userDao.upsertUser(user1)
+                   // userDao.upsertUser(user2)
+
+//                    if (lockDao != null) {
+//                        lockDao.upsertLock(lock1)
+//                        lockDao.upsertLock(lock)
+//                    }
+
+                    if (userLockDao != null) {
+//                        userLockDao.upsertUserAndLock(userLock1)
+//                        userLockDao.upsertUserAndLock(userLock2)
+//                        userLockDao.upsertUserAndLock(userLock3)
+//                        userLockDao.upsertUserAndLock(userLock4)
+
+                    }
+
+
                 }
             }
 
