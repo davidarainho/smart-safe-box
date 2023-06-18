@@ -84,7 +84,7 @@ class ChangePinFragment : Fragment() {
                 ) {
                     Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
                 }else if (newPin.length != 6) {
-                    Toast.makeText(context, "Error: The pin must have four characters", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, "Error: The pin must have six characters", Toast.LENGTH_SHORT)
                         .show()
                 }
                 else if (!containsOnlyNumbers(newPin)) {
@@ -103,9 +103,17 @@ class ChangePinFragment : Fragment() {
                 } else {
                     if (userLockDao != null) {
                         userLockDao.updateLockPin(userId, newPin)
+                        Toast.makeText(context, "SUCCESS: Your pin was updated", Toast.LENGTH_SHORT)
+                            .show()
+
+                        binding.oldPinText.text?.clear()
+                        binding.newPinText.text?.clear()
+                        binding.pinConfirmationText.text?.clear()
+
+
+
                     }
-                    Toast.makeText(context, "SUCCESS: Your pin was updated", Toast.LENGTH_SHORT)
-                        .show()
+
                 }
             }
         }

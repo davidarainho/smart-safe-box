@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.application.data.UserDBSingleton
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentChangeUsernameBinding
-import com.example.application.databinding.FragmentNotificationsBinding
 import kotlinx.coroutines.launch
 
 class ChangeUsernameFragment : Fragment() {
@@ -18,12 +17,12 @@ class ChangeUsernameFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    private lateinit var previousUername : String
+    private lateinit var previousUsername : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            previousUername = it.getString("username").toString()
+            previousUsername = it.getString("previousUsername").toString()
         }
 
     }
@@ -48,14 +47,19 @@ class ChangeUsernameFragment : Fragment() {
 
             viewLifecycleOwner.lifecycleScope.launch {
 
-                userId=userDao.getUserIdByUsername(previousUername)
+                userId=userDao.getUserIdByUsername(previousUsername)
 
                 if (newUsername.isEmpty()) {
                     Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
                 } /*else if ( /* VERFICAR NO SERVIDOR SE EXISTE UM USERNAME IGUAL NA DB DO SERVIDOR */ ) {
                     Toast.makeText(context, "Error: This username is already taken", Toast.LENGTH_SHORT)
                         .show()
-                } */ else {
+                } */ else if (newUsername==previousUsername)
+                {
+                    Toast.makeText(context, "Error: New username should be different from the previous", Toast.LENGTH_SHORT).show()
+                }
+
+                else {
                     userDao.updateUsername(userId, newUsername)
                     Toast.makeText(context, "SUCCESS: Your username was updated", Toast.LENGTH_SHORT)
                         .show()

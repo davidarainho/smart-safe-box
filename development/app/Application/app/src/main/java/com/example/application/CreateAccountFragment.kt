@@ -70,7 +70,7 @@ class CreateAccountFragment : Fragment() {
         val user2= User(username = "beatriz", email= "beatriz@gmail.com", allow_notifications = 1, password = "wasd", user_id = 8777)
         val user1= User(username = "Francisco", email= "francisco@gmail.com", allow_notifications = 1, password = "francisco", user_id = 3)
 
-        val userLock2=UserAndLock(user_id=8777, lock_id=82, lock_access_pin="1598", permission_level = 1, userLockId = 10210)
+        val userLock2=UserAndLock(user_id=8777, lock_id=82, lock_access_pin="1598", permission_level = 3, userLockId = 10210)
         val userLock3=UserAndLock(user_id=8777, lock_id=96, lock_access_pin="1598", permission_level = 1, userLockId = 10310)
         val userLock4=UserAndLock(user_id=8777, lock_id=93, lock_access_pin="1598", permission_level = 1, userLockId = 10710)
         val userLock5=UserAndLock(user_id=8777, lock_id=103, lock_access_pin="1598", permission_level = 1, userLockId = 10910)
@@ -107,6 +107,7 @@ class CreateAccountFragment : Fragment() {
                 Toast.makeText(context, "Error: invalid email format", Toast.LENGTH_SHORT).show()
             } else{
                 flagAllowNewAccount = true
+
             }
 
 
@@ -117,26 +118,26 @@ class CreateAccountFragment : Fragment() {
 
             GlobalScope.launch {
                 viewLifecycleOwner.lifecycleScope.launch {
-//                   userDao.upsertUser(user1)
-//                   userDao.upsertUser(user2)
+                   userDao.upsertUser(user1)
+                   userDao.upsertUser(user2)
                      userDao.upsertUser(user)
 
                     if (lockDao != null) {
-//                        lockDao.upsertLock(lock1)
-//                        lockDao.upsertLock(lock2)
-//                        lockDao.upsertLock(lock3)
-//                        lockDao.upsertLock(lock4)
-//                        lockDao.upsertLock(lock5)
+                        lockDao.upsertLock(lock1)
+                        lockDao.upsertLock(lock2)
+                        lockDao.upsertLock(lock3)
+                        lockDao.upsertLock(lock4)
+                        lockDao.upsertLock(lock5)
 
                     }
 
                     if (userLockDao != null) {
                         //userLockDao.upsertUserAndLock(userLock1)
-//                        userLockDao.upsertUserAndLock(userLock2)
-//                        userLockDao.upsertUserAndLock(userLock3)
-//                        userLockDao.upsertUserAndLock(userLock4)
-//                        userLockDao.upsertUserAndLock(userLock5)
-                          userLockDao.upsertUserAndLock(userLock6)
+                        userLockDao.upsertUserAndLock(userLock2)
+                        userLockDao.upsertUserAndLock(userLock3)
+                        userLockDao.upsertUserAndLock(userLock4)
+                        userLockDao.upsertUserAndLock(userLock5)
+                         // userLockDao.upsertUserAndLock(userLock6)
 
                     }
 

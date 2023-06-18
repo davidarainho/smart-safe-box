@@ -82,7 +82,7 @@
         android:label="fragment_change_username"
         tools:layout="@layout/fragment_change_username" >
         <argument
-            android:name="previous_username"
+            android:name="previousUsername"
             app:argType="string" />
     </fragment>
     <fragment

@@ -52,6 +52,9 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.createAccount.setOnClickListener {
+//            context?.deleteDatabase("new_userANDlock_database")
+//            context?.deleteDatabase("new_lock_database")
+//            context?.deleteDatabase("new_user_database")
             findNavController().navigate(R.id.action_startFragment_to_createAccountFragment)
         }
 
@@ -68,11 +71,11 @@ class StartFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 // Miguel - chamar a funcao autenticacao
                 // recebe a informacao, transfere para a base de dados, altera validAccount para true
-//            if (username == "beatriz" && password == "wasd"){
-//                validAccount = true
-//            }
-
+            if (username == "beatriz" && password == "pass"){
                 validAccount = true
+            }
+
+                //validAccount = true
 
                 // se flag correta passo para o proximo
                 if (validAccount) {
