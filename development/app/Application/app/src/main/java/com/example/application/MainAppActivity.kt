@@ -67,25 +67,38 @@ class MainAppActivity : AppCompatActivity() {
         var flagWrongPin : Boolean = false
         var flagChangedLockState : Boolean = false
 
-        var lockname : String = "default"
+
+
+        // Usar query ao servidor para receber lista de doors para determinada flag
+        // (Erro ao inserir código ou alteração do estado do lock)
+
+        // Concatenar as doors numa string e colocar em lockname1 e lockname2
+
+        // Alterar os estados das doors na base de dados
+
+
+        // Receber lista
+        var lockname1 : String = "default"
+        var lockname2 : String = "default"
+
         printRunnable = object : Runnable {
             override fun run() {
                 // Pedidos para verificar alteracoes (Pin Errado / Estado Lock)
 
                 if (flagWrongPin){
-                    sendNotificationWrongPin(lockname)
+                    sendNotificationWrongPin(lockname1)
                     flagWrongPin = false
                 }
 
                 if (flagChangedLockState){
-                    sendNotificationState(lockname)
+                    sendNotificationState(lockname2)
                     flagChangedLockState = false
                 }
 
-                handler.postDelayed(this, 5000)
+                handler.postDelayed(this, 15000)
             }
         }
-        handler.postDelayed(printRunnable, 5000)
+        handler.postDelayed(printRunnable, 15000)
     }
 
     private fun createNotificationChannel() {
@@ -105,7 +118,7 @@ class MainAppActivity : AppCompatActivity() {
 
     private fun sendNotificationWrongPin(lockname : String){
         val message : String =
-            "The wrong pin was inserted 3 times for lock $lockname. It will be blocked for 1 minute."
+            "The wrong pin was inserted for doors $lockname. It will be blocked for 1 minute."
         val builder = NotificationCompat.Builder(this,CHANNEL_ID)
             .setSmallIcon(R.drawable.baseline_lock_24)
             .setContentTitle("Wrong Pin Inserted")

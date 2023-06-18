@@ -11,24 +11,31 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.application.data.LockDBSingleton
 import com.example.application.data.UserAndLock.UserAndLockDao
 import com.example.application.data.UserAndLockDBSingleton
 import com.example.application.data.UserDBSingleton
+import com.example.application.data.lock.LockDao
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentLockerPageBinding
 import com.example.application.databinding.FragmentMyLocksBinding
 import com.example.application.model.AppViewModel
+import com.example.myapplication.functions.serverConnectionFunctions
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class LockerPageFragment : Fragment() {
     // IDLE is closed - should come from a flag/request
-    private var state : Boolean = false
+    private var state : Int = 0
 
     private lateinit var name : String
     private lateinit var lockID : String
     private lateinit var username : String
 
     private var _binding : FragmentLockerPageBinding? = null
+
+    //private val functionConnection = serverConnectionFunctions()
 
     private val sharedViewModel: AppViewModel by activityViewModels()
 
@@ -132,19 +139,40 @@ class LockerPageFragment : Fragment() {
         lev
     }
 
+    // state == 1 fechado
     private fun setLockState(imageView: ImageView){
         // state = Ir buscar valor do estado na base de dados
-        // state == 1 fechado
-        state = if(state){
+
+        //Verifica na base de dados
+        state = if(state == 0){
             imageView.setImageResource(R.drawable.lock_closed)
-            /// [REVER]!! /// Adicionar mais logica antes de prosseguir para o popup
             Toast.makeText(context, "Lock is now Closed", Toast.LENGTH_SHORT).show()
-            false
+            1
         }else{
             imageView.setImageResource(R.drawable.lock_open)
             Toast.makeText(context, "Lock is now Open", Toast.LENGTH_SHORT).show()
-            true
+            0
         }
+    }
+
+    private fun changeState() = runBlocking {
+        withContext(Dispatchers.IO) {
+            //functionConnection.openLocks(username)
+        }
+    }
+
+    private fun getState() : Int = runBlocking{
+        val lockDatabase = LockDBSingleton.getInstance(requireContext())
+        val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
+
+        var estado : Int = 0
+        withContext(Dispatchers.IO) {
+            if (lockDao != null) {
+                //estado = lockDao.getLockStateOpen(lockID.toInt()).toInt()
+            }
+        }
+
+        estado
     }
 
 }

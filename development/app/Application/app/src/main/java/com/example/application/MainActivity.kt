@@ -13,5 +13,7 @@ class MainActivity : AppCompatActivity() {
         LockDBSingleton.getInstance(getApplicationContext());
         UserDBSingleton.getInstance(getApplicationContext());
         UserAndLockDBSingleton.getInstance(getApplicationContext());
+
+
     }
 }

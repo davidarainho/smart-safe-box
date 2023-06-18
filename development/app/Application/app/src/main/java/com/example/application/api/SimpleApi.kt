@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName
 
 interface SimpleApi {
 
-    //testadas
+    //testadas e confirmadas
 
     data class EmailResponse(val email: String)
 
@@ -30,50 +30,8 @@ interface SimpleApi {
     suspend fun createUser(@Query("username") username:String, @Query("password") password:String, @Query("email") email:String, @Query("accessLevel0") accessLevel0: Int, @Query("accessPin") accessPin:String): Response<UserConn?>
 
 
-
-
-
-
-    // a testar
-
     @GET("/user/login")
     suspend fun login(@Query("username") username: String, @Query("loginPassword") loginPassword: String): Response<UserConn?>
-
-
-
-    /*
-        @GET("/user/active_locks")
-        suspend fun getActiveLocks(@Query("username") username: String): Response<List<ActiveLocks>>
-
-
-     */
-    @GET("/user/lock")
-    suspend fun getLock(@Query("username") username: String, @Query("lockID") lockID: String): Response<LockConn>
-
-
-
-
-    //não testadas
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @POST("/user/username")
-    suspend fun updateUserUsername(@Query("oldUsername") oldUsername: String, @Query("newUsername") newUsername: String): Response<String?>
-
-    @POST("/user/password")
-    suspend fun updateUserPassword(@Query("username") username: String, @Query("oldPassword") oldPassword: String, @Query("newPassword") newPassword: String): Response<Any?>
 
 
     @POST("/user/updateUserPin")
@@ -81,19 +39,12 @@ interface SimpleApi {
 
 
 
-
-
-
-
-
     @POST("/user/allocateLock")
     suspend fun allocateLock(@Query("username") username: String, @Query("lockID") lockID: String, @Query("accessLevel") accessLevel:Int): Response<Any?>
 
 
-
     @POST("/user/deallocateLock")
     suspend fun deallocateLock(@Query("username") username: String, @Query("lockID") lockID:String): Response<Any?>
-
 
 
     @POST("/lock/updateLockLocation")
@@ -111,7 +62,41 @@ interface SimpleApi {
 
 
 
+    data class UpdateUsernameResponse(
+        val success: String
+    )
+    data class UpdatePasswordResponse(
+        val success: String
+    )
+
+    @POST("/user/username")
+    suspend fun updateUserUsername(@Query("oldUsername") oldUsername: String, @Query("newUsername") newUsername: String): Response<UpdateUsernameResponse>
+
+    @POST("/user/password")
+    suspend fun updateUserPassword(@Query("username") username: String, @Query("oldPassword") oldPassword: String, @Query("newPassword") newPassword: String): Response<UpdatePasswordResponse>
+
+
+
+
+
+
+
+
+    //testadas, mas com erros
+    @GET("/lock")
+    suspend fun getLock(@Query("username") username: String, @Query("lockID") lockID: String): Response<LockConn>
+
+
+
+
+
+
 
 
 
 }
+
+
+
+
+

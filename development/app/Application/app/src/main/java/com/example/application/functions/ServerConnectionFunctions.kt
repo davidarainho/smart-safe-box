@@ -59,9 +59,6 @@ class serverConnectionFunctions() {
 
 
 
-
-
-
     suspend fun firstInteraction(username:String, appcode:String): Boolean? {
         return try {
             val firstInteraction = api.firstInteraction(username, appcode)
@@ -72,71 +69,12 @@ class serverConnectionFunctions() {
     }
 
 
-
-    //não testadas
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    suspend fun changeUsername(oldUsername: String, newUsername: String): Boolean? {
+    suspend fun openLocks(username:String): Boolean? {
         return try {
-            val checkNewUsername = api.getUser(newUsername)
-            if (!checkNewUsername.isSuccessful) {
-                val response = api.updateUserUsername(oldUsername,newUsername)
-                if (response.isSuccessful) {
-                    return true
-                } else {
-                    throw ServerException(response.code())
-                }
-            } else throw Exception("Username already exists.")
-        } catch (e: IOException){
-            throw  Exception("Unable to connect to the server.")
-        }
-    }
-
-
-    suspend fun changePassword(username: String, oldPassword: String, newPassword: String): Boolean? {
-        return try {
-            val response = api.updateUserPassword(username,oldPassword,newPassword)
-            if (response.isSuccessful) {
-                return true
-            } else {
-                throw ServerException(response.code())
-            }
-        } catch (e: IOException){
-            throw  Exception("Unable to connect to the server.")
-        }
-    }
-
-
-    suspend fun updateUserPin(username: String, oldPin: String, newPin: String): Boolean? {
-        return try {
-            val updateUserPin = api.updateUserPin(username,newPin,oldPin)
-            if (updateUserPin.isSuccessful) true else throw ServerException(updateUserPin.code())
-        } catch (e: IOException){
-            throw  Exception("Unable to connect to the server.")
+            val openLocks = api.openLocks(username)
+            if (openLocks.isSuccessful) true else throw ServerException(openLocks.code())
+        } catch (e: IOException) {
+            throw Exception("Unable to connect to the server.")
         }
     }
 
@@ -153,17 +91,17 @@ class serverConnectionFunctions() {
 
 
 
-    suspend fun deallocateLock(username: String, lockID: String): Boolean?{
+
+
+
+    suspend fun updateUserPin(username: String, oldPin: String, newPin: String): Boolean? {
         return try {
-            val deallocateLock = api.deallocateLock(username,lockID)
-            if (deallocateLock.isSuccessful) true else throw ServerException(deallocateLock.code())
+            val updateUserPin = api.updateUserPin(username,newPin,oldPin)
+            if (updateUserPin.isSuccessful) true else throw ServerException(updateUserPin.code())
         } catch (e: IOException){
             throw  Exception("Unable to connect to the server.")
         }
     }
-
-
-
 
 
     suspend fun updateLockLocation(lockID: String, newLocation: String): Boolean? {
@@ -186,14 +124,66 @@ class serverConnectionFunctions() {
 
 
 
-    suspend fun openLocks(username:String): Boolean? {
+    suspend fun deallocateLock(username: String, lockID: String): Boolean?{
         return try {
-            val openLocks = api.openLocks(username)
-            if (openLocks.isSuccessful) true else throw ServerException(openLocks.code())
-        } catch (e: IOException) {
-            throw Exception("Unable to connect to the server.")
+            val deallocateLock = api.deallocateLock(username,lockID)
+            if (deallocateLock.isSuccessful) true else throw ServerException(deallocateLock.code())
+        } catch (e: IOException){
+            throw  Exception("Unable to connect to the server.")
         }
     }
+
+
+
+
+
+    // fazem a troca, mas no return dão a excpetion for some reason
+
+    suspend fun changePassword(username: String, oldPassword: String, newPassword: String): Boolean? {
+        return try {
+            val response = api.updateUserPassword(username,oldPassword,newPassword)
+            if (response.isSuccessful) {
+                return true
+            } else {
+                throw ServerException(response.code())
+            }
+        } catch (e: IOException){
+            throw  Exception("Unable to connect to the server.")
+        }
+    }
+
+
+
+
+    suspend fun updateUserUsername(oldUsername: String, newUsername: String): Boolean? {
+        return try {
+            val checkNewUsername = api.getUser(newUsername)
+            if (!checkNewUsername.isSuccessful) {
+                val updateUserUsername = api.updateUserUsername(oldUsername,newUsername)
+                if (updateUserUsername.isSuccessful) return true else throw ServerException(updateUserUsername.code())
+            } else throw Exception("Username already exists.")
+        } catch (e: IOException){
+            throw  Exception("Unable to connect to the server.")
+        }
+    }
+
+
+
+    // a testar
+    suspend fun getLock(username: String, lockID: String): LockConn? {
+        try {
+            val response = api.getLock(username, lockID)
+            if (response.isSuccessful) {
+                return response.body()
+            } else {
+                throw ServerException(response.code())
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+            throw Exception("Unable to connect to the server")
+        }
+    }
+
 
 
 

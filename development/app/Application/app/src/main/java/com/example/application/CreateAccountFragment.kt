@@ -21,6 +21,7 @@ import com.example.application.data.user.User
 import com.example.application.data.user.UserDatabase
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentCreateAccountBinding
+import com.example.myapplication.functions.serverConnectionFunctions
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -108,8 +109,8 @@ class CreateAccountFragment : Fragment() {
                 flagAllowNewAccount = true
             }
 
-            ////////// Verificar se e' uma conta permitida [Miguel] //////////
 
+            //val functionConnection = serverConnectionFunctions()
             val user = User(username, email, password, allowNotifications, userId)
             val userLock6=UserAndLock(user_id=userId, lock_id=103, lock_access_pin="1598", permission_level = 1, userLockId = 417)
 

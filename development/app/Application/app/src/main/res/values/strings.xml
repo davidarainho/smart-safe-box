@@ -8,7 +8,7 @@
     <string name="search">Search</string>
 
     <!-- activity_main -->
-    <string name="app_name">GUI</string>
+    <string name="app_name">Smart Box</string>
     <string name="hello">Hello!</string>
     <string name="welcome">Welcome to <b>Smart Box</b></string>
     <string name="create_account">Don\'t have an account? <b>Create</b>!</string>
