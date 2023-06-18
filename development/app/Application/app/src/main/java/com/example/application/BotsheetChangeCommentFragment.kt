@@ -68,6 +68,8 @@ class BotsheetChangeCommentFragment : BottomSheetDialogFragment() {
                         lockDao.updateLockComment(lockId, newComment)
                         Toast.makeText(context, "SUCCESS: Your comment was updated", Toast.LENGTH_SHORT)
                             .show()
+
+                        binding.commentText.text?.clear()
                     }
 
                 }
