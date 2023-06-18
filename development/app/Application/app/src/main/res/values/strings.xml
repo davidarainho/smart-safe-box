@@ -17,7 +17,7 @@
 
 
     <!-- create_account -->
-    <string name="create_account_title">Create account</string>
+    <string name="create_account_title">Create Account</string>
     <string name="terms_services">I agree with <u>Terms and services</u></string>
     <string name="sign_up">Sign Up</string>
     <string name="have_account">Have already an account? <b>Login here!</b></string>
@@ -29,7 +29,7 @@
     <!-- settings -->
     <string name="share_multiple_locks">Share Multiple Locks</string>
     <string name="manage_notifications">Manage Notifications</string>
-    <string name="change_email">Change e-mail</string>
+    <string name="change_email">Change E-mail</string>
     <string name="change_lock_name">Change Lock Name</string>
     <string name="delete_account">Delete Account</string>
     <string name="settings">Settings</string>
@@ -46,7 +46,7 @@
     <string name="do_not_disturb">Do not disturb</string>
 
     <!-- change email-->
-    <string name="change_your_email">Change your e-mail</string>
+    <string name="change_your_email">Change Your E-mail</string>
     <string name="enter_your_old_email">Enter your <b>old</b> e-mail</string>
     <string name="enter_your_new_email">Enter your <b>new</b> e-mail</string>
 
@@ -135,7 +135,7 @@
     <string name="changepin"><u>Change Lock Pin</u></string>
     <string name="change_lock_password">Change User #ID Lock Password</string>
     <string name="exit">exit</string>
-    <string name="old_email">Old email</string>
+    <string name="old_email">Old Email</string>
     <string name="new_email">New Email</string>
     <string name="access_history"><b>Access History</b></string>
     <string name="users_with_access"><b>Users with access</b></string>
