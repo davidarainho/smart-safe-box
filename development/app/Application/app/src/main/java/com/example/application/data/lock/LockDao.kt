@@ -71,7 +71,7 @@ interface LockDao {
     suspend fun getLockLastAccessDates(): String
 
     @Query("SELECT user_last_access FROM Lock")
-    suspend fun getLockLastAccessUsers(): String
+    suspend fun getUsersWithAccessToLock(): String
 
     // não dá para guardar listas em bases de dados ent para o user_last_access e last_access
     // temos que receber tudo num unica string separada por virgulas e depois fazer parse
@@ -80,9 +80,21 @@ interface LockDao {
         return lockLastAccess.split(",")
     }
 
+    // parse dos users with access to a lock
     suspend fun parseLockLastAccessUser(lockLastAccessUser: String): List<String> {
         return lockLastAccessUser.split(",")
     }
+
+    suspend fun parseLastAccess(input: String): Pair<String, String>? {
+        val parts = input.split("/")
+        if (parts.size == 2) {
+            val date = parts[0]
+            val user = parts[1]
+            return Pair(date, user)
+        }
+        return null
+    }
+
 
     // e usar assim por exemplo:
     // val lockLastAccessDateString = getLockLastAccessDates()
