@@ -70,6 +70,7 @@ class LockerPageFragment : Fragment() {
     private lateinit var botsheetUserFragment : BotsheetUserFragment
     //private lateinit var botsheetPinFragment: UpdatePinFragment
     private lateinit var botsheetShareLockFragment: BotsheetShareLockFragment
+    private lateinit var botsheetChangeCommentFragment: BotsheetChangeCommentFragment
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -96,10 +97,10 @@ class LockerPageFragment : Fragment() {
             botsheetUserFragment.show(childFragmentManager,botsheetUserFragment.tag)
         }
 
-//        binding.changePassword.setOnClickListener {
-//            botsheetPinFragment = UpdatePinFragment()
-//            botsheetPinFragment.show(childFragmentManager,botsheetPinFragment.tag)
-//        }
+        binding.updateComment.setOnClickListener {
+            botsheetChangeCommentFragment = BotsheetChangeCommentFragment()
+            botsheetChangeCommentFragment.show(childFragmentManager,botsheetChangeCommentFragment.tag)
+        }
 
         binding.exit.setOnClickListener {
             val action = LockerPageFragmentDirections.actionLockerPageFragmentToMyLocksFragment(userName = username)

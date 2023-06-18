@@ -131,6 +131,7 @@
     <string name="last_accessed">Last Accessed:</string>
     <string name="number_of_users">Number of users:</string>
     <string name="info"><u>+ info:</u></string>
+    <string name="comment"><b><u>Update Lock Comment</u></b></string>
     <string name="changepin"><u>Change Lock Pin</u></string>
     <string name="change_lock_password">Change User #ID Lock Password</string>
     <string name="exit">exit</string>
@@ -139,6 +140,7 @@
     <string name="access_history"><b>Access History</b></string>
     <string name="users_with_access"><b>Users with access</b></string>
     <string name="update_lock_pin"><b>Update Lock Pin</b></string>
+    <string name="update_lock_comment"><b>Update Lock Comment</b></string>
     <string name="enter_your_old_pin">Enter your <b>old</b> pin</string>
     <string name="enter_your_new_pin">Enter your <b>new</b> pin</string>
     <string name="confirm_your_new_pin">Confirm your <b>new</b> pin</string>

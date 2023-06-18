@@ -32,7 +32,7 @@ class ChangePinFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            username1 = it.getString("username").toString()
+            username1 = it.getString("username1").toString()
         }
 
     }
