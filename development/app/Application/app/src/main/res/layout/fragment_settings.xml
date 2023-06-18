@@ -40,26 +40,7 @@
 
 
     <!-- Alterar para ser somente texto!!! -->
-    <Button
-        android:id="@+id/share_multiple_locks"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="45dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/rounded_view"
-        android:paddingVertical="8dp"
-        android:text="@string/share_multiple_locks"
-        android:textColor="@color/blue_buttons"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:gravity="center_horizontal"
-        app:backgroundTint="@color/white"
-        app:icon="@drawable/share_multiple_locks"
-        app:iconTint="@color/blue_buttons"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wave"
-        app:startIconDrawable="@drawable/search_icon" />
+
 
     <Button
         android:id="@+id/change_lock_name"
@@ -79,7 +60,7 @@
         app:iconSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/share_multiple_locks" />
+        app:layout_constraintTop_toBottomOf="@+id/wave"/>
 
     <Button
         android:id="@+id/manage_notifications"

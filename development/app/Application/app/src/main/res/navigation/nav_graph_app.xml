@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_profilePageFragment_to_addNewLockFragment"
             app:destination="@id/addNewLockFragment" />
+        <action
+            android:id="@+id/action_profilePageFragment_to_changePinFragment"
+            app:destination="@id/changePinFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -126,6 +129,14 @@
         android:name="com.example.application.AddNewLockFragment"
         android:label="AddNewLockFragment"
         tools:layout="@layout/fragment_add_new_lock"/>
+    <fragment
+        android:id="@+id/changePinFragment"
+        android:name="com.example.application.ChangePinFragment"
+        android:label="ChangePinFragment" >
+        <argument
+            android:name="username1"
+            app:argType="string" />
+    </fragment>
 
 
 </navigation>

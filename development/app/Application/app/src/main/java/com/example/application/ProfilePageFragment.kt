@@ -1,7 +1,6 @@
 package com.example.application
 
 import android.os.Bundle
-import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -68,10 +67,10 @@ class ProfilePageFragment : Fragment() {
         val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
         val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
-        val email : String = emailFetch(sharedViewModel.username.value.toString())
+        var userID : Int = userIDFetch(sharedViewModel.username.value.toString())
 
         binding.welcomeAccount.text = getString(R.string.welcome_to_account, sharedViewModel.username.value.toString())
-        binding.yourEmail.text = getString(R.string.your_email_show, email)
+        binding.yourEmail.text = getString(R.string.your_email_show, userID.toString())
 
 
         binding.changePassword.setOnClickListener {
@@ -86,6 +85,11 @@ class ProfilePageFragment : Fragment() {
             binding.changeUsername.findNavController().navigate(action)
         }
 
+
+        binding.updatePin.setOnClickListener {
+            val action = ProfilePageFragmentDirections.actionProfilePageFragmentToChangePinFragment(username1 = sharedViewModel.username.value.toString())
+            binding.updatePin.findNavController().navigate(action)
+        }
 
        binding.logoutButton.setOnClickListener {
            MaterialAlertDialogBuilder(requireContext())
@@ -127,17 +131,17 @@ class ProfilePageFragment : Fragment() {
         }
     }
 
-    private fun emailFetch(username : String) : String = runBlocking {
+    private fun userIDFetch(username : String) : Int = runBlocking {
         val userDatabase = UserDBSingleton.getInstance(requireContext())
         val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
 
 
-        val email : String = userDao.getEmailByUsername(username)
+        val userID : Int = userDao.getUserIdByUsername(username)
 
-        email
+        userID
     }
 
-    suspend fun deleteLockData() {
+     suspend fun deleteLockData() {
         val lockDatabase = LockDBSingleton.getInstance(requireContext())
         val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
 

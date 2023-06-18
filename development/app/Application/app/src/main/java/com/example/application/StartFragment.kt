@@ -6,11 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.application.data.UserDBSingleton
 import com.example.application.data.lock.LockDao
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentStartBinding
+import kotlinx.coroutines.launch
 
 
 class StartFragment : Fragment() {
@@ -35,35 +38,48 @@ class StartFragment : Fragment() {
             findNavController().navigate(R.id.action_startFragment_to_createAccountFragment)
         }
 
-        binding.forgotPassword.setOnClickListener {
-            findNavController().navigate(R.id.action_startFragment_to_recoverPasswordFragment)
-        }
+        val userDatabase = UserDBSingleton.getInstance(requireContext())
+        val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
 
-        var validAccount : Boolean = false
-        var username : String?
-        var password : String?
-        binding.signIn.setOnClickListener{
+        var validAccount: Boolean = false
+        var username: String?
+        var password: String?
+        var userId: Int=0
+
+        binding.signIn.setOnClickListener {
+
             username = binding.usernameText.text.toString()
             password = binding.passwordText.text.toString()
 
-            // Miguel - chamar a funcao autenticacao
-            // recebe a informacao, transfere para a base de dados, altera validAccount para true
-            if (username == "beatriz" && password == "wasd"){
+            viewLifecycleOwner.lifecycleScope.launch {
+
+                if (userDao != null) {
+                    userId = userDao.getUserIdByUsername(username!!)
+                }
+
+                println("USER ID "+ userId)
+
+
+                // Miguel - chamar a funcao autenticacao
+                // recebe a informacao, transfere para a base de dados, altera validAccount para true
+//            if (username == "beatriz" && password == "wasd"){
+//                validAccount = true
+//            }
+
                 validAccount = true
+
+                // se flag correta passo para o proximo
+                if (validAccount) {
+                    validAccount = false
+                    binding.usernameText.text?.clear()
+                    binding.passwordText.text?.clear()
+                    val action =
+                        StartFragmentDirections.actionStartFragmentToMainAppActivity(userName = username!!) //userName = "cenas"
+                    binding.signIn.findNavController().navigate(action)
+                }
+
             }
-
-
-            // se flag correta passo para o proximo
-            if (validAccount){
-                validAccount = false
-                binding.usernameText.text?.clear()
-                binding.passwordText.text?.clear()
-                val action = StartFragmentDirections.actionStartFragmentToMainAppActivity(userName = username!!) //userName = "cenas"
-                binding.signIn.findNavController().navigate(action)
-            }
-
         }
-        // No Dao
     }
 
     override fun onDestroyView() {

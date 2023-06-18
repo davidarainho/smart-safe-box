@@ -37,24 +37,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/changelocknamebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/rounded_view"
-        android:paddingHorizontal="24dp"
-        android:paddingVertical="10dp"
-        android:text="Confirm"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:textColor="#F6F1D1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf= "@+id/new_name"
-        />
-
     <TextView
         android:id="@+id/enter_new_lock_name"
         android:layout_width="wrap_content"
@@ -80,10 +62,11 @@
             android:id="@+id/new_lock_name_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/rounded_view"
+            android:background="@drawable/rounded_view_outlined_boxes"
             android:hint="@string/new_lock_name"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <TextView
         android:id="@+id/select_lock_id"
@@ -99,25 +82,42 @@
         android:id="@+id/dropdown"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="12dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/select_lock_id"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
-        android:hint="@string/locks"
-        android:background="@drawable/rounded_view">
+        android:hint="Lock"
+        android:background="@drawable/rounded_view"
+        app:layout_constraintTop_toBottomOf="@+id/select_lock_id">
 
         <AutoCompleteTextView
             android:id="@+id/dropdown_items"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:background="@drawable/rounded_view"
+            android:background="@drawable/rounded_view_outlined_boxes"
             android:inputType="none"
-            style="@style/Widget.App.PopupMenu"
-            />
+            style="@style/Widget.App.PopupMenu" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/changelocknamebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/rounded_view"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:text="Confirm"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textColor="#F6F1D1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf= "@+id/new_name"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

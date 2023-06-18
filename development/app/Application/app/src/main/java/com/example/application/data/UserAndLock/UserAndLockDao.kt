@@ -43,11 +43,11 @@ interface UserAndLockDao {
     @Query("SELECT user_id FROM UserAndLock WHERE lock_id = :lockId")
     suspend fun getUsersIDByLockId(lockId: Int): List<Int>
 
-    @Query("UPDATE UserAndLock SET lock_access_pin = :newLockPin WHERE user_id = :userId AND lock_id = :lockId")
-    suspend fun updateLockPin(userId: Int, lockId: Int, newLockPin: String)
+    @Query("UPDATE UserAndLock SET lock_access_pin = :newLockPin WHERE user_id = :userId")
+    suspend fun updateLockPin(userId: Int, newLockPin: String)
 
-    @Query("SELECT lock_access_pin FROM UserAndLock WHERE user_id = :userId AND lock_id = :lockId")
-    suspend fun getLockPin(userId: Int, lockId: Int): String
+    @Query("SELECT lock_access_pin FROM UserAndLock WHERE user_id = :userId LIMIT 1")
+    suspend fun getLockPin(userId: Int): String
 
     @Query("SELECT permission_level FROM UserAndLock WHERE user_id = :userId AND lock_id = :lockId")
     suspend fun getUserLockPermissionLevel(userId: Int, lockId: Int): Int

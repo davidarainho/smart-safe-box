@@ -18,8 +18,17 @@ import android.os.Handler
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.getSystemService
+import com.example.application.data.LockDBSingleton
+import com.example.application.data.UserAndLock.UserAndLockDao
+import com.example.application.data.UserAndLockDBSingleton
+import com.example.application.data.UserDBSingleton
+import com.example.application.data.lock.LockDao
+import com.example.application.data.user.UserDao
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.*
+import java.lang.Runnable
 
 
 class MainAppActivity : AppCompatActivity() {
@@ -142,8 +151,44 @@ class MainAppActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    suspend fun deleteData() {
+        val lockDatabase = LockDBSingleton.getInstance(this)
+        val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
+
+        val userDatabase = UserDBSingleton.getInstance(this)
+        val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
+
+        val userAndLockDatabase = UserAndLockDBSingleton.getInstance(this)
+        val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
+
+        withContext(Dispatchers.IO) {
+
+            if (lockDao != null) {
+                lockDao.deleteLockData()
+            }
+            userDao.deleteUserData()
+
+            if (userLockDao != null) {
+                userLockDao.deleteUserLockData()
+            }
+
+        }
+    }
+
     override fun onDestroy() {
+
         super.onDestroy()
         handler.removeCallbacks(printRunnable)
+    }
+
+    override fun onStop() {
+
+        super.onStop()
+
+        if (isFinishing) {
+            GlobalScope.launch {
+                deleteData()
+            }
+        }
     }
 }

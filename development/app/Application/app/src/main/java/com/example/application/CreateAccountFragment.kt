@@ -30,14 +30,11 @@ class CreateAccountFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    //private lateinit var userDao: UserDao
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
+
         _binding = FragmentCreateAccountBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -46,14 +43,11 @@ class CreateAccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //userDao = UserDatabase.getDatabase(requireContext()).userDao()
 
         binding.hasAccount.setOnClickListener {
             findNavController().navigate(R.id.action_createAccountFragment_to_startFragment)
         }
 
-
-        // FAZER ISTO PARA CADA FRAGEMENTO ONDE VAMOS CHAMAR UMA FUNÇÃO DA BASE DE DADOS
 
         val lockDatabase = LockDBSingleton.getInstance(requireContext())
         val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
@@ -64,25 +58,21 @@ class CreateAccountFragment : Fragment() {
         val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
         val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
-
-
         var flagAllowNewAccount : Boolean = false
 
-//        val lock = Lock(lock_name="GYM", last_access= "2022-06-31", user_last_access =  "Logan", number_of_users = 2,comment="New gym lock", eKey = null, lock_state = "open", lock_id=12)
-//        val  lock1= Lock(lock_name="HOME", last_access="2023-04-10,2022-09-10,2022-09-04", user_last_access =  "Logan,Manuel,Pedro", number_of_users = 3,comment="Garage", eKey = null, lock_state = "open", lock_id=14)
-////
-//        val user1= User(username = "pedro01", email= "pedro@gmail.com", allow_notifications = 1, password = "wasd", user_id = 5656)
-//        val user2= User(username = "miguelAlmeida", email= "miguel@gmail.com", allow_notifications = 1, password = "wasd", user_id = 7777)
-   //       val user2= User(username = "beatriz", email= "beatriz@gmail.com", allow_notifications = 1, password = "wasd", user_id = 8777)
+        val  lock1= Lock(lock_name="My Lock", last_access="2023-06-16", user_last_access =  "Beatriz", number_of_users = 3,comment="new lock at feup", eKey = null, lock_state = "open", lock_id=85)
+        val  lock2= Lock(lock_name="FEUP", last_access="2023-06-16,2022-06-15", user_last_access =  "Francisco, Tomás", number_of_users = 3,comment="lock1", eKey = null, lock_state = "open", lock_id=82)
+        val  lock3= Lock(lock_name="GRANDMA", last_access="2022-12-14", user_last_access =  "Manuel", number_of_users = 3,comment="at Porto", eKey = null, lock_state = "open", lock_id=96)
+        val  lock4= Lock(lock_name="New Lock", last_access="2023-05-17,2022-07-05, 2022-07-05", user_last_access =  "Francisco, Manuel, Tomás", number_of_users = 3,comment=":)", eKey = null, lock_state = "open", lock_id=93)
+        val  lock5= Lock(lock_name="House", last_access="2023-05-17", user_last_access =  "Miguel", number_of_users = 3,comment="<3", eKey = null, lock_state = "open", lock_id=103)
 
-//
-//
-//        val userLock1=UserAndLock(user_id=8777, lock_id=12, lock_access_pin="0123", permission_level = 1, userLockId = 5)
-//        val userLock2=UserAndLock(user_id=8777, lock_id=14, lock_access_pin="0123", permission_level = 1, userLockId = 52)
-//        val userLock3=UserAndLock(user_id=7777, lock_id=12, lock_access_pin="0123", permission_level = 3, userLockId = 53)
-//        val userLock4=UserAndLock(user_id=7777, lock_id=12, lock_access_pin="0123", permission_level = 3, userLockId = 54)
+        val user2= User(username = "beatriz", email= "beatriz@gmail.com", allow_notifications = 1, password = "wasd", user_id = 8777)
+        val user1= User(username = "Francisco", email= "francisco@gmail.com", allow_notifications = 1, password = "francisco", user_id = 3)
 
-
+        val userLock2=UserAndLock(user_id=8777, lock_id=82, lock_access_pin="1598", permission_level = 1, userLockId = 10210)
+        val userLock3=UserAndLock(user_id=8777, lock_id=96, lock_access_pin="1598", permission_level = 1, userLockId = 10310)
+        val userLock4=UserAndLock(user_id=8777, lock_id=93, lock_access_pin="1598", permission_level = 1, userLockId = 10710)
+        val userLock5=UserAndLock(user_id=8777, lock_id=103, lock_access_pin="1598", permission_level = 1, userLockId = 10910)
 
 
         var username : String
@@ -90,53 +80,62 @@ class CreateAccountFragment : Fragment() {
         var password : String
         var passwordConfirmed : String
         val allowNotifications = 1
+        val userId= 1204
+        var pin:  String
+
         binding.signUp.setOnClickListener {
             username = binding.usernameText.text.toString()
             email = binding.emailText.text.toString()
             password = binding.passwordText.text.toString()
             passwordConfirmed = binding.passwordConfirmationText.text.toString()
+            pin=binding.pinText.text.toString()
+
             if(username.isEmpty() ||
                 email.isEmpty() ||
                 password.isEmpty() ||
-                passwordConfirmed.isEmpty()){
-                // Mostrar erro
+                passwordConfirmed.isEmpty() || pin.isEmpty()){
                 Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
             }else if(password != passwordConfirmed){
-                // Mostrar erro
                 Toast.makeText(context, "Error: password and confirmation don't match", Toast.LENGTH_SHORT).show()
-            }else if(!binding.checkBox.isChecked){
+            }/*else if(!binding.checkBox.isChecked){
                 // Mostrar erro
                 Toast.makeText(context, "Error: Check Box", Toast.LENGTH_SHORT).show()
+            } */ else if(pin.length != 6){
+                Toast.makeText(context, "Error: pin must have 6 numbers", Toast.LENGTH_SHORT).show()
             } else if (!validateEmail(email)) {
                 Toast.makeText(context, "Error: invalid email format", Toast.LENGTH_SHORT).show()
-                binding.usernameText.text?.clear()
-                binding.emailText.text?.clear()
-                binding.passwordText.text?.clear()
-                binding.passwordConfirmationText.text?.clear()
             } else{
                 flagAllowNewAccount = true
             }
 
             ////////// Verificar se e' uma conta permitida [Miguel] //////////
 
-            //val user = User(username, email, password, allowNotifications, userid)
+            val user = User(username, email, password, allowNotifications, userId)
+            val userLock6=UserAndLock(user_id=userId, lock_id=103, lock_access_pin="1598", permission_level = 1, userLockId = 417)
 
 
             GlobalScope.launch {
                 viewLifecycleOwner.lifecycleScope.launch {
-                   //userDao.upsertUser(user1)
-                   // userDao.upsertUser(user2)
+//                   userDao.upsertUser(user1)
+//                   userDao.upsertUser(user2)
+                     userDao.upsertUser(user)
 
-//                    if (lockDao != null) {
+                    if (lockDao != null) {
 //                        lockDao.upsertLock(lock1)
-//                        lockDao.upsertLock(lock)
-//                    }
+//                        lockDao.upsertLock(lock2)
+//                        lockDao.upsertLock(lock3)
+//                        lockDao.upsertLock(lock4)
+//                        lockDao.upsertLock(lock5)
+
+                    }
 
                     if (userLockDao != null) {
-//                        userLockDao.upsertUserAndLock(userLock1)
+                        //userLockDao.upsertUserAndLock(userLock1)
 //                        userLockDao.upsertUserAndLock(userLock2)
 //                        userLockDao.upsertUserAndLock(userLock3)
 //                        userLockDao.upsertUserAndLock(userLock4)
+//                        userLockDao.upsertUserAndLock(userLock5)
+                          userLockDao.upsertUserAndLock(userLock6)
 
                     }
 
@@ -148,7 +147,13 @@ class CreateAccountFragment : Fragment() {
             if(flagAllowNewAccount){
                 // Mostrar algo que confirme o sucesso da criação da conta
                 Toast.makeText(context, "SUCESSO: An email was sent to confirm", Toast.LENGTH_SHORT).show()
+                binding.usernameText.text?.clear()
+                binding.emailText.text?.clear()
+                binding.passwordText.text?.clear()
+                binding.passwordConfirmationText.text?.clear()
+                binding.pinText.text?.clear()
                 flagAllowNewAccount = false
+                findNavController().navigate(R.id.action_createAccountFragment_to_startFragment)
             }
         }
     }
