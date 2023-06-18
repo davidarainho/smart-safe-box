@@ -91,6 +91,9 @@ class LockerPageFragment : Fragment() {
             if(level <= 2){
                 botsheetShareLockFragment = BotsheetShareLockFragment(lockID.toInt())
                 botsheetShareLockFragment.show(childFragmentManager,botsheetShareLockFragment.tag)
+            } else {
+                Toast.makeText(context, "You don't have permission to share this lock", Toast.LENGTH_SHORT)
+                .show()
             }
         }
 
