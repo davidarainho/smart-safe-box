@@ -7,7 +7,7 @@ data class Door (
     val last_access: String,
     val user_last_access: String,
     val number_of_users: Int,
-    val users_with_access: List <String>,
+    val users_with_access: String,
     val permission_level: Int,
     val comment: String
 )

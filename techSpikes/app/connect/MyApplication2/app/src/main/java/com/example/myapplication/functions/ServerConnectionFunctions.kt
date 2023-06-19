@@ -18,7 +18,7 @@ class ServerConnectionFunctions() {
 
     class ServerException(val code: Int): Exception("Server returned error code $code")
 
-    suspend fun createAccount(username: String, password: String, pin: String, email: String): Any? {
+    suspend fun createAccount(username: String, password: String, pin: String, email: String): Boolean? {
         return try {
             val checkUsername = api.checkUsername(username)
             if (!checkUsername.isSuccessful) {
@@ -49,7 +49,7 @@ class ServerConnectionFunctions() {
     }
 
 
-    suspend fun shareLock(username: String, user_to_share: String, door_id: Int): Any? {
+    suspend fun shareLock(username: String, user_to_share: String, door_id: Int): Boolean? {
         return try {
             val shareLock = api.shareLock(username, user_to_share, door_id)
             if (shareLock.isSuccessful) return true else false
@@ -58,7 +58,7 @@ class ServerConnectionFunctions() {
         }
     }
 
-    suspend fun updatePin(username: String, newPin: Int): Any? {
+    suspend fun updatePin(username: String, newPin: Int): Boolean? {
         return try {
             val updatePin = api.updatePin(username,newPin)
             if (updatePin.isSuccessful) return true else false
@@ -67,7 +67,7 @@ class ServerConnectionFunctions() {
         }
     }
 
-    suspend fun updateComment(username: String, door_id: Int, newComment: String): Any? {
+    suspend fun updateComment(username: String, door_id: Int, newComment: String): Boolean? {
         return try {
             val updateComment = api.updateComment(username,door_id, newComment)
             if (updateComment.isSuccessful) return true else false
@@ -76,7 +76,7 @@ class ServerConnectionFunctions() {
         }
     }
 
-    suspend fun changePassword(username: String, newPassword: String): Any? {
+    suspend fun changePassword(username: String, newPassword: String): Boolean? {
         return try {
             val changePassword = api.changePassword(username,newPassword)
             if (changePassword.isSuccessful) return true else false
@@ -85,7 +85,7 @@ class ServerConnectionFunctions() {
         }
     }
 
-    suspend fun changeUsername(newUsername: String, oldUsername: String): Any? {
+    suspend fun changeUsername(newUsername: String, oldUsername: String): Boolean? {
         return try {
             val checkNewUsername = api.checkUsername(newUsername)
             if (!checkNewUsername.isSuccessful) {
@@ -97,7 +97,7 @@ class ServerConnectionFunctions() {
         }
     }
 
-    suspend fun addNewLock(username: String, app_code: Int): Any? {
+    suspend fun addNewLock(username: String, app_code: Int): Boolean? {
         return try {
             val addNewLock = api.addNewLock(username, app_code)
             if (addNewLock.isSuccessful) return true else false
@@ -106,7 +106,7 @@ class ServerConnectionFunctions() {
         }
     }
 
-    suspend fun changeLockName(username: String, door_id: Int, new_door_name: String): Any? {
+    suspend fun changeLockName(username: String, door_id: Int, new_door_name: String): Boolean? {
         return try {
             val changeLockName = api.changeLockName(username, door_id, new_door_name)
             if (changeLockName.isSuccessful) return true else false
@@ -115,7 +115,7 @@ class ServerConnectionFunctions() {
         }
     }
 
-    suspend fun changeNotificationPreference(username: String): Any? {
+    suspend fun changeNotificationPreference(username: String): Boolean? {
         return try {
             val changeNotificationPreference = api.changeNotificationPreference(username)
             if(changeNotificationPreference.isSuccessful) return true else false
@@ -124,7 +124,7 @@ class ServerConnectionFunctions() {
         }
     }
 
-    suspend fun changeEmail(username: String, newEmail: String): Any? {
+    suspend fun changeEmail(username: String, newEmail: String): Boolean? {
         return try {
             val checkNewEmail = api.checkEmail(newEmail)
             if (!checkNewEmail.isSuccessful) {
@@ -136,7 +136,7 @@ class ServerConnectionFunctions() {
         }
     }
 
-    suspend fun deleteAccount(username: String): Any? {
+    suspend fun deleteAccount(username: String): Boolean? {
         return try {
             val deleteAccount = api.deleteAccount(username)
             if (deleteAccount.isSuccessful) return true else false
@@ -153,7 +153,7 @@ class ServerConnectionFunctions() {
 //        }
 //    }
 
-    suspend fun removeAccountFromDoor(username: String, username_to_be_removed: String, door_id: Int): Any? {
+    suspend fun removeAccountFromDoor(username: String, username_to_be_removed: String, door_id: Int): Boolean? {
         return try {
             val removeAccountFromDoor = api.removeAccountFromDoor(username, username_to_be_removed, door_id)
             if (removeAccountFromDoor.isSuccessful) return true else false
@@ -162,7 +162,7 @@ class ServerConnectionFunctions() {
         }
     }
 
-    suspend fun changeDoorState(username: String, door_id: Int): Any? {
+    suspend fun changeDoorState(username: String, door_id: Int): Boolean? {
         return try {
             val changeDoorState = api.changeDoorState(username, door_id)
             if (changeDoorState.isSuccessful) return true else false
