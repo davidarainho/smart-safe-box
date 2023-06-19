@@ -14,25 +14,35 @@ import com.example.application.data.UserAndLockDBSingleton
 import com.example.application.data.UserDBSingleton
 import com.example.application.data.lock.LockDao
 import com.example.application.data.user.UserDao
-import com.example.application.databinding.FragmentBotsheetAccessBinding
-import com.example.application.databinding.FragmentUpdatePinBinding
+import com.example.application.databinding.FragmentChangeEmailBinding
+import com.example.application.databinding.FragmentChangePinBinding
+import com.example.application.databinding.FragmentNotificationsBinding
 import com.example.application.model.AppViewModel
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.launch
 
-class UpdatePinFragment : BottomSheetDialogFragment() {
-    private var _binding : FragmentUpdatePinBinding? = null
+
+class ChangePinFragment : Fragment() {
+    private var _binding : FragmentChangePinBinding? = null
 
     private val binding get() = _binding!!
 
-    private val sharedViewModel: AppViewModel by activityViewModels()
+    private lateinit var username1 : String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            username1 = it.getString("username1").toString()
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentUpdatePinBinding.inflate(inflater,container,false)
+        _binding = FragmentChangePinBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -48,12 +58,10 @@ class UpdatePinFragment : BottomSheetDialogFragment() {
         val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
         val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
-        val userId: Int = 8777
-        val lockId: Int = 12
-        val userLockID: Int = 5
+        var userId: Int = 0
+        //val lockId: Int = 0
+        val userLockID: Int = 0
         var userLockPin: String=""
-
-        //println(sharedViewModel.lockID.value)
 
         binding.confirm.setOnClickListener {
             val oldPin = binding.oldPinText.text.toString()
@@ -62,8 +70,12 @@ class UpdatePinFragment : BottomSheetDialogFragment() {
 
             viewLifecycleOwner.lifecycleScope.launch {
 
+                println("USERNAME " + username1)
+
                 if (userLockDao != null) {
-                    userLockPin = userLockDao.getLockPin(userId, lockId)
+
+                    userId=userDao.getUserIdByUsername(username1)
+                    userLockPin = userLockDao.getLockPin(userId)
                 }
 
                 if (oldPin.isEmpty() ||
@@ -72,7 +84,7 @@ class UpdatePinFragment : BottomSheetDialogFragment() {
                 ) {
                     Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
                 }else if (newPin.length != 6) {
-                    Toast.makeText(context, "Error: The pin must have four characters", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, "Error: The pin must have six characters", Toast.LENGTH_SHORT)
                         .show()
                 }
                 else if (!containsOnlyNumbers(newPin)) {
@@ -90,22 +102,30 @@ class UpdatePinFragment : BottomSheetDialogFragment() {
                     ).show()
                 } else {
                     if (userLockDao != null) {
-                        userLockDao.updateLockPin(userId, lockId, newPin)
+                        userLockDao.updateLockPin(userId, newPin)
+                        Toast.makeText(context, "SUCCESS: Your pin was updated", Toast.LENGTH_SHORT)
+                            .show()
+
+                        binding.oldPinText.text?.clear()
+                        binding.newPinText.text?.clear()
+                        binding.pinConfirmationText.text?.clear()
+
+
+
                     }
-                    Toast.makeText(context, "SUCCESS: Your pin was updated", Toast.LENGTH_SHORT)
-                        .show()
+
                 }
             }
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     fun containsOnlyNumbers(input: String): Boolean {
         val regex = Regex("^[0-9]+$")
         return regex.matches(input)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

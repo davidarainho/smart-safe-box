@@ -39,10 +39,12 @@ class MyLocksFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         arguments?.let {
             username = it.getString("userName").toString()
         }
         sharedViewModel.setUsername(username)
+
     }
 
     override fun onCreateView(
@@ -63,13 +65,13 @@ class MyLocksFragment : Fragment() {
 
         // println(username)
         // Set string
-        val count : String = lockCount(username).toString()
+        val count : String = lockCount(sharedViewModel.username.value.toString()).toString()
         binding.welcomeText.text = getString(R.string.active_locks, count)
 
         // Set List of Locks
         var myList: List<Lock>? = null
-        val lockList = LockDataSource().loadUserlockers(requireContext(), username)
-        val itemAdapter = ItemAdapter(lockList, username)
+        val lockList = LockDataSource().loadUserlockers(requireContext(), sharedViewModel.username.value.toString())
+        val itemAdapter = ItemAdapter(lockList, sharedViewModel.username.value.toString())
 
         val recyclerView:RecyclerView=view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -86,7 +88,7 @@ class MyLocksFragment : Fragment() {
                         lockList
                     }
                 }
-                recyclerView.adapter = ItemAdapter(myList, username)
+                recyclerView.adapter = ItemAdapter(myList, sharedViewModel.username.value.toString())
             }
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}

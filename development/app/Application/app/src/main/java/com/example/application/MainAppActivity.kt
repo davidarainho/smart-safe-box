@@ -4,9 +4,7 @@ import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -18,8 +16,17 @@ import android.os.Handler
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.getSystemService
+import com.example.application.data.LockDBSingleton
+import com.example.application.data.UserAndLock.UserAndLockDao
+import com.example.application.data.UserAndLockDBSingleton
+import com.example.application.data.UserDBSingleton
+import com.example.application.data.lock.LockDao
+import com.example.application.data.user.UserDao
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.*
+import java.lang.Runnable
 
 
 class MainAppActivity : AppCompatActivity() {
@@ -58,25 +65,40 @@ class MainAppActivity : AppCompatActivity() {
         var flagWrongPin : Boolean = false
         var flagChangedLockState : Boolean = false
 
-        var lockname : String = "default"
+
+
+        // Usar query ao servidor para receber lista de doors para determinada flag
+        // (Erro ao inserir código ou alteração do estado do lock)
+
+        // Concatenar as doors numa string e colocar em lockname1 e lockname2
+
+        // Alterar os estados das doors na base de dados
+        val lockDatabaseSingleton = LockDBSingleton.getInstance(this)
+        val lockDao : LockDao? = lockDatabaseSingleton!!.getAppDatabase().lockDao()
+
+
+        // Receber lista
+        var lockname1 : String = "default"
+        var lockname2 : String = "default"
+
         printRunnable = object : Runnable {
             override fun run() {
                 // Pedidos para verificar alteracoes (Pin Errado / Estado Lock)
 
                 if (flagWrongPin){
-                    sendNotificationWrongPin(lockname)
+                    sendNotificationWrongPin(lockname1)
                     flagWrongPin = false
                 }
 
                 if (flagChangedLockState){
-                    sendNotificationState(lockname)
+                    sendNotificationState(lockname2)
                     flagChangedLockState = false
                 }
 
-                handler.postDelayed(this, 5000)
+                handler.postDelayed(this, 15000)
             }
         }
-        handler.postDelayed(printRunnable, 5000)
+        handler.postDelayed(printRunnable, 15000)
     }
 
     private fun createNotificationChannel() {
@@ -96,7 +118,7 @@ class MainAppActivity : AppCompatActivity() {
 
     private fun sendNotificationWrongPin(lockname : String){
         val message : String =
-            "The wrong pin was inserted 3 times for lock $lockname. It will be blocked for 1 minute."
+            "The wrong pin was inserted for doors $lockname. It will be blocked for 1 minute."
         val builder = NotificationCompat.Builder(this,CHANNEL_ID)
             .setSmallIcon(R.drawable.baseline_lock_24)
             .setContentTitle("Wrong Pin Inserted")
@@ -142,8 +164,44 @@ class MainAppActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    suspend fun deleteData() {
+        val lockDatabase = LockDBSingleton.getInstance(this)
+        val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
+
+        val userDatabase = UserDBSingleton.getInstance(this)
+        val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
+
+        val userAndLockDatabase = UserAndLockDBSingleton.getInstance(this)
+        val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
+
+        withContext(Dispatchers.IO) {
+
+            if (lockDao != null) {
+                lockDao.deleteLockData()
+            }
+            userDao.deleteUserData()
+
+            if (userLockDao != null) {
+                userLockDao.deleteUserLockData()
+            }
+
+        }
+    }
+
     override fun onDestroy() {
+
         super.onDestroy()
         handler.removeCallbacks(printRunnable)
+    }
+
+    override fun onStop() {
+
+        super.onStop()
+
+        if (isFinishing) {
+            GlobalScope.launch {
+                deleteData()
+            }
+        }
     }
 }

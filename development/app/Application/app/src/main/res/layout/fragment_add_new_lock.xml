@@ -12,17 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="30dp"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/lockcodetext">
+        app:layout_constraintTop_toBottomOf="@+id/instructions">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/lock_code_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/rounded_view"
-            android:hint="Lock code"
+            android:hint="Enter Lock Code"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Add new lock"
+        android:text="Add New Lock"
         android:textColor="@color/Text_Bold"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -73,23 +73,27 @@
         android:text="Add"
         android:textAllCaps="false"
         android:textSize="25sp"
-        android:textColor="#F6F1D1"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lockcodetext" />
+        app:layout_constraintTop_toBottomOf="@+id/instructions" />
+
+
+
 
     <TextView
-        android:id="@+id/lockcodetext"
+        android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
         android:layout_marginTop="12dp"
-        android:text="Enter lock code"
-        android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:textColor="@color/blue_buttons"
+        android:text="When you a buy a new lock, please check the code displayed on the box "
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/lockcodebox"
+        app:layout_constraintStart_toStartOf="@+id/lockcodebox"
         app:layout_constraintTop_toBottomOf="@+id/wave" />
-
 
 
 

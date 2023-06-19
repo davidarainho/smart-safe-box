@@ -49,10 +49,13 @@ class ChangeLockNameFragment : Fragment() {
 
         //var userID= 0;
 
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_item, loadLockIds(requireContext()))
+        val arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, loadLockIds(requireContext()))
         binding.dropdownItems.setAdapter(arrayAdapter)
 
+
         return binding.root
+
+
     }
 
     fun loadLockIds(context: Context): List<Int> = runBlocking {
@@ -87,7 +90,7 @@ class ChangeLockNameFragment : Fragment() {
 
         binding.dropdownItems.setOnItemClickListener { parent, _, position, id ->
             val selectedItem = parent.getItemAtPosition(position)
-            lockId = selectedItem as Int
+            lockId = selectedItem.toString().toInt()
 
         }
 

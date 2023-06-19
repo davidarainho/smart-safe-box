@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minHeight="500dp">
+    android:background="@color/background_color"
+    tools:context=".ChangePasswordFragment">
+
+    <ImageView
+        android:id="@+id/wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:rotation="1"
+        android:scaleType="centerCrop"
+        android:scaleX="1.2"
+        android:scaleY="1"
+        android:translationY="-10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/wave" />
+
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:id="@+id/changepassword"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingHorizontal="25dp"
-        android:paddingVertical="15dp"
-        android:text="@string/update_lock_pin"
+        android:layout_marginTop="30dp"
+        android:text="Change Lock Pin"
         android:textColor="@color/Text_Bold"
-        android:textSize="30sp"
+        android:textSize="35sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,13 +42,13 @@
         android:id="@+id/enter_old_pin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="80dp"
         android:text="@string/enter_your_old_pin"
         android:textSize="15sp"
         android:textColor="@color/Text_Bold"
-        app:layout_constraintStart_toStartOf="@+id/title"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintStart_toStartOf="@+id/changepassword"
+        app:layout_constraintTop_toBottomOf="@+id/changepassword" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -142,5 +161,9 @@
         app:layout_constraintTop_toBottomOf="@+id/pin_confirmation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

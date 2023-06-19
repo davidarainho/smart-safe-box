@@ -2,13 +2,13 @@
     <!-- Hints -->
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="your_email_show">Your E-mail: %1$s</string>
+    <string name="your_email_show">Your User ID: %1$s</string>
     <string name="your_email">Your E-mail</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="search">Search</string>
 
     <!-- activity_main -->
-    <string name="app_name">GUI</string>
+    <string name="app_name">Smart Box</string>
     <string name="hello">Hello!</string>
     <string name="welcome">Welcome to <b>Smart Box</b></string>
     <string name="create_account">Don\'t have an account? <b>Create</b>!</string>
@@ -17,7 +17,7 @@
 
 
     <!-- create_account -->
-    <string name="create_account_title">Create account</string>
+    <string name="create_account_title">Create Account</string>
     <string name="terms_services">I agree with <u>Terms and services</u></string>
     <string name="sign_up">Sign Up</string>
     <string name="have_account">Have already an account? <b>Login here!</b></string>
@@ -29,7 +29,7 @@
     <!-- settings -->
     <string name="share_multiple_locks">Share Multiple Locks</string>
     <string name="manage_notifications">Manage Notifications</string>
-    <string name="change_email">Change e-mail</string>
+    <string name="change_email">Change E-mail</string>
     <string name="change_lock_name">Change Lock Name</string>
     <string name="delete_account">Delete Account</string>
     <string name="settings">Settings</string>
@@ -46,7 +46,7 @@
     <string name="do_not_disturb">Do not disturb</string>
 
     <!-- change email-->
-    <string name="change_your_email">Change your e-mail</string>
+    <string name="change_your_email">Change Your E-mail</string>
     <string name="enter_your_old_email">Enter your <b>old</b> e-mail</string>
     <string name="enter_your_new_email">Enter your <b>new</b> e-mail</string>
 
@@ -129,16 +129,18 @@
     <string name="enter_the_new_lock_name">Enter the <b>new</b> Lock Name</string>
     <string name="name_label">{locker_name}</string>
     <string name="last_accessed">Last Accessed:</string>
-    <string name="number_of_users">Number of users:</string>
     <string name="info"><u>+ info:</u></string>
+    <string name="comment"><b><u>Update Lock Comment</u></b></string>
     <string name="changepin"><u>Change Lock Pin</u></string>
     <string name="change_lock_password">Change User #ID Lock Password</string>
     <string name="exit">exit</string>
-    <string name="old_email">Old email</string>
+    <string name="old_email">Old Email</string>
     <string name="new_email">New Email</string>
     <string name="access_history"><b>Access History</b></string>
     <string name="users_with_access"><b>Users with access</b></string>
+    <string name="users_with_access_1">Users with access:</string>
     <string name="update_lock_pin"><b>Update Lock Pin</b></string>
+    <string name="update_lock_comment"><b>Update Lock Comment</b></string>
     <string name="enter_your_old_pin">Enter your <b>old</b> pin</string>
     <string name="enter_your_new_pin">Enter your <b>new</b> pin</string>
     <string name="confirm_your_new_pin">Confirm your <b>new</b> pin</string>

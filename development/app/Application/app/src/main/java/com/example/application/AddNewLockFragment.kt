@@ -42,8 +42,16 @@ class AddNewLockFragment : Fragment() {
 
             val lockCode = binding.lockCodeText.text.toString()
 
-           // no caso de sucesso:
-           // binding.lockCodeText.text?.clear()
+            if (lockCode.isEmpty()) {
+                Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
+            } else {
+
+                //  acrescentar
+                Toast.makeText(context, "SUCCESS: Your lock was added", Toast.LENGTH_SHORT)
+                    .show()
+
+                binding.lockCodeText.text?.clear()
+            }
         }
 
 
