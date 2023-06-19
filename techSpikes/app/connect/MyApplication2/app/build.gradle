@@ -48,8 +48,8 @@ dependencies {
 
     // GSON
 
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.google.code.gson:gson:2.10.1' // Gson library
+    implementation 'com.google.code.gson:gson-stream:2.8.9' // Gson streaming support
 
     // coroutine
 

@@ -1,6 +1,7 @@
 package com.example.myapplication.api
 
 import com.example.myapplication.model.User
+import com.example.myapplication.model.Door
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -14,6 +15,11 @@ interface SimpleApi {
 
     @GET("/user")
     suspend fun checkUsername(@Query("username") username: String): Response<User?>
+
+    @GET("/door")
+    suspend fun checkDoor(
+        @Query("username") username: String,
+        @Query("door_id") door_id: Int): Response<Door>
 
 
     @POST("/createAccount")
