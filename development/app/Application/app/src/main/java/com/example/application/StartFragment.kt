@@ -129,31 +129,31 @@ class StartFragment : Fragment() {
         }
     }
 
-    private fun loginCheck(username: String, password : String) : Pair<UserConn?, List<LockConn?>?> = runBlocking {
-
-        //verificar conta login
-        val userConn = functionConnection.login(username, password)
-        //Log.d("example","$userConn")
-        val locksList : List<LockConn?>?
-        withContext(Dispatchers.IO) {
-            locksList =
-                userConn?.active_locks?.stream()?.filter{ l -> l.lockId != null }?.map { lock -> lock.lockId?.let {
-                    returnsListLocks(username,
-                        it
-                    )
-                } }?.toList()
-        }
-        Pair(userConn, locksList)
-    }
-
-    private fun returnsListLocks(username: String, lockID : String) = runBlocking{
-        var value : LockConn? = null
-        withContext(Dispatchers.IO) {
-            value = functionConnection.getLock(username, lockID)
-        }
-
-        value
-    }
+//    private fun loginCheck(username: String, password : String) : Pair<UserConn?, List<LockConn?>?> = runBlocking {
+//
+//        //verificar conta login
+//        val userConn = functionConnection.login(username, password)
+//        //Log.d("example","$userConn")
+//        val locksList : List<LockConn?>?
+//        withContext(Dispatchers.IO) {
+//            locksList =
+//                userConn?.active_locks?.stream()?.filter{ l -> l.lockId != null }?.map { lock -> lock.lockId?.let {
+//                    returnsListLocks(username,
+//                        it
+//                    )
+//                } }?.toList()
+//        }
+//        Pair(userConn, locksList)
+//    }
+//
+//    private fun returnsListLocks(username: String, lockID : String) = runBlocking{
+//        var value : LockConn? = null
+//        withContext(Dispatchers.IO) {
+//            value = functionConnection.getLock(username, lockID)
+//        }
+//
+//        value
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

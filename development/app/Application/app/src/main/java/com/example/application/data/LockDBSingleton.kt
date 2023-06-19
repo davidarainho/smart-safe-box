@@ -2,6 +2,7 @@ package com.example.application.data
 
 import android.content.Context
 import androidx.room.Room.databaseBuilder
+import com.example.application.data.lock.LockDao
 import com.example.application.data.lock.LockDatabase
 
 

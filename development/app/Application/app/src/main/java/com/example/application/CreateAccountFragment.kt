@@ -22,14 +22,15 @@ import com.example.application.data.user.UserDatabase
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentCreateAccountBinding
 import com.example.myapplication.functions.serverConnectionFunctions
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 class CreateAccountFragment : Fragment() {
     private var _binding : FragmentCreateAccountBinding? = null
 
     private val binding get() = _binding!!
+
+    private val functionConnection = serverConnectionFunctions()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -106,45 +107,14 @@ class CreateAccountFragment : Fragment() {
             } else if (!validateEmail(email)) {
                 Toast.makeText(context, "Error: invalid email format", Toast.LENGTH_SHORT).show()
             } else{
-                flagAllowNewAccount = true
-
-            }
-
-
-            //val functionConnection = serverConnectionFunctions()
-            val user = User(username, email, password, allowNotifications, userId)
-            val userLock6=UserAndLock(user_id=userId, lock_id=103, lock_access_pin="1598", permission_level = 1, userLockId = 417)
-
-
-            GlobalScope.launch {
-                viewLifecycleOwner.lifecycleScope.launch {
-                   userDao.upsertUser(user1)
-                   userDao.upsertUser(user2)
-                    userDao.upsertUser(user)
-
-                    if (lockDao != null) {
-                        lockDao.upsertLock(lock1)
-                        lockDao.upsertLock(lock2)
-                        lockDao.upsertLock(lock3)
-                        lockDao.upsertLock(lock4)
-                        lockDao.upsertLock(lock5)
-
-                    }
-
-                    if (userLockDao != null) {
-                        //userLockDao.upsertUserAndLock(userLock1)
-                        userLockDao.upsertUserAndLock(userLock2)
-                        userLockDao.upsertUserAndLock(userLock3)
-                        userLockDao.upsertUserAndLock(userLock4)
-                        userLockDao.upsertUserAndLock(userLock5)
-                         // userLockDao.upsertUserAndLock(userLock6)
-
-                    }
-
-
+                val result = allowCreateAccount(username,password, email, pin)
+                println(result)
+                if(result == true) {
+                    flagAllowNewAccount = true
+                }else {
+                    Toast.makeText(context, "Error: Wasn't able to create account", Toast.LENGTH_SHORT).show()
                 }
             }
-
 
             if(flagAllowNewAccount){
                 // Mostrar algo que confirme o sucesso da criação da conta
@@ -160,10 +130,13 @@ class CreateAccountFragment : Fragment() {
         }
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    fun allowCreateAccount(username : String, password : String, email: String, pin : String) : Boolean? = runBlocking{
+        var create : Boolean? = false
+        withContext(Dispatchers.IO) {
+            create = functionConnection.createAccount(username=username, password=password, email=email, pincode=pin)
+        }
+        println(create)
+        create
     }
 
     fun validateEmail(email: String): Boolean {
@@ -171,4 +144,8 @@ class CreateAccountFragment : Fragment() {
         return regexPattern.matches(email)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
