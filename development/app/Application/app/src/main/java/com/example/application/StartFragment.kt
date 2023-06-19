@@ -1,8 +1,6 @@
 package com.example.application
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,11 +20,9 @@ import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentStartBinding
 import kotlinx.coroutines.launch
 import com.example.myapplication.functions.serverConnectionFunctions
-import com.example.myapplication.model.ActiveLocksConn
 import com.example.myapplication.model.LockConn
 import com.example.myapplication.model.UserConn
 import kotlinx.coroutines.*
-import java.io.IOException
 import kotlin.streams.toList
 
 
@@ -71,9 +67,9 @@ class StartFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 // Miguel - chamar a funcao autenticacao
                 // recebe a informacao, transfere para a base de dados, altera validAccount para true
-            if (username == "beatriz" && password == "pass"){
-                validAccount = true
-            }
+                if (username == "beatriz" && password == "pass"){
+                    validAccount = true
+                }
 
                 //validAccount = true
 

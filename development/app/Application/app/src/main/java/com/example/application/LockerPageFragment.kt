@@ -22,6 +22,7 @@ import com.example.application.databinding.FragmentMyLocksBinding
 import com.example.application.model.AppViewModel
 import com.example.myapplication.functions.serverConnectionFunctions
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
@@ -68,7 +69,7 @@ class LockerPageFragment : Fragment() {
         val idLock = "#$lockID"
         binding.lockerUserIdentifier.text = idLock
 
-        setLockState(binding.imageView)
+        setLockState(binding.imageView, 0)
 
         return binding.root
     }
@@ -84,7 +85,8 @@ class LockerPageFragment : Fragment() {
         val imageView: ImageView = binding.imageView
 
         imageView.setOnClickListener{
-            setLockState(imageView)
+            // Colocar o pedido para abertura se sucesso e depois sim chamar a função
+            setLockState(imageView, 1)
         }
 
         binding.shareLock.setOnClickListener {
@@ -142,19 +144,24 @@ class LockerPageFragment : Fragment() {
         lev
     }
 
-    // state == 1 fechado
-    private fun setLockState(imageView: ImageView){
-        // state = Ir buscar valor do estado na base de dados
+
+    private fun setLockState(imageView: ImageView, open : Int) = runBlocking{
+        val lockDatabaseSingleton = LockDBSingleton.getInstance(requireContext())
+        val lockDao : LockDao? = lockDatabaseSingleton!!.getAppDatabase().lockDao()
+
+        coroutineScope {
+            state = if (lockDao?.getLockState()=="opened"){ 1 }else{ 0 }
+        }
+
+        if (state == 0 && open == 1){ state = 1 }
 
         //Verifica na base de dados
-        state = if(state == 0){
+        if(state == 0){
             imageView.setImageResource(R.drawable.lock_closed)
-            Toast.makeText(context, "Lock is now Closed", Toast.LENGTH_SHORT).show()
-            1
+            Toast.makeText(context, "Lock is Closed", Toast.LENGTH_SHORT).show()
         }else{
             imageView.setImageResource(R.drawable.lock_open)
-            Toast.makeText(context, "Lock is now Open", Toast.LENGTH_SHORT).show()
-            0
+            Toast.makeText(context, "Lock is Open", Toast.LENGTH_SHORT).show()
         }
     }
 

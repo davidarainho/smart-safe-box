@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.application.data.UserDBSingleton
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentChangeUsernameBinding
+import com.example.application.model.AppViewModel
 import kotlinx.coroutines.launch
 
 class ChangeUsernameFragment : Fragment() {
@@ -18,6 +20,7 @@ class ChangeUsernameFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var previousUsername : String
+    private val sharedViewModel: AppViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,15 +54,15 @@ class ChangeUsernameFragment : Fragment() {
 
                 if (newUsername.isEmpty()) {
                     Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
+                }else if (newUsername==previousUsername)
+                {
+                    Toast.makeText(context, "Error: New username should be different from the previous", Toast.LENGTH_SHORT).show()
                 } /*else if ( /* VERFICAR NO SERVIDOR SE EXISTE UM USERNAME IGUAL NA DB DO SERVIDOR */ ) {
                     Toast.makeText(context, "Error: This username is already taken", Toast.LENGTH_SHORT)
                         .show()
-                } */ else if (newUsername==previousUsername)
-                {
-                    Toast.makeText(context, "Error: New username should be different from the previous", Toast.LENGTH_SHORT).show()
-                }
-
+                } */
                 else {
+                    sharedViewModel.setUsername(newUsername)
                     userDao.updateUsername(userId, newUsername)
                     Toast.makeText(context, "SUCCESS: Your username was updated", Toast.LENGTH_SHORT)
                         .show()

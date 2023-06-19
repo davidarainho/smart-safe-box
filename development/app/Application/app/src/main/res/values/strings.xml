@@ -129,7 +129,6 @@
     <string name="enter_the_new_lock_name">Enter the <b>new</b> Lock Name</string>
     <string name="name_label">{locker_name}</string>
     <string name="last_accessed">Last Accessed:</string>
-    <string name="number_of_users">Number of users:</string>
     <string name="info"><u>+ info:</u></string>
     <string name="comment"><b><u>Update Lock Comment</u></b></string>
     <string name="changepin"><u>Change Lock Pin</u></string>
@@ -139,6 +138,7 @@
     <string name="new_email">New Email</string>
     <string name="access_history"><b>Access History</b></string>
     <string name="users_with_access"><b>Users with access</b></string>
+    <string name="users_with_access_1">Users with access:</string>
     <string name="update_lock_pin"><b>Update Lock Pin</b></string>
     <string name="update_lock_comment"><b>Update Lock Comment</b></string>
     <string name="enter_your_old_pin">Enter your <b>old</b> pin</string>

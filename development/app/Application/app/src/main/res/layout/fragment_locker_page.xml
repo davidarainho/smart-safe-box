@@ -119,7 +119,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/more_info_accesses"
-        android:text="@string/number_of_users" />
+        android:text="@string/users_with_access_1" />
 
     <TextView
         android:id="@+id/more_info_number"

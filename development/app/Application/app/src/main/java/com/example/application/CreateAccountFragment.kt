@@ -120,7 +120,7 @@ class CreateAccountFragment : Fragment() {
                 viewLifecycleOwner.lifecycleScope.launch {
                    userDao.upsertUser(user1)
                    userDao.upsertUser(user2)
-                     userDao.upsertUser(user)
+                    userDao.upsertUser(user)
 
                     if (lockDao != null) {
                         lockDao.upsertLock(lock1)

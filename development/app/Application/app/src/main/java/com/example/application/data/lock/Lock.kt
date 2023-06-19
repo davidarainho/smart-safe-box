@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey
 data class Lock(
 
     val lock_name: String,
-    val last_access: String,
-    val user_last_access: String,
+    val last_access: String,            // data1/user1,data2/user2,...
+    val user_last_access: String,       // user com acesso separado por virgula
     val number_of_users: Int,
     val comment: String,
     val eKey: String?,
