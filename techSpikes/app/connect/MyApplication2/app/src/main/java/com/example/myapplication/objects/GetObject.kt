@@ -7,8 +7,6 @@ object GetObject {
 
     val baseUrl = "http://34.125.181.207:8081"
 
-    //val okHttpClient  OkHttpClient.Builder().connectTimeout(1, TimeUnit.MINUTES).readTimeout(30, TimeUnit.SECONDS).writeTimeout(15, TimeUnit.SECONDS).build()
-
     fun getInstance(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
