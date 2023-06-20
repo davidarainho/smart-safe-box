@@ -18,10 +18,12 @@ class UserDataSource (val username : String) {
     private val functionConnection = serverConnectionFunctions()
 
 
-    fun loadUserInfo(context: Context, lockID : Int): List<String> = runBlocking {
-
-        val lock : LockConn? = functionConnection.getLockConnLogin(username, lockID.toString())
-
-        lock!!.users_with_access
+    fun loadUserInfo(context: Context, lockID : Int): List<String>? = runBlocking {
+        var lock: LockConn? = null
+        withContext(Dispatchers.IO) {
+             lock = functionConnection.getLockConnLogin(username, lockID.toString())
+        }
+        lock?.users_with_access
     }
+
 }

@@ -19,7 +19,9 @@ import com.example.application.databinding.FragmentBotsheetUserBinding
 import com.example.application.model.AppViewModel
 import com.example.myapplication.functions.serverConnectionFunctions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class InfoAccountAdapter (
     private val dataset: List<String>?,
@@ -60,15 +62,9 @@ class InfoAccountAdapter (
         if (user_to_rmv != null) {
             holder.textView.text = user_to_rmv
 
-
-
-            //////////////// Verificar nivel do utilizador no lock ////////////////
-            //
             // Senao der da popup de "Nao tens nivel permissao neste lock para usar esta funcao"
             holder.itemView.setOnClickListener {
-                val optionUserLevel : Int = getPermissionLevel(user_to_rmv, lockID)
-
-                if(optionUserLevel < level && user_to_rmv != username){
+                if(user_to_rmv != username){
                     MaterialAlertDialogBuilder(context)
                         .setTitle(context.resources.getString(R.string.title_remove_account))
                         .setMessage(context.resources.getString(R.string.supporting_text_remove_account, user_to_rmv))
@@ -78,6 +74,9 @@ class InfoAccountAdapter (
                         .setPositiveButton(context.resources.getString(R.string.accept)) { _, _ ->
                             if (rmvAccount(user_to_rmv) == true){
                                 Toast.makeText(context, "The user was removed successfully", Toast.LENGTH_SHORT)
+                                    .show()
+                            } else{
+                                Toast.makeText(context, "You can't remove this user", Toast.LENGTH_SHORT)
                                     .show()
                             }
                         }
@@ -105,8 +104,12 @@ class InfoAccountAdapter (
         lev
     }
 
-    private fun rmvAccount(username_to_remove : String) = runBlocking{
-        functionConnection.removeAccountFromDoor(username, username_to_remove, lockID.toString())
+    private fun rmvAccount(username_to_remove : String) : Boolean? = runBlocking{
+        val rmv : Boolean?
+        withContext(Dispatchers.IO) {
+            rmv = functionConnection.removeAccountFromDoor(username, username_to_remove, lockID.toString())
+        }
+        rmv
     }
 
     /**
