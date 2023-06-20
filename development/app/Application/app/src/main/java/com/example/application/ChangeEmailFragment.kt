@@ -66,6 +66,9 @@ class ChangeEmailFragment : Fragment() {
                 } else if (oldEmail != userEmail) {
                     Toast.makeText(context, "Error: Old e-mail is not correct", Toast.LENGTH_SHORT)
                         .show()
+                } else if (!validateEmail(newEmail)) {
+                    Toast.makeText(context, "Error: The new e-mail is not in the correct format", Toast.LENGTH_SHORT)
+                        .show()
                 }  else if ( !functionConnection.changeEmail(username, newEmail)  ) {
                     Toast.makeText(context, "Error: The server wasn't able to change email", Toast.LENGTH_SHORT)
                         .show()
@@ -80,6 +83,11 @@ class ChangeEmailFragment : Fragment() {
                 }
             }
         }
+    }
+
+    fun validateEmail(email: String): Boolean {
+        val regexPattern = Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
+        return regexPattern.matches(email)
     }
 
     override fun onDestroyView() {

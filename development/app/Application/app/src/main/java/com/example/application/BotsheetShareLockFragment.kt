@@ -35,7 +35,7 @@ class BotsheetShareLockFragment(private val lockID: Int) : BottomSheetDialogFrag
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var duration: String = ""
-
+/*
         val durationList: Array<String> by lazy {
             resources.getStringArray(R.array.array_share_durarion)
         }
@@ -47,15 +47,15 @@ class BotsheetShareLockFragment(private val lockID: Int) : BottomSheetDialogFrag
             val selectedItem = parent.getItemAtPosition(position)
             duration = selectedItem.toString()
             // enviar a duração escolhida para o server
-        }
+        }*/
 
         binding.sharebutton.setOnClickListener {
             val userToAdd = binding.usernameText.text.toString()
 
-            if (userToAdd.isEmpty() || duration=="") {
+            if (userToAdd.isEmpty() /*|| duration==""*/) {
                 Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
             } else if (!successShared(sharedViewModel.username.value.toString(),userToAdd, sharedViewModel.lockID.value.toString())) {
-                Toast.makeText(context, "Error: Wasn't able to share Door", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Error: Wasn't able to share Lock", Toast.LENGTH_SHORT).show()
             } else {
                 // se tiver sucesso
                 Toast.makeText(context, "SUCCESS: Lock was shared", Toast.LENGTH_SHORT).show()

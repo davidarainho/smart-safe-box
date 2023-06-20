@@ -49,39 +49,39 @@
             android:maxLength="18"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/select_share_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="30dp"
-        android:text="Select desired lock duration"
-        app:layout_constraintStart_toStartOf="@+id/enteryournewusername"
-        app:layout_constraintTop_toBottomOf="@+id/newemailbox2" />
+<!--    <TextView-->
+<!--        android:id="@+id/select_share_duration"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="0dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:text="Select desired lock duration"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/enteryournewusername"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/newemailbox2" />-->
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dropdown"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="12dp"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        android:hint="Share Duration"
-        android:background="@drawable/rounded_view"
-        app:layout_constraintTop_toBottomOf="@+id/select_share_duration">
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/dropdown"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="40dp"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        app:boxStrokeWidth="0dp"-->
+<!--        app:boxStrokeWidthFocused="0dp"-->
+<!--        android:hint="Share Duration"-->
+<!--        android:background="@drawable/rounded_view"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/select_share_duration">-->
 
-        <AutoCompleteTextView
-            android:id="@+id/dropdown_items"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:background="@drawable/rounded_view_outlined_boxes"
-            android:inputType="none"
-            style="@style/Widget.App.PopupMenu" />
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/dropdown_items"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:ellipsize="end"-->
+<!--            android:background="@drawable/rounded_view_outlined_boxes"-->
+<!--            android:inputType="none"-->
+<!--            style="@style/Widget.App.PopupMenu" />-->
 
-    </com.google.android.material.textfield.TextInputLayout>
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
     <Button
         android:id="@+id/sharebutton"
@@ -100,6 +100,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dropdown" />
+        app:layout_constraintTop_toBottomOf="@+id/newemailbox2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

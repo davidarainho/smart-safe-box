@@ -61,6 +61,9 @@ class ChangeUsernameFragment : Fragment() {
                 }else if (newUsername==previousUsername)
                 {
                     Toast.makeText(context, "Error: New username should be different from the previous", Toast.LENGTH_SHORT).show()
+                } else if (newUsername.length > 18)
+                {
+                    Toast.makeText(context, "Error: New username must have 18 or less characters", Toast.LENGTH_SHORT).show()
                 } else if ( !functionConnection.changeUsername(newUsername,previousUsername) ) { // Melhorar condicoes e feedback para o utilizador
                     Toast.makeText(context, "Error: Server wasn't able to change username", Toast.LENGTH_SHORT)
                         .show()

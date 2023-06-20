@@ -34,6 +34,10 @@
     <string name="delete_account">Delete Account</string>
     <string name="settings">Settings</string>
 
+    <!-- add_new_lock -->
+
+    <string name="add_new_lock_info">When you a buy a new lock, please check the code displayed on the box</string>
+
     <!-- share locks-->
     <string name="share_locks">Share Locks</string>
     <string name="select_lock_id">Select lock <b>ID</b></string>
