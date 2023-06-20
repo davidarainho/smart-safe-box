@@ -1,7 +1,7 @@
 package com.example.myapplication.api
 
 import com.example.application.data.user.User
-import com.example.myapplication.model.ActiveLocksConn
+import com.example.myapplication.model.ActiveLocks
 import com.example.myapplication.model.LockConn
 import com.example.myapplication.model.UserConn
 import retrofit2.Call
@@ -27,30 +27,32 @@ interface SimpleApi {
     /************************************************************************/
 
     /******************************** GET ***********************************/
+    // 200 - vetor
+    // 400 - Tag error, ver dentro do body() - .error
     @GET("/usernames")
-    suspend fun getAllUsernames(): Response<String?>
+    suspend fun getAllUsernames(): Response<List<String>?>
 
     @GET("/user")
-    suspend fun checkUsername(@Query("username") username: String): Response<String?>
+    suspend fun returnUser(@Query("username") username: String): Response<UserConn?>
 
     @GET("/user/login")
     suspend fun login(
         @Query("username") username: String,
         @Query("password") password: String
-    ): Response<UserConn?>
+    ): Response<String?>
 
     @GET("/user/email")
     suspend fun checkEmail(@Query("email") email: String): Response<String?>
 
-    @GET("/user/active_locks")
+    @GET("/user/active_doors")
     suspend fun getActiveDoors(
         @Query("username") username: String
-    ): Response<ActiveLocksConn?>
+    ): Response<ActiveLocks?>
 
     @GET("/door")
     suspend fun getLockConnObject(
-        @Query("door_id") door_id: String,
-        @Query("username") username: String
+        @Query("username") username: String,
+        @Query("door_id") door_id: String
     ): Response<LockConn?>
 
 
@@ -89,7 +91,7 @@ interface SimpleApi {
         @Query("new_email") new_email: String
     ): Response<String?>
 
-    @POST("/user/updateUserPin")
+    @POST("/user/update_pin")
     suspend fun updatePin(
         @Query("username") username : String,
         @Query("new_pin") new_pin : String,
@@ -103,12 +105,12 @@ interface SimpleApi {
         @Query("new_comment") new_comment:String
     ): Response<String?>
 
-/*    @POST("/user/share_door")
+    @POST("/user/share_door")
     suspend fun shareDoor(
+        @Query("username") username: String,
         @Query("user_to_share") user_to_share: String,
-        @Query("door_id") door_id: String,
-        @Query("access_level") access_level: String
-    ): Response<String?>*/
+        @Query("door_id") door_id: String
+    ): Response<String?>
 
     @POST("/user/door_access_level")
     suspend fun updateAccessLevel(
@@ -128,7 +130,7 @@ interface SimpleApi {
     suspend fun addNewLock(
         @Query("username") username: String,
         @Query("app_code") app_code: String
-    ): Response<LockConn?>
+    ): Response<List<String>?>
 
     @POST("/user/change_notification_preference")
     suspend fun changeNotificationPreference(
@@ -137,12 +139,12 @@ interface SimpleApi {
 
 
 
-/*    @POST("/user/removeAccountFromDoor")
+    @POST("/user/remove_share_door")
     suspend fun removeAccountFromDoor(
         @Query("username") username: String,
-        @Query("username_to_be_removed") username_to_be_removed: String,
+        @Query("username_to_deshare") username_to_be_removed: String,
         @Query("door_id") door_id: Int
-    ): Response<String?>*/
+    ): Response<String?>
 
 
 }

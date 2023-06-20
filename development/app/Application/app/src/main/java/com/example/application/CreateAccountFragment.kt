@@ -130,11 +130,10 @@ class CreateAccountFragment : Fragment() {
         }
     }
 
-    fun allowCreateAccount(username : String, password : String, email: String, pin : String) : Boolean? = runBlocking{
-        var create : Boolean? = false
-        viewLifecycleOwner.lifecycleScope.launch() {
-            create = functionConnection.createAccount(username=username, password=password, email=email, pincode=pin)
-        }
+    private fun allowCreateAccount(username : String, password : String, email: String, pin : String) : Boolean? = runBlocking{
+        var create : Boolean? = async(Dispatchers.IO) {
+            functionConnection.createAccount(username=username, password=password, email=email, pincode=pin)
+        }.await()
         println(create)
         create
     }

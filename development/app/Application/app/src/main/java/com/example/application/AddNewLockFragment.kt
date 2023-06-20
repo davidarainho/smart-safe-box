@@ -24,6 +24,7 @@ import com.example.application.model.AppViewModel
 import com.example.myapplication.functions.serverConnectionFunctions
 import com.example.myapplication.model.LockConn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class AddNewLockFragment : Fragment() {
 
@@ -66,22 +67,26 @@ class AddNewLockFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 val lockCode = binding.lockCodeText.text.toString()
                 val userID = userDao.getUserIdByUsername(username)
-                val addedLock : LockConn? = functionConnection.addNewLock(username, lockCode)
+                val listLock : List<String>? = functionConnection.addNewLock(username, lockCode)
 
-
-                if (lockCode.isEmpty()) {
-                    Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
-                } else {
-                    val lock = addedLock?.let { it1 -> Lock(it1.lock_name,addedLock.last_access,addedLock.user_last_access,addedLock.number_of_users,addedLock.comment, eKey = null, addedLock.lock_state, addedLock.lock_id) }
-/*                    if (lock != null) {
-                        lockDao?.upsertLock(lock)
-                        if(userLockDao?.getCountOfUserId() != null){
-                            val userandlock : UserAndLock = UserAndLock(userID,lock.lock_id, "000000",3, userLockDao.getCountOfUserId() + 1)
-                            userLockDao.upsertUserAndLock(userandlock)
+                if (listLock != null) {
+                    var addedLock : Any?
+                    for (retLock in listLock){
+                        addedLock = functionConnection.getLockConnLogin(username, retLock)
+                        if (lockCode.isEmpty()) {
+                            Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
+                        } else {
+                            val lock = addedLock?.let { it1 -> Lock(it1.lock_name,addedLock.last_access,addedLock.user_last_access,addedLock.number_of_users,addedLock.comment, eKey = null, addedLock.lock_state, addedLock.lock_id.toInt()) }
+                            if (lock != null) {
+                                lockDao?.upsertLock(lock)
+                                if(userLockDao?.getCountOfUserId() != null && addedLock != null){
+                                    val userandlock : UserAndLock = UserAndLock(userID,lock.lock_id, lock_access_pin = "000000", permission_level = addedLock.permission_level, userLockDao.getCountOfUserId() + 1)
+                                    userLockDao.upsertUserAndLock(userandlock)
+                                }
+                            }
+                            println("Fim")
                         }
-                    }*/
-
-
+                    }
                     Toast.makeText(context, "SUCCESS: Your lock was added", Toast.LENGTH_SHORT)
                         .show()
                     binding.lockCodeText.text?.clear()

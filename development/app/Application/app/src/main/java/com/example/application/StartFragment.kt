@@ -1,10 +1,10 @@
 package com.example.application
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -18,7 +18,6 @@ import com.example.application.data.lock.LockDao
 import com.example.application.data.user.User
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentStartBinding
-import kotlinx.coroutines.launch
 import com.example.myapplication.functions.serverConnectionFunctions
 import com.example.myapplication.model.LockConn
 import com.example.myapplication.model.UserConn
@@ -67,11 +66,16 @@ class StartFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 // Miguel - chamar a funcao autenticacao
                 // recebe a informacao, transfere para a base de dados, altera validAccount para true
-                if (username == "beatriz" && password == "pass"){
+                /*if (username == "beatriz" && password == "pass"){
+                    validAccount = true
+                }*/
+                val (user, lockList) = loginCheck(username!!, password!!)
+                if (user != null){
+                    println(user)
+                    println(lockList)
+                    setupLogin(user,lockList)
                     validAccount = true
                 }
-
-                //validAccount = true
 
                 // se flag correta passo para o proximo
                 if (validAccount) {
@@ -82,7 +86,6 @@ class StartFragment : Fragment() {
                         StartFragmentDirections.actionStartFragmentToMainAppActivity(userName = username!!) //userName = "cenas"
                     binding.signIn.findNavController().navigate(action)
                 }
-
             }
         }
     }
@@ -98,19 +101,17 @@ class StartFragment : Fragment() {
         val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
         val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
-        val user = userConn?.email?.let { userConn.let { it1 -> User(username = it1.username, email = it, password = "null", allow_notifications = 1, user_id = 10) } }
+        val user = userConn?.email?.let { userConn.let { it1 -> User(username = it1.username, email = it, password = it1.password, allow_notifications = it1.allow_notifications, user_id = it1.user_id.toInt()) } }
 
         //println(listLocks?.get(0))
         var numb = 1
-        if (listLocks != null) {
-            for (i in listLocks){
-                val locks = i?.lockId?.let { i.let { Lock(lock_name = i.lockId, last_access = "2023-06-0$numb", user_last_access = "Logan", comment = it.location, eKey = null, lock_state = i.state.toString(), lock_id = numb, number_of_users = i.activeUsers.size) } }
-
-                val userandlock = userConn?.let { userConn.active_locks?.get(0)?.let { it1 -> UserAndLock(user_id = 10, lock_id = numb, lock_access_pin = it.access_pin, permission_level = it1.accessLevel, userLockId = numb) } }
-
-                GlobalScope.launch {
-                    if (user != null) {
-                        userDao.upsertUser(user)
+        if (user != null) {
+            userDao.upsertUser(user)
+            if (listLocks != null) {
+                for (i in listLocks){
+                    val locks = i?.lock_id?.let { i.let { Lock(lock_name = i.lock_name, last_access = i.last_access, user_last_access = i.user_last_access, comment = i.comment, eKey = null, lock_state = i.lock_state, lock_id = i.lock_id.toInt(), number_of_users = i.number_of_users) } }
+                    val userandlock = userConn.let { userConn.active_doors?.get(0)?.let { it1 -> i?.let { it2 -> i.lock_id.let { it3 -> UserAndLock(user_id = userConn.user_id.toInt(), lock_id = it3.toInt(), lock_access_pin = userConn.access_pin, permission_level = it2.permission_level, userLockId = numb) } } } }
+                    withContext(Dispatchers.IO) {
                         if (lockDao != null) {
                             if (locks != null) {
                                 lockDao.upsertLock(locks)
@@ -122,38 +123,35 @@ class StartFragment : Fragment() {
                             }
                         }
                     }
+                    numb++
                 }
-
-                numb++
             }
         }
     }
 
-//    private fun loginCheck(username: String, password : String) : Pair<UserConn?, List<LockConn?>?> = runBlocking {
-//
-//        //verificar conta login
-//        val userConn = functionConnection.login(username, password)
-//        //Log.d("example","$userConn")
-//        val locksList : List<LockConn?>?
-//        withContext(Dispatchers.IO) {
-//            locksList =
-//                userConn?.active_locks?.stream()?.filter{ l -> l.lockId != null }?.map { lock -> lock.lockId?.let {
-//                    returnsListLocks(username,
-//                        it
-//                    )
-//                } }?.toList()
-//        }
-//        Pair(userConn, locksList)
-//    }
-//
-//    private fun returnsListLocks(username: String, lockID : String) = runBlocking{
-//        var value : LockConn? = null
-//        withContext(Dispatchers.IO) {
-//            value = functionConnection.getLock(username, lockID)
-//        }
-//
-//        value
-//    }
+    private fun loginCheck(username: String, password : String) : Pair<UserConn?, List<LockConn?>?> = runBlocking {
+
+        //verificar conta login
+        val userConn = functionConnection.getUserConnLogin(username, password)
+        //Log.d("example","$userConn")
+        var locksList : List<LockConn?>? = null
+        if(userConn!=null){
+            locksList = withContext(Dispatchers.IO) {
+                userConn.active_doors?.stream()?.filter { l -> l != null }
+                    ?.map { l -> returnsListLocks(username, l) }?.toList()
+            }
+        }
+        Pair(userConn, locksList)
+    }
+
+    private fun returnsListLocks(username: String, lockID : String) = runBlocking{
+        var value : LockConn? = null
+        withContext(Dispatchers.IO) {
+            value = functionConnection.getLockConnLogin(username, lockID)
+        }
+
+        value
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

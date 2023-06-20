@@ -61,6 +61,8 @@ class MainAppActivity : AppCompatActivity() {
         createNotificationChannel()
         startPrintLoop()
     }
+
+
     private fun startPrintLoop() {
         var flagWrongPin : Boolean = false
         var flagChangedLockState : Boolean = false

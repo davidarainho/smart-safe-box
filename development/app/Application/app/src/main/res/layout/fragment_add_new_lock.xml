@@ -88,9 +88,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:gravity="center"
-        android:textColor="@color/blue_buttons"
+        android:textColor="@color/Text_Bold"
         android:text="When you a buy a new lock, please check the code displayed on the box "
-        android:textSize="22sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/lockcodebox"
         app:layout_constraintStart_toStartOf="@+id/lockcodebox"
         app:layout_constraintTop_toBottomOf="@+id/wave" />

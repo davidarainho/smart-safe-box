@@ -20,13 +20,18 @@ class serverConnectionFunctions() {
 
     /* Cria conta se username e email nao tiverem uma conta associada*/
     suspend fun createAccount(username: String, password: String, email: String, pincode: String): Boolean? {
-        return try {
-            val checkUsername = api.checkUsername(username)
-            if (!checkUsername.isSuccessful) {
+        try {
+            val checkUsername = api.returnUser(username)
+            return if (!checkUsername.isSuccessful) {
                 val checkEmail = api.checkEmail(email)
                 if (!checkEmail.isSuccessful) {
                     val createAccount = api.createAccount(username, password, email, pincode)
-                    if (!createAccount.isSuccessful) return false else true
+                    if (createAccount.isSuccessful) {
+                        true
+                    } else {
+                        //println(createAccount.errorBody()?.string())
+                        false
+                    }
                 } else false //throw Exception("Email already exists.")
             } else false //throw Exception("Username already exists.")
         } catch (e: IOException) {
@@ -35,43 +40,43 @@ class serverConnectionFunctions() {
     }
 
 
-    suspend fun getUserConnLogin(username: String, password: String): Any? {
+    suspend fun getUserConnLogin(username: String, password: String): UserConn? {
         return try {
             // Verify login
             val login = api.login(username, password)
             if (login.isSuccessful) {
                 // Get user information
-                val user = api.checkUsername(username)
-                if (user.isSuccessful) return user.body() else return false
-            } else false
+                val user = api.returnUser(username)
+                if (user.isSuccessful) return user.body() else return null
+            } else null
         } catch (e: IOException) {
-            return false
+            return null
         }
     }
 
-    suspend fun getLockConnLogin(username: String): Any? {
+    suspend fun getLockConnLogin(username: String, doorID : String): LockConn? {
         return try {
             // Verify login
             val retrievedLock = api.getActiveDoors(username)
             if (retrievedLock.isSuccessful) {
                 // Get user information
-                val lock = api.checkUsername(username)
-                if (lock.isSuccessful) return lock.body() else return false
-            } else false
+                val lock = api.getLockConnObject(username, doorID)
+                if (lock.isSuccessful) return lock.body() else return null
+            } else null
         } catch (e: IOException) {
-            return false
+            return null
         }
     }
 
 
- /*   suspend fun shareLock(username: String, user_to_share: String, door_id: String): Boolean? {
+    suspend fun shareLock(username: String, user_to_share: String, door_id: String): Boolean {
         return try {
             val shareLock = api.shareDoor(username, user_to_share, door_id)
             if (shareLock.isSuccessful) return true else false
         } catch (e: IOException) {
             return false
         }
-    }*/
+    }
 
     suspend fun changePin(username: String, newPin: String, oldPin: String): Boolean? {
         return try {
@@ -102,7 +107,7 @@ class serverConnectionFunctions() {
 
     suspend fun changeUsername(newUsername: String, oldUsername: String): Boolean {
         return try {
-            val checkNewUsername = api.checkUsername(newUsername)
+            val checkNewUsername = api.returnUser(newUsername)
             if (!checkNewUsername.isSuccessful) {
                 val changeUsername = api.changeUsername(newUsername,oldUsername)
                 if (changeUsername.isSuccessful) return true else false
@@ -113,7 +118,7 @@ class serverConnectionFunctions() {
     }
 
     // Rever esta funcao
-    suspend fun addNewLock(username: String, app_code: String): LockConn? {
+    suspend fun addNewLock(username: String, app_code: String): List<String>? {
         return try {
             val addNewLock = api.addNewLock(username, app_code)
             if (addNewLock.isSuccessful) return addNewLock.body() else null
