@@ -5,30 +5,23 @@ import com.example.application.data.UserAndLock.UserAndLockDao
 import com.example.application.data.lock.LockDao
 import com.example.application.data.user.User
 import com.example.application.data.user.UserDao
+import com.example.myapplication.functions.serverConnectionFunctions
+import com.example.myapplication.model.LockConn
+import com.example.myapplication.model.UserConn
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlin.streams.toList
 
-class UserDataSource {
-    fun loadUserInfo(context: Context, lockID : Int): List<User>? = runBlocking {
+class UserDataSource (val username : String) {
 
-        val userDatabaseSingleton = UserDBSingleton.getInstance(context)
-        val userDao : UserDao = userDatabaseSingleton!!.getAppDatabase().userDao()
+    private val functionConnection = serverConnectionFunctions()
 
-        val userAndLockDatabase = UserAndLockDBSingleton.getInstance(context)
-        val userLockDao : UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
 
-        var listOfUser: List<User>? = null
-        var usersID : List<Int>
-        withContext(Dispatchers.IO) {
-            if (userLockDao != null) {
-                usersID = userLockDao.getUsersIDByLockId(lockID)
-                listOfUser = usersID.stream().map { l -> userDao.getUserByUserId(l) }.toList()
-            }
+    fun loadUserInfo(context: Context, lockID : Int): List<String> = runBlocking {
 
-        }
+        val lock : LockConn? = functionConnection.getLockConnLogin(username, lockID.toString())
 
-        listOfUser
+        lock!!.users_with_access
     }
 }

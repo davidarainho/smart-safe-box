@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.application.R
@@ -14,11 +16,13 @@ import com.example.application.data.UserDBSingleton
 import com.example.application.data.user.User
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentBotsheetUserBinding
+import com.example.application.model.AppViewModel
+import com.example.myapplication.functions.serverConnectionFunctions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.runBlocking
 
 class InfoAccountAdapter (
-    private val dataset: List<User>?,
+    private val dataset: List<String>?,
     private val context : Context,
     private val binding: FragmentBotsheetUserBinding,
     private val username : String,
@@ -27,6 +31,9 @@ class InfoAccountAdapter (
 
     // Assume menor nivel de permissao por default
     private var level : Int = 3
+
+    private val functionConnection = serverConnectionFunctions()
+
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.users_item)
@@ -49,34 +56,35 @@ class InfoAccountAdapter (
      * Replace the contents of a view (invoked by the layout manager)
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val user = dataset?.get(position)
-        if (user != null) {
-            holder.textView.text = user.username
+        val user_to_rmv = dataset?.get(position)
+        if (user_to_rmv != null) {
+            holder.textView.text = user_to_rmv
+
+
 
             //////////////// Verificar nivel do utilizador no lock ////////////////
+            //
             // Senao der da popup de "Nao tens nivel permissao neste lock para usar esta funcao"
             holder.itemView.setOnClickListener {
-                val optionUserLevel : Int = getPermissionLevel(user.username, lockID)
+                val optionUserLevel : Int = getPermissionLevel(user_to_rmv, lockID)
 
-                if(optionUserLevel < level && user.username != username){
+                if(optionUserLevel < level && user_to_rmv != username){
                     MaterialAlertDialogBuilder(context)
                         .setTitle(context.resources.getString(R.string.title_remove_account))
-                        .setMessage(context.resources.getString(R.string.supporting_text_remove_account, user.username))
+                        .setMessage(context.resources.getString(R.string.supporting_text_remove_account, user_to_rmv))
                         .setNeutralButton(context.resources.getString(R.string.cancel)) { _, _ ->
                             // Respond to neutral button press
                         }
-                        .setPositiveButton(context.resources.getString(R.string.accept)) { dialog, which ->
-                            // Envia pedido para remover o user
-                            // Remove dados da base de dados desse utilizador
-
-                            println("Remove dados da base de dados desse utilizador")
+                        .setPositiveButton(context.resources.getString(R.string.accept)) { _, _ ->
+                            if (rmvAccount(user_to_rmv) == true){
+                                Toast.makeText(context, "The user was removed successfully", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
                         }
                         .show()
                 }
             }
         }
-        // Aqui adicionar depois para atribuir à caixa de texto
-        // Mais o .userEmail
     }
 
 
@@ -95,6 +103,10 @@ class InfoAccountAdapter (
         }
 
         lev
+    }
+
+    private fun rmvAccount(username_to_remove : String) = runBlocking{
+        functionConnection.removeAccountFromDoor(username, username_to_remove, lockID.toString())
     }
 
     /**

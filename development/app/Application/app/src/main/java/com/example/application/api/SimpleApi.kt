@@ -137,13 +137,19 @@ interface SimpleApi {
         @Query("username") username: String
     ): Response<String?>
 
+    @POST("/door/open_door")
+    suspend fun openDoor(
+        @Query("username") username: String,
+        @Query("door_id") door_id: String
+    ): Response<String?>
+
 
 
     @POST("/user/remove_share_door")
     suspend fun removeAccountFromDoor(
         @Query("username") username: String,
         @Query("username_to_deshare") username_to_be_removed: String,
-        @Query("door_id") door_id: Int
+        @Query("door_id") door_id: String
     ): Response<String?>
 
 

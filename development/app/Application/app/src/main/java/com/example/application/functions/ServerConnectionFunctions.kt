@@ -166,6 +166,18 @@ class serverConnectionFunctions() {
         }
     }
 
+    suspend fun openDoor(username: String, door_id: String): Boolean {
+        return try {
+            val open = api.openDoor(username, door_id)
+            if (open.isSuccessful) return true else false
+        } catch (e: IOException){
+            return false
+        }
+    }
+
+
+
+
 /*    suspend fun checkNotifications(username: String): Int {
         return try{
             val checkErrorPin = api.checkErrorPin(username)
@@ -174,14 +186,14 @@ class serverConnectionFunctions() {
         }
     }*/
 
-/*    suspend fun removeAccountFromDoor(username: String, username_to_be_removed: String, door_id: String): Boolean? {
+    suspend fun removeAccountFromDoor(username: String, username_to_be_removed: String, door_id: String): Boolean? {
         return try {
             val removeAccountFromDoor = api.removeAccountFromDoor(username, username_to_be_removed, door_id)
             if (removeAccountFromDoor.isSuccessful) return true else false
         } catch (e: IOException){
             return false
         }
-    }*/
+    }
 
 /*    suspend fun changeDoorState(username: String, door_id: String): Boolean? {
         return try {

@@ -36,7 +36,7 @@ class LockerPageFragment : Fragment() {
 
     private var _binding : FragmentLockerPageBinding? = null
 
-    //private val functionConnection = serverConnectionFunctions()
+    private val functionConnection = serverConnectionFunctions()
 
     private val sharedViewModel: AppViewModel by activityViewModels()
 
@@ -153,7 +153,7 @@ class LockerPageFragment : Fragment() {
             state = if (lockDao?.getLockState()=="opened"){ 1 }else{ 0 }
         }
 
-        if (state == 0 && open == 1){ state = 1 }
+        if (state == 0 && open == 1 && functionConnection.openDoor(username, lockID)){ state = 1 }
 
         //Verifica na base de dados
         if(state == 0){

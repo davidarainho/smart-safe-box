@@ -28,7 +28,7 @@ class BotsheetUserFragment(private val lockID : Int, private val username : Stri
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val lockList = UserDataSource().loadUserInfo(requireContext(), lockID)
+        val lockList : List<String>? = UserDataSource(username).loadUserInfo(requireContext(), lockID)
         val itemAdapter = InfoAccountAdapter(lockList, requireContext(), binding, username, lockID)
 
         binding.enterOldPin.text = getString(R.string.shared_by_n_users, (itemAdapter.itemCount-1).toString());
