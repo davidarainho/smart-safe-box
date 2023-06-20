@@ -11,6 +11,7 @@ import com.example.application.data.UserDBSingleton
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentChangePasswordBinding
 import com.example.application.databinding.FragmentProfilePageBinding
+import com.example.myapplication.functions.serverConnectionFunctions
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -20,6 +21,8 @@ class ChangePasswordFragment : Fragment() {
 
     private val binding get() = _binding!!
     private lateinit var username : String
+
+    private val functionConnection = serverConnectionFunctions()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +71,10 @@ class ChangePasswordFragment : Fragment() {
                 } else if (oldPassword != userPassword) {
                     Toast.makeText(context, "Error: Old password is not correct", Toast.LENGTH_SHORT)
                         .show()
-                } else {
+                } else if (!functionConnection.changePassword(username,newPassword,oldPassword)){
+                    Toast.makeText(context, "Error: Server wasn't able to update password", Toast.LENGTH_SHORT)
+                        .show()
+                }else {
                     userDao.updatePassword(userId, newPassword)
                     Toast.makeText(context, "SUCCESS: Your password was updated", Toast.LENGTH_SHORT)
                         .show()

@@ -12,6 +12,7 @@ import com.example.application.data.UserDBSingleton
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentChangeUsernameBinding
 import com.example.application.model.AppViewModel
+import com.example.myapplication.functions.serverConnectionFunctions
 import kotlinx.coroutines.launch
 
 class ChangeUsernameFragment : Fragment() {
@@ -21,6 +22,9 @@ class ChangeUsernameFragment : Fragment() {
 
     private lateinit var previousUsername : String
     private val sharedViewModel: AppViewModel by activityViewModels()
+
+    private val functionConnection = serverConnectionFunctions()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -57,10 +61,10 @@ class ChangeUsernameFragment : Fragment() {
                 }else if (newUsername==previousUsername)
                 {
                     Toast.makeText(context, "Error: New username should be different from the previous", Toast.LENGTH_SHORT).show()
-                } /*else if ( /* VERFICAR NO SERVIDOR SE EXISTE UM USERNAME IGUAL NA DB DO SERVIDOR */ ) {
-                    Toast.makeText(context, "Error: This username is already taken", Toast.LENGTH_SHORT)
+                } else if ( !functionConnection.changeUsername(newUsername,previousUsername) ) { // Melhorar condicoes e feedback para o utilizador
+                    Toast.makeText(context, "Error: Server wasn't able to change username", Toast.LENGTH_SHORT)
                         .show()
-                } */
+                }
                 else {
                     sharedViewModel.setUsername(newUsername)
                     userDao.updateUsername(userId, newUsername)

@@ -18,6 +18,7 @@ import com.example.application.data.lock.LockDao
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentChangeLockNameBinding
 import com.example.application.databinding.FragmentNotificationsBinding
+import com.example.myapplication.functions.serverConnectionFunctions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -31,6 +32,8 @@ class ChangeLockNameFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var username : String
+    private val functionConnection = serverConnectionFunctions()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -71,7 +74,7 @@ class ChangeLockNameFragment : Fragment() {
         var listOfLockIDs: List<Int> = emptyList()
 
 
-        withContext(Dispatchers.IO) {
+        viewLifecycleOwner.lifecycleScope.launch {
             userID=userDao.getUserIdByUsername(username)
             if (userLockDao != null) {
                 listOfLockIDs = userLockDao.getLocksIDByUserId(userID)
@@ -103,7 +106,7 @@ class ChangeLockNameFragment : Fragment() {
                 if (newLockName.isEmpty() || (lockId==0)) {
                     Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
                 } else
-                    if (lockDao != null) {
+                    if (lockDao != null && functionConnection.changeLockName(username,newLockName,lockId.toString())) {
                         lockDao.updateLockName(lockId, newLockName)
                         Toast.makeText(context, "SUCCESS: Your lock name was updated", Toast.LENGTH_SHORT).show()
                         binding.newLockNameText.text?.clear()

@@ -18,6 +18,7 @@ import com.example.application.databinding.FragmentChangeEmailBinding
 import com.example.application.databinding.FragmentChangePinBinding
 import com.example.application.databinding.FragmentNotificationsBinding
 import com.example.application.model.AppViewModel
+import com.example.myapplication.functions.serverConnectionFunctions
 import kotlinx.coroutines.launch
 
 
@@ -27,6 +28,8 @@ class ChangePinFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var username1 : String
+
+    private val functionConnection = serverConnectionFunctions()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,11 +72,7 @@ class ChangePinFragment : Fragment() {
             val newPinConfirmed = binding.pinConfirmationText.text.toString()
 
             viewLifecycleOwner.lifecycleScope.launch {
-
-                println("USERNAME " + username1)
-
                 if (userLockDao != null) {
-
                     userId=userDao.getUserIdByUsername(username1)
                     userLockPin = userLockDao.getLockPin(userId)
                 }
@@ -100,7 +99,11 @@ class ChangePinFragment : Fragment() {
                         "Error: Pin and Confirmation don't match",
                         Toast.LENGTH_SHORT
                     ).show()
-                } else {
+                } else if (!functionConnection.changePin(username1, newPin,oldPin)!!){
+                    Toast.makeText(context, "Error: Server wasn't able to change Pin", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                else {
                     if (userLockDao != null) {
                         userLockDao.updateLockPin(userId, newPin)
                         Toast.makeText(context, "SUCCESS: Your pin was updated", Toast.LENGTH_SHORT)
@@ -109,8 +112,6 @@ class ChangePinFragment : Fragment() {
                         binding.oldPinText.text?.clear()
                         binding.newPinText.text?.clear()
                         binding.pinConfirmationText.text?.clear()
-
-
 
                     }
 

@@ -12,6 +12,7 @@ import com.example.application.data.UserDBSingleton
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentNotificationsBinding
 import com.example.application.databinding.FragmentSettingsBinding
+import com.example.myapplication.functions.serverConnectionFunctions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,6 +22,9 @@ class NotificationsFragment : Fragment() {
 
     private val binding get() = _binding!!
     private lateinit var username : String
+
+    private val functionConnection = serverConnectionFunctions()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,7 +37,7 @@ class NotificationsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentNotificationsBinding.inflate(inflater,container,false)
         return binding.root
@@ -51,14 +55,10 @@ class NotificationsFragment : Fragment() {
         switchCompat.setOnCheckedChangeListener { _, isChecked ->
             notifications = if (isChecked) 1 else 0
             viewLifecycleOwner.lifecycleScope.launch {
-                withContext(Dispatchers.IO) {
-                    userId=userDao.getUserIdByUsername(username)
-                    userDao.updateNotificationPreference(userId, notifications)
-                    println("New Notification Preference"+ notifications)
-                }
+                userId=userDao.getUserIdByUsername(username)
+                userDao.updateNotificationPreference(userId, notifications)
             }
         }
-
     }
 
     override fun onDestroyView() {

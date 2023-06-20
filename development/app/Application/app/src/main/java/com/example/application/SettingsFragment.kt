@@ -5,13 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.application.data.LockDBSingleton
+import com.example.application.data.UserAndLock.UserAndLockDao
+import com.example.application.data.UserAndLockDBSingleton
+import com.example.application.data.UserDBSingleton
+import com.example.application.data.lock.LockDao
+import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentSettingsBinding
 import com.example.application.databinding.FragmentStartBinding
 import com.example.application.model.AppViewModel
+import com.example.myapplication.functions.serverConnectionFunctions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.launch
 
 class SettingsFragment : Fragment() {
     private var _binding : FragmentSettingsBinding? = null
@@ -20,6 +30,7 @@ class SettingsFragment : Fragment() {
 
     private val sharedViewModel: AppViewModel by activityViewModels()
 
+    private val functionConnection = serverConnectionFunctions()
     private lateinit var username: String
 
 
@@ -35,6 +46,14 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Obter valor do user neste fragmento
+        val lockDatabaseSingleton = LockDBSingleton.getInstance(requireContext())
+        val lockDao : LockDao? = lockDatabaseSingleton!!.getAppDatabase().lockDao()
+
+        val userDatabaseSingleton = UserDBSingleton.getInstance(requireContext())
+        val userDao : UserDao = userDatabaseSingleton!!.getAppDatabase().userDao()
+
+        val userAndLockDatabase = UserAndLockDBSingleton.getInstance(requireContext())
+        val userLockDao : UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
         //println(sharedViewModel.username.value)
 
         binding.changeEmail.setOnClickListener {
@@ -57,7 +76,7 @@ class SettingsFragment : Fragment() {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(resources.getString(R.string.title_delete_account))
                 .setMessage(resources.getString(R.string.supporting_text_delete_account))
-                .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
+                .setNeutralButton(resources.getString(R.string.cancel)) { _, _ ->
                     // Respond to neutral button press
                 }
 //                .setNegativeButton(resources.getString(R.string.decline)) { dialog, which ->
@@ -67,13 +86,17 @@ class SettingsFragment : Fragment() {
                     // Respond to positive button press
                     activity?.finish()
                     // apaga os dados de todas as tabelas
-        //           if (lockDao != null) {
-        //               lockDao.deleteLockData()
-        //           }
-        //           userDao.deleteUserData()
-        //           if (userLockDao != null) {
-        //               userLockDao.deleteUserLockData()
-        //           }
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        if (!functionConnection.deleteAccount(username)){
+                            Toast.makeText(context, "Error: It wasn't possible to delete account", Toast.LENGTH_SHORT)
+                                .show()
+                        } else {
+                            lockDao?.deleteLockData()
+                            userDao.deleteUserData()
+                            userLockDao?.deleteUserLockData()
+                        }
+
+                    }
                 }
                 .show()
 

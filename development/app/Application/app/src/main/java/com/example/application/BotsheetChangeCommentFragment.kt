@@ -17,6 +17,7 @@ import com.example.application.databinding.FragmentBotsheetChangeCommentBinding
 
 
 import com.example.application.model.AppViewModel
+import com.example.myapplication.functions.serverConnectionFunctions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.launch
 
@@ -26,6 +27,8 @@ class BotsheetChangeCommentFragment : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
 
     private val sharedViewModel: AppViewModel by activityViewModels()
+
+    private val functionConnection = serverConnectionFunctions()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +54,7 @@ class BotsheetChangeCommentFragment : BottomSheetDialogFragment() {
         var lockId: Int = 0
         val userLockID: Int = 0
 
+        val username = sharedViewModel.username.value
         lockId= sharedViewModel.lockID.value!!
 
         //println(sharedViewModel.lockID.value)
@@ -63,7 +67,9 @@ class BotsheetChangeCommentFragment : BottomSheetDialogFragment() {
 
                 if (newComment.isEmpty()) {
                     Toast.makeText(context, "Error: Fill all entries", Toast.LENGTH_SHORT).show()
-                } else {
+                } else if (username?.let { it1 -> functionConnection.changeComment(it1, lockId.toString(), newComment) } == false) {
+                    Toast.makeText(context, "Error: Server wasn't able to change comment", Toast.LENGTH_SHORT).show()
+                }else {
                     if (lockDao != null) {
                         lockDao.updateLockComment(lockId, newComment)
                         Toast.makeText(context, "SUCCESS: Your comment was updated", Toast.LENGTH_SHORT)

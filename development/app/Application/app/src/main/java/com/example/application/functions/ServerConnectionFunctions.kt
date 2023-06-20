@@ -8,10 +8,6 @@ import com.example.myapplication.objects.GetObject
 import com.example.myapplication.objects.GetObject.getInstance
 import java.io.IOException
 
-
-
-
-
 class serverConnectionFunctions() {
 
     // Define API
@@ -39,7 +35,7 @@ class serverConnectionFunctions() {
     }
 
 
-    /*suspend fun login(username: String, password: String): Any? {
+    suspend fun getUserConnLogin(username: String, password: String): Any? {
         return try {
             // Verify login
             val login = api.login(username, password)
@@ -53,26 +49,40 @@ class serverConnectionFunctions() {
         }
     }
 
-
-    suspend fun shareLock(username: String, user_to_share: String, door_id: Int): Boolean? {
+    suspend fun getLockConnLogin(username: String): Any? {
         return try {
-            val shareLock = api.shareLock(username, user_to_share, door_id)
-            if (shareLock.isSuccessful) return true else false
+            // Verify login
+            val retrievedLock = api.getActiveDoors(username)
+            if (retrievedLock.isSuccessful) {
+                // Get user information
+                val lock = api.checkUsername(username)
+                if (lock.isSuccessful) return lock.body() else return false
+            } else false
         } catch (e: IOException) {
             return false
         }
     }
 
-    suspend fun updatePin(username: String, newPin: Int): Boolean? {
+
+ /*   suspend fun shareLock(username: String, user_to_share: String, door_id: String): Boolean? {
         return try {
-            val updatePin = api.updatePin(username,newPin)
+            val shareLock = api.shareDoor(username, user_to_share, door_id)
+            if (shareLock.isSuccessful) return true else false
+        } catch (e: IOException) {
+            return false
+        }
+    }*/
+
+    suspend fun changePin(username: String, newPin: String, oldPin: String): Boolean? {
+        return try {
+            val updatePin = api.updatePin(username,newPin, oldPin)
             if (updatePin.isSuccessful) return true else false
         } catch (e: IOException){
             return false
         }
     }
 
-    suspend fun updateComment(username: String, door_id: Int, newComment: String): Boolean? {
+    suspend fun changeComment(username: String, door_id: String, newComment: String): Boolean {
         return try {
             val updateComment = api.updateComment(username,door_id, newComment)
             if (updateComment.isSuccessful) return true else false
@@ -81,46 +91,47 @@ class serverConnectionFunctions() {
         }
     }
 
-    suspend fun changePassword(username: String, newPassword: String): Boolean? {
+    suspend fun changePassword(username: String, newPassword: String, oldPassword: String): Boolean {
         return try {
-            val changePassword = api.changePassword(username,newPassword)
+            val changePassword = api.changePassword(username, newPassword, oldPassword)
             if (changePassword.isSuccessful) return true else false
         } catch (e: IOException){
             return false
         }
     }
 
-    suspend fun changeUsername(newUsername: String, oldUsername: String): Boolean? {
+    suspend fun changeUsername(newUsername: String, oldUsername: String): Boolean {
         return try {
             val checkNewUsername = api.checkUsername(newUsername)
             if (!checkNewUsername.isSuccessful) {
                 val changeUsername = api.changeUsername(newUsername,oldUsername)
                 if (changeUsername.isSuccessful) return true else false
-            } else throw Exception("Username already exists.")
+            } else false
         } catch (e: IOException){
             return false
         }
     }
 
-    suspend fun addNewLock(username: String, app_code: Int): Boolean? {
+    // Rever esta funcao
+    suspend fun addNewLock(username: String, app_code: String): LockConn? {
         return try {
             val addNewLock = api.addNewLock(username, app_code)
-            if (addNewLock.isSuccessful) return true else false
+            if (addNewLock.isSuccessful) return addNewLock.body() else null
         } catch (e: IOException) {
-            return false
+            return null
         }
     }
 
-    suspend fun changeLockName(username: String, door_id: Int, new_door_name: String): Boolean? {
+    suspend fun changeLockName(username: String, new_door_name: String, door_id: String): Boolean {
         return try {
-            val changeLockName = api.changeLockName(username, door_id, new_door_name)
+            val changeLockName = api.changeLockName(username, new_door_name, door_id)
             if (changeLockName.isSuccessful) return true else false
         } catch (e: IOException){
             return false
         }
     }
 
-    suspend fun changeNotificationPreference(username: String): Boolean? {
+    suspend fun changeNotificationPreference(username: String): Boolean {
         return try {
             val changeNotificationPreference = api.changeNotificationPreference(username)
             if(changeNotificationPreference.isSuccessful) return true else false
@@ -129,45 +140,45 @@ class serverConnectionFunctions() {
         }
     }
 
-    suspend fun changeEmail(username: String, newEmail: String): Boolean? {
+    suspend fun changeEmail(username: String, newEmail: String): Boolean {
         return try {
             val checkNewEmail = api.checkEmail(newEmail)
             if (!checkNewEmail.isSuccessful) {
                 val changeEmail = api.changeEmail(username,newEmail)
                 if (changeEmail.isSuccessful) return true else false
-            } else throw Exception("Email already exists.")
+            } else false
         } catch (e: IOException){
             return false
         }
     }
 
-    suspend fun deleteAccount(username: String): Boolean? {
+    suspend fun deleteAccount(username: String): Boolean {
         return try {
-            val deleteAccount = api.deleteAccount(username)
+            val deleteAccount = api.deleteUser(username)
             if (deleteAccount.isSuccessful) return true else false
         } catch (e: IOException){
             return false
         }
     }
 
-//    suspend fun checkNotifications(username: String): Int {
-//        return try{
-//            val checkErrorPin = api.checkErrorPin(username)
-//            if (checkErrorPin.isSuccessful) return 2
-//            else
-//        }
-//    }
+/*    suspend fun checkNotifications(username: String): Int {
+        return try{
+            val checkErrorPin = api.checkErrorPin(username)
+            if (checkErrorPin.isSuccessful) return 2
+            else
+        }
+    }*/
 
-    suspend fun removeAccountFromDoor(username: String, username_to_be_removed: String, door_id: Int): Boolean? {
+/*    suspend fun removeAccountFromDoor(username: String, username_to_be_removed: String, door_id: String): Boolean? {
         return try {
             val removeAccountFromDoor = api.removeAccountFromDoor(username, username_to_be_removed, door_id)
             if (removeAccountFromDoor.isSuccessful) return true else false
         } catch (e: IOException){
             return false
         }
-    }
+    }*/
 
-    suspend fun changeDoorState(username: String, door_id: Int): Boolean? {
+/*    suspend fun changeDoorState(username: String, door_id: String): Boolean? {
         return try {
             val changeDoorState = api.changeDoorState(username, door_id)
             if (changeDoorState.isSuccessful) return true else false
@@ -175,11 +186,6 @@ class serverConnectionFunctions() {
             return false
         }
     }*/
-
-
-
-
-
 
 
 

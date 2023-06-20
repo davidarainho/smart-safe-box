@@ -1,5 +1,6 @@
 package com.example.application
 
+import android.icu.lang.UCharacter.IndicPositionalCategory.NA
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.example.application.data.UserDBSingleton
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentChangeEmailBinding
 import com.example.application.databinding.FragmentNotificationsBinding
+import com.example.myapplication.functions.serverConnectionFunctions
 import kotlinx.coroutines.launch
 
 
@@ -20,6 +22,9 @@ class ChangeEmailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var username : String
+
+    private val functionConnection = serverConnectionFunctions()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,7 +37,7 @@ class ChangeEmailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentChangeEmailBinding.inflate(inflater,container,false)
         return binding.root
@@ -61,10 +66,10 @@ class ChangeEmailFragment : Fragment() {
                 } else if (oldEmail != userEmail) {
                     Toast.makeText(context, "Error: Old e-mail is not correct", Toast.LENGTH_SHORT)
                         .show()
-                }  /*else if ( /* VERFICAR NO SERVIDOR SE EXISTE UM EMAIL IGUAL NA DB DO SERVIDOR */ ) {
-                    Toast.makeText(context, "Error: This e-mail is already registered", Toast.LENGTH_SHORT)
+                }  else if ( !functionConnection.changeEmail(username, newEmail)  ) {
+                    Toast.makeText(context, "Error: The server wasn't able to change email", Toast.LENGTH_SHORT)
                         .show()
-                } */
+                }
                 else {
                     userDao.updateEmail(userId, newEmail)
                     Toast.makeText(context, "SUCCESS: Your e-mail was updated", Toast.LENGTH_SHORT)
@@ -72,7 +77,6 @@ class ChangeEmailFragment : Fragment() {
 
                     binding.oldEmailText.text?.clear()
                     binding.newEmailText.text?.clear()
-
                 }
             }
         }
