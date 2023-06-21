@@ -19,7 +19,7 @@ class serverConnectionFunctions() {
 
 
     /* Cria conta se username e email nao tiverem uma conta associada*/
-    suspend fun createAccount(username: String, password: String, email: String, pincode: String): Boolean? {
+  /* suspend fun createAccount(username: String, password: String, email: String, pincode: String): Boolean? {
         try {
             val checkUsername = api.returnUser(username)
             return if (!checkUsername.isSuccessful) {
@@ -37,8 +37,27 @@ class serverConnectionFunctions() {
         } catch (e: IOException) {
             return false
         }
-    }
+    }*/
 
+    suspend fun createAccount(username: String, password: String, email: String, pincode: String): Int? {
+        try {
+            val checkUsername = api.returnUser(username)
+            return if (!checkUsername.isSuccessful) {
+                val checkEmail = api.checkEmail(email)
+                if (!checkEmail.isSuccessful) {
+                    val createAccount = api.createAccount(username, password, email, pincode)
+                    if (createAccount.isSuccessful) {
+                        0
+                    } else {
+                        //println(createAccount.errorBody()?.string())
+                        3
+                    }
+                } else 1 //throw Exception("Email already exists.")
+            } else 2 //throw Exception("Username already exists.")
+        } catch (e: IOException) {
+            return -1
+        }
+    }
 
     suspend fun getUserConnLogin(username: String, password: String): UserConn? {
         return try {

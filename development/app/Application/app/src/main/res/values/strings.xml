@@ -36,7 +36,7 @@
 
     <!-- add_new_lock -->
 
-    <string name="add_new_lock_info">When you a buy a new lock, please check the code displayed on the box</string>
+    <string name="add_new_lock_info">When you a buy a new lock, please check the code displayed on the device after your first login</string>
 
     <!-- share locks-->
     <string name="share_locks">Share Locks</string>

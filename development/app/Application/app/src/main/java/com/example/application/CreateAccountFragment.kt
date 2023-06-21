@@ -85,6 +85,7 @@ class CreateAccountFragment : Fragment() {
         val userId= 1204
         var pin:  String
 
+
         binding.signUp.setOnClickListener {
             username = binding.usernameText.text.toString()
             email = binding.emailText.text.toString()
@@ -109,10 +110,15 @@ class CreateAccountFragment : Fragment() {
             } else{
                 val result = allowCreateAccount(username,password, email, pin)
                 println(result)
-                if(result == true) {
+                if(result == 0) {
                     flagAllowNewAccount = true
-                }else {
-                    Toast.makeText(context, "Error: Wasn't able to create account", Toast.LENGTH_SHORT).show()
+                }else if (result==1){
+                    Toast.makeText(context, "Error: E-mail is already registered", Toast.LENGTH_SHORT).show()
+                } else if (result==2){
+                    Toast.makeText(context, "Error: Username already exists", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Error: Unable to create account", Toast.LENGTH_SHORT).show()
+
                 }
             }
 
@@ -130,13 +136,23 @@ class CreateAccountFragment : Fragment() {
         }
     }
 
-    private fun allowCreateAccount(username : String, password : String, email: String, pin : String) : Boolean? = runBlocking{
+  /*  private fun allowCreateAccount(username : String, password : String, email: String, pin : String) : Boolean? = runBlocking{
         var create : Boolean? = async(Dispatchers.IO) {
             functionConnection.createAccount(username=username, password=password, email=email, pincode=pin)
         }.await()
         println(create)
         create
+    }*/
+
+    private fun allowCreateAccount(username: String, password: String, email: String, pin: String): Int? = runBlocking {
+        val errorCode: Int? = async(Dispatchers.IO) {
+            functionConnection.createAccount(username, password, email, pin)
+        }.await()
+
+        return@runBlocking errorCode
     }
+
+
 
     fun validateEmail(email: String): Boolean {
         val regexPattern = Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")

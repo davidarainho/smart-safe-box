@@ -61,28 +61,34 @@ class ChangeLockNameFragment : Fragment() {
 
     }
 
-    fun loadLockIds(context: Context): List<Int> = runBlocking {
-
+    fun loadLockIds(context: Context): List<String> = runBlocking {
         val userDatabaseSingleton = UserDBSingleton.getInstance(context)
-        val userDao : UserDao = userDatabaseSingleton!!.getAppDatabase().userDao()
+        val userDao: UserDao = userDatabaseSingleton!!.getAppDatabase().userDao()
 
         val userAndLockDatabase = UserAndLockDBSingleton.getInstance(context)
-        val userLockDao : UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
+        val userLockDao: UserAndLockDao? = userAndLockDatabase!!.getAppDatabase().userAndLockDao()
+
+        val lockDatabase = LockDBSingleton.getInstance(context)
+        val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
 
         var userID: Int
-
-        var listOfLockIDs: List<Int> = emptyList()
-
+        val lockNames = mutableListOf<String>()
 
         withContext(Dispatchers.IO) {
-            userID=userDao.getUserIdByUsername(username)
+            userID = userDao.getUserIdByUsername(username)
             if (userLockDao != null) {
-                listOfLockIDs = userLockDao.getLocksIDByUserId(userID)
+                val listOfLockIDs = userLockDao.getLocksIDByUserId(userID)
+
+                listOfLockIDs.forEach { lockId ->
+                    val lockName = lockDao?.getLocknameByLockID(lockId)
+                    lockName?.let { lockNames.add(it) }
+                }
             }
         }
 
-        listOfLockIDs
+        lockNames
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -90,13 +96,19 @@ class ChangeLockNameFragment : Fragment() {
         val lockDatabaseSingleton = LockDBSingleton.getInstance(requireContext())
         val lockDao : LockDao? = lockDatabaseSingleton!!.getAppDatabase().lockDao()
         var lockId: Int = 0
+        var lockName: String
 
         binding.dropdownItems.setOnItemClickListener { parent, _, position, id ->
             val selectedItem = parent.getItemAtPosition(position)
-            lockId = selectedItem.toString().toInt()
+            lockName = selectedItem as String
 
+            if (lockDao != null) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    val id = withContext(Dispatchers.IO) { getLockId(lockName) }
+                    lockId = id
+                }
+            }
         }
-
 
         binding.changelocknamebutton.setOnClickListener {
             val newLockName = binding.newLockNameText.text.toString()
@@ -111,12 +123,17 @@ class ChangeLockNameFragment : Fragment() {
                         Toast.makeText(context, "SUCCESS: Your lock name was updated", Toast.LENGTH_SHORT).show()
                         binding.newLockNameText.text?.clear()
                     }
-
                 }
             }
 
         }
 
+    private suspend fun getLockId(lockname: String): Int = withContext(Dispatchers.IO) {
+        val lockDatabase = context?.let { LockDBSingleton.getInstance(it) }
+        val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
+
+        lockDao?.getLockIdByLockname(lockname) ?: 0
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

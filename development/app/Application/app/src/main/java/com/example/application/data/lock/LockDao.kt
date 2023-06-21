@@ -28,6 +28,13 @@ interface LockDao {
     @Query("SELECT * FROM Lock ORDER BY last_access DESC")
     fun orderLocksByLastAccess(): List<Lock>
 
+    @Query("SELECT lock_name FROM Lock WHERE lock_id = :lockId")
+    fun getLocknameByLockID(lockId: Int): String
+
+    @Query("SELECT lock_id FROM Lock WHERE lock_name = :lockName")
+    fun getLockIdByLockname(lockName: String): Int
+
+
     @Query("SELECT * FROM Lock")
     fun getAll(): List<Lock>
 
