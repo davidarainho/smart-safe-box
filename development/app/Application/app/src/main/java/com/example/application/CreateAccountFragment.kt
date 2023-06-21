@@ -118,7 +118,7 @@ class CreateAccountFragment : Fragment() {
 
             if(flagAllowNewAccount){
                 // Mostrar algo que confirme o sucesso da criação da conta
-                Toast.makeText(context, "SUCESSO: An email was sent to confirm", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "SUCESS: Your account was created, please login", Toast.LENGTH_SHORT).show()
                 binding.usernameText.text?.clear()
                 binding.emailText.text?.clear()
                 binding.passwordText.text?.clear()

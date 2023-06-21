@@ -62,7 +62,7 @@
     <!-- Change Username -->
     <string name="change_username">Change Username</string>
     <string name="enter_new_username">Enter <b>new</b> username</string>
-    <string name="new_display_name">New Display Name</string>
+    <string name="new_display_name">New username</string>
     <string name="confirm_change_button">Confirm Change</string>
 
 
@@ -76,7 +76,7 @@
     <string name="change_password">Change Password</string>
     <string name="welcome_to_account">%1$s account</string>
     <string name="change_display_name">Change Username</string>
-    <string name="logout">Log out</string>
+    <string name="logout"> Logout</string>
 
 
     <!-- My Locks (Admin) -->
@@ -106,6 +106,19 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Locker Page -->
+
+    <string name="last_access_info"><b>Last Accesses</b></string>
+    <string name="users_access_info"><b>Users with Access</b></string>
+    <string name="update_lock_comment1"><b>Update Lock Comment</b></string>
+
+
+
+
+
+
+
 
     <string-array name="array_share_durarion">
         <item> 30 min </item>
@@ -137,7 +150,7 @@
     <string name="comment"><b><u>Update Lock Comment</u></b></string>
     <string name="changepin"><u>Change Lock Pin</u></string>
     <string name="change_lock_password">Change User #ID Lock Password</string>
-    <string name="exit">exit</string>
+    <string name="exit">Go back to <b>My Locks</b></string>
     <string name="old_email">Old Email</string>
     <string name="new_email">New Email</string>
     <string name="access_history"><b>Access History</b></string>
