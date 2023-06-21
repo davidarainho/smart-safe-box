@@ -21,7 +21,10 @@ import com.example.application.databinding.FragmentStartBinding
 import com.example.application.model.AppViewModel
 import com.example.myapplication.functions.serverConnectionFunctions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class SettingsFragment : Fragment() {
     private var _binding : FragmentSettingsBinding? = null
@@ -87,7 +90,7 @@ class SettingsFragment : Fragment() {
                     activity?.finish()
                     // apaga os dados de todas as tabelas
                     viewLifecycleOwner.lifecycleScope.launch {
-                        if (!functionConnection.deleteAccount(username)){
+                        if (!delAcc()){
                             Toast.makeText(context, "Error: It wasn't possible to delete account", Toast.LENGTH_SHORT)
                                 .show()
                         } else {
@@ -104,6 +107,13 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    private fun delAcc() : Boolean  = runBlocking {
+        val p : Boolean
+        withContext(Dispatchers.IO) {
+            p = functionConnection.deleteAccount(username)
+        }
+        p
+    }
 
 
     override fun onDestroyView() {

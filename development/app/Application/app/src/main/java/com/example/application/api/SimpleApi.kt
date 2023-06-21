@@ -61,6 +61,18 @@ interface SimpleApi {
         @Query("door_id") door_id: String
     ): Response<String?>
 
+    // Aviso se alterou o pin no local/fisico
+    @GET("/user/pin_change_notification")
+    suspend fun getPinNotification(
+        @Query("username") username: String?
+    ): Response<String?>
+
+    // Entrar lock com engano no pin
+    @GET("/user/user_general_notification")
+    suspend fun getUserNotification(
+        @Query("username") username: String?
+    ): Response<String?>
+
 
     /******************************** POST **********************************/
     @POST("/add_user")

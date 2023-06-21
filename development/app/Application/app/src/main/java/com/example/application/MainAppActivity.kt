@@ -24,6 +24,7 @@ import com.example.application.data.UserAndLockDBSingleton
 import com.example.application.data.UserDBSingleton
 import com.example.application.data.lock.LockDao
 import com.example.application.data.user.UserDao
+import com.example.myapplication.functions.serverConnectionFunctions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.*
 import java.lang.Runnable
@@ -34,7 +35,7 @@ class MainAppActivity : AppCompatActivity() {
 
     private lateinit var navController : NavController
 
-    private lateinit var name : String
+    private var username : String? = ""
 
     private val CHANNEL_ID = "channel_id_teste"
     private val notificationIdWrong = 101
@@ -44,6 +45,7 @@ class MainAppActivity : AppCompatActivity() {
 
     private lateinit var printRunnable: Runnable
 
+    private val functionConnection = serverConnectionFunctions()
     //private val sharedViewModel: AppViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +56,8 @@ class MainAppActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         navController.setGraph(R.navigation.nav_graph_app, intent.extras) // Tirar no xml app:navGraph="@navigation/nav_graph_app" ?
+
+        username = intent.getStringExtra("userName")
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.menu_bar)
         setupWithNavController(bottomNavigationView, navController)
@@ -83,26 +87,46 @@ class MainAppActivity : AppCompatActivity() {
         var lockname1 : String = "default"
         var lockname2 : String = "default"
 
-        printRunnable = object : Runnable {
-            override fun run() {
-                handler.postDelayed(this, 7500)
+        printRunnable = Runnable {
+            while(true) {
+                Thread.sleep(8500)
                 // Pedidos para verificar alteracoes (Pin Errado / Estado Lock)
 
-                if (flagWrongPin){
-                    sendNotificationWrongPin(lockname1)
-                    flagWrongPin = false
+                if ( conditionWrongPin() ){
+                    sendNotificationWrongPin()
                 }
 
-                if (flagChangedLockState){
-                    sendNotificationState(lockname2)
-                    flagChangedLockState = false
+                if ( conditionChangePin() ){
+                    //sendNotificationState(lockname2)
+                    sendNotificationChangePin()
                 }
 
-                handler.postDelayed(this, 7500)
+                Thread.sleep(8500)
             }
         }
-        handler.postDelayed(printRunnable, 15000)
+        Thread(printRunnable).start()
     }
+
+    private fun conditionChangePin() = runBlocking{
+        val p : Boolean
+        withContext(Dispatchers.IO) {
+            p = functionConnection.getPinNotification(username)
+        }
+        p
+    }
+
+    private fun conditionWrongPin() = runBlocking{
+        val p : Boolean
+        withContext(Dispatchers.IO) {
+            p = functionConnection.getUserNotification(username)
+        }
+        p
+    }
+
+
+
+
+
 
     private fun createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
@@ -119,9 +143,12 @@ class MainAppActivity : AppCompatActivity() {
         notificationManager.createNotificationChannel(channel)
     }
 
-    private fun sendNotificationWrongPin(lockname : String){
+
+
+
+    private fun sendNotificationWrongPin(){
         val message : String =
-            "The wrong pin was inserted for doors $lockname. It will be blocked for 1 minute."
+            "The wrong pin was inserted for your doors."
         val builder = NotificationCompat.Builder(this,CHANNEL_ID)
             .setSmallIcon(R.drawable.baseline_lock_24)
             .setContentTitle("Wrong Pin Inserted")
@@ -142,7 +169,30 @@ class MainAppActivity : AppCompatActivity() {
         }
     }
 
-    private fun sendNotificationState(lockname : String){
+    private fun sendNotificationChangePin(){
+        val message : String =
+            "The pin of your for door was modifies."
+        val builder = NotificationCompat.Builder(this,CHANNEL_ID)
+            .setSmallIcon(R.drawable.baseline_lock_24)
+            .setContentTitle("Changed Pin")
+            .setContentText(message)
+            .setStyle(NotificationCompat.BigTextStyle()
+                .bigText(message))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(this)){
+            if (ActivityCompat.checkSelfPermission(
+                    this@MainAppActivity,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
+            notify(notificationIdWrong,builder.build())
+        }
+    }
+
+/*    private fun sendNotificationState(lockname : String){
         val message : String =
             "Lock $lockname was opened."
         val builder = NotificationCompat.Builder(this,CHANNEL_ID)
@@ -161,7 +211,7 @@ class MainAppActivity : AppCompatActivity() {
             }
             notify(notificationIdState,builder.build())
         }
-    }
+    }*/
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()

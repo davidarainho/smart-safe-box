@@ -176,15 +176,14 @@ class serverConnectionFunctions() {
     }
 
 
-
-
-/*    suspend fun checkNotifications(username: String): Int {
-        return try{
-            val checkErrorPin = api.checkErrorPin(username)
-            if (checkErrorPin.isSuccessful) return 2
-            else
+    suspend fun checkNotifications(username: String): Boolean {
+        return try {
+            val checkNotif = api.changeNotificationPreference(username)
+            if (checkNotif.isSuccessful) return true else false
+        }catch (e: IOException){
+            return false
         }
-    }*/
+    }
 
     suspend fun removeAccountFromDoor(username: String, username_to_be_removed: String, door_id: String): Boolean? {
         return try {
@@ -198,6 +197,24 @@ class serverConnectionFunctions() {
     suspend fun getDoorState(username : String, door_id: String): Boolean? {
         return try {
             val changeDoorState = api.getDoorState(username, door_id)
+            if (changeDoorState.isSuccessful) return true else false
+        } catch (e: IOException){
+            return false
+        }
+    }
+
+    suspend fun getPinNotification(username : String?): Boolean {
+        return try {
+            val changeDoorState = api.getPinNotification(username)
+            if (changeDoorState.isSuccessful) return true else false
+        } catch (e: IOException){
+            return false
+        }
+    }
+
+    suspend fun getUserNotification(username : String?): Boolean {
+        return try {
+            val changeDoorState = api.getUserNotification(username)
             if (changeDoorState.isSuccessful) return true else false
         } catch (e: IOException){
             return false

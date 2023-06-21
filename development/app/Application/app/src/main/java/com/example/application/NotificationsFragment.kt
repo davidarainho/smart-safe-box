@@ -15,6 +15,7 @@ import com.example.application.databinding.FragmentSettingsBinding
 import com.example.myapplication.functions.serverConnectionFunctions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class NotificationsFragment : Fragment() {
@@ -49,17 +50,47 @@ class NotificationsFragment : Fragment() {
         val userDatabase = UserDBSingleton.getInstance(requireContext())
         val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
         var userId: Int = 0
-        var notifications: Int = 1
+        var notifications: Int = getCurrentNotPref()
+
 
         val switchCompat = view.findViewById<SwitchCompat>(R.id.allownotifications)
         switchCompat.setOnCheckedChangeListener { _, isChecked ->
-            notifications = if (isChecked) 1 else 0
-            viewLifecycleOwner.lifecycleScope.launch {
-                userId=userDao.getUserIdByUsername(username)
-                userDao.updateNotificationPreference(userId, notifications)
+            if (isChecked && changeNotification()) {
+                notifications = if (notifications == 0) { 1 } else { 0 }
+                switchCompat.setChecked(notifications == 1)
+                viewLifecycleOwner.lifecycleScope.launch {
+                    // Fazer o pedido
+                    userDao.updateNotificationPreference(userId, notifications)
+                }
             }
         }
     }
+
+    private fun getCurrentNotPref() : Int = runBlocking {
+        val current : Int
+
+        val userDatabase = UserDBSingleton.getInstance(requireContext())
+        val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
+        var userId: Int = 0
+        var notifications: Int = 1
+
+        withContext(Dispatchers.IO){
+            userId=userDao.getUserIdByUsername(username)
+            current = userDao.getNotificationPreferenceByUserId(userId)
+        }
+
+        current
+    }
+
+    private fun changeNotification() : Boolean = runBlocking {
+        val change : Boolean
+        withContext(Dispatchers.IO){
+            change = functionConnection.checkNotifications(username)
+        }
+
+        change
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
