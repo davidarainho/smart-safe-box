@@ -68,9 +68,6 @@ class ChangePasswordFragment : Fragment() {
                         "Error: Password and Confirmation don't match",
                         Toast.LENGTH_SHORT
                     ).show()
-                } else if (oldPassword != userPassword) {
-                    Toast.makeText(context, "Error: Old password is not correct", Toast.LENGTH_SHORT)
-                        .show()
                 } else if (!functionConnection.changePassword(username,newPassword,oldPassword)){
                     Toast.makeText(context, "Error: Server wasn't able to update password", Toast.LENGTH_SHORT)
                         .show()

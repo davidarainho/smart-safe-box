@@ -28,7 +28,7 @@ import kotlinx.coroutines.withContext
 
 class LockerPageFragment : Fragment() {
     // IDLE is closed - should come from a flag/request
-    private var state : Int = 0
+    private var state : Boolean? = false
 
     private lateinit var name : String
     private lateinit var lockID : String
@@ -149,14 +149,12 @@ class LockerPageFragment : Fragment() {
         val lockDatabaseSingleton = LockDBSingleton.getInstance(requireContext())
         val lockDao : LockDao? = lockDatabaseSingleton!!.getAppDatabase().lockDao()
 
-        coroutineScope {
-            state = if (lockDao?.getLockState()=="opened"){ 1 }else{ 0 }
-        }
+        state = getState()
 
-        if (state == 0 && open == 1 && functionConnection.openDoor(username, lockID)){ state = 1 }
+        if (state == false && open == 1 && functionConnection.openDoor(username, lockID)){ state = true }
 
         //Verifica na base de dados
-        if(state == 0){
+        if(state == false){
             imageView.setImageResource(R.drawable.lock_closed)
             Toast.makeText(context, "Lock is Closed", Toast.LENGTH_SHORT).show()
         }else{
@@ -165,23 +163,19 @@ class LockerPageFragment : Fragment() {
         }
     }
 
-    private fun changeState() = runBlocking {
-        withContext(Dispatchers.IO) {
-            //functionConnection.openLocks(username)
-        }
-    }
 
-    private fun getState() : Int = runBlocking{
+
+    private fun getState() : Boolean? = runBlocking{
         val lockDatabase = LockDBSingleton.getInstance(requireContext())
         val lockDao: LockDao? = lockDatabase!!.getAppDatabase().lockDao()
 
-        var estado : Int = 0
+        var estado : Boolean? = false
         withContext(Dispatchers.IO) {
             if (lockDao != null) {
+                estado = functionConnection.getDoorState(username, lockID)
                 //estado = lockDao.getLockStateOpen(lockID.toInt()).toInt()
             }
         }
-
         estado
     }
 

@@ -195,15 +195,13 @@ class serverConnectionFunctions() {
         }
     }
 
-/*    suspend fun changeDoorState(username: String, door_id: String): Boolean? {
+    suspend fun getDoorState(username : String, door_id: String): Boolean? {
         return try {
-            val changeDoorState = api.changeDoorState(username, door_id)
+            val changeDoorState = api.getDoorState(username, door_id)
             if (changeDoorState.isSuccessful) return true else false
         } catch (e: IOException){
             return false
         }
-    }*/
-
-
+    }
 
 }

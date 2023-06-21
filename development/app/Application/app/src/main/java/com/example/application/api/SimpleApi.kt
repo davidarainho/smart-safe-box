@@ -55,7 +55,11 @@ interface SimpleApi {
         @Query("door_id") door_id: String
     ): Response<LockConn?>
 
-
+    @GET("/door/get_door_state")
+    suspend fun getDoorState(
+        @Query("username") username: String,
+        @Query("door_id") door_id: String
+    ): Response<String?>
 
 
     /******************************** POST **********************************/
@@ -119,7 +123,7 @@ interface SimpleApi {
         @Query("door_id") door_id: String
     ): Response<String?>
 
-    @POST("/lock/update_door_name")
+    @POST("/door/update_door_name")
     suspend fun changeLockName(
         @Query("username") username : String,
         @Query("new_door_name") new_door_name : String,
@@ -143,8 +147,6 @@ interface SimpleApi {
         @Query("door_id") door_id: String
     ): Response<String?>
 
-
-
     @POST("/user/remove_share_door")
     suspend fun removeAccountFromDoor(
         @Query("username") username: String,
@@ -153,9 +155,7 @@ interface SimpleApi {
     ): Response<String?>
 
 
+
 }
-
-
-
 
 

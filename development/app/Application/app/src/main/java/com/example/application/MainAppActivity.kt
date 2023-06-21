@@ -85,6 +85,7 @@ class MainAppActivity : AppCompatActivity() {
 
         printRunnable = object : Runnable {
             override fun run() {
+                handler.postDelayed(this, 7500)
                 // Pedidos para verificar alteracoes (Pin Errado / Estado Lock)
 
                 if (flagWrongPin){
@@ -97,7 +98,7 @@ class MainAppActivity : AppCompatActivity() {
                     flagChangedLockState = false
                 }
 
-                handler.postDelayed(this, 15000)
+                handler.postDelayed(this, 7500)
             }
         }
         handler.postDelayed(printRunnable, 15000)

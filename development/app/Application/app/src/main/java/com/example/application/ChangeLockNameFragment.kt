@@ -74,7 +74,7 @@ class ChangeLockNameFragment : Fragment() {
         var listOfLockIDs: List<Int> = emptyList()
 
 
-        viewLifecycleOwner.lifecycleScope.launch {
+        withContext(Dispatchers.IO) {
             userID=userDao.getUserIdByUsername(username)
             if (userLockDao != null) {
                 listOfLockIDs = userLockDao.getLocksIDByUserId(userID)
