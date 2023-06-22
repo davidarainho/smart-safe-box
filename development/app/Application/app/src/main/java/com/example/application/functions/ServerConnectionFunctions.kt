@@ -14,7 +14,6 @@ class serverConnectionFunctions() {
     val api = GetObject.getInstance().create(SimpleApi::class.java)
 
     // Define Exceptions
-
     class ServerException(val code: Int): Exception("Server returned error code $code")
 
 
@@ -195,10 +194,10 @@ class serverConnectionFunctions() {
     }
 
 
-    suspend fun checkNotifications(username: String): Boolean {
+    suspend fun changeNotifications(username: String): Boolean {
         return try {
-            val checkNotif = api.changeNotificationPreference(username)
-            if (checkNotif.isSuccessful) return true else false
+            val changeNotifications = api.changeNotificationPreference(username)
+            if (changeNotifications.isSuccessful) return true else false
         }catch (e: IOException){
             return false
         }
@@ -233,8 +232,8 @@ class serverConnectionFunctions() {
 
     suspend fun getUserNotification(username : String?): Boolean {
         return try {
-            val changeDoorState = api.getUserNotification(username)
-            if (changeDoorState.isSuccessful) return true else false
+            val notificationStatus = api.getNotificationStatus(username)
+            if (notificationStatus.isSuccessful) return true else false
         } catch (e: IOException){
             return false
         }

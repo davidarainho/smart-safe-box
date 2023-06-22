@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import com.example.application.data.UserDBSingleton
 import com.example.application.data.user.UserDao
@@ -23,6 +24,7 @@ class NotificationsFragment : Fragment() {
 
     private val binding get() = _binding!!
     private lateinit var username : String
+    private var notifications: Int = -1
 
     private val functionConnection = serverConnectionFunctions()
 
@@ -39,6 +41,7 @@ class NotificationsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        notifications = getCurrentNotPref()
         // Inflate the layout for this fragment
         _binding = FragmentNotificationsBinding.inflate(inflater,container,false)
         return binding.root
@@ -47,23 +50,31 @@ class NotificationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val switchCompat = view.findViewById<SwitchCompat>(R.id.allownotifications)
+        // Inicializa o estado correto
+        switchCompat.setChecked(notifications == 1)
+
+        // Permite futuras alteracoes ao estado
+        switchCompat.setOnClickListener {
+            switchCompat.setChecked(switchOption())
+        }
+    }
+
+    private fun switchOption() : Boolean = runBlocking{
         val userDatabase = UserDBSingleton.getInstance(requireContext())
         val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
         var userId: Int = 0
-        var notifications: Int = getCurrentNotPref()
-
-
-        val switchCompat = view.findViewById<SwitchCompat>(R.id.allownotifications)
-        switchCompat.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked && changeNotification()) {
-                notifications = if (notifications == 0) { 1 } else { 0 }
-                switchCompat.setChecked(notifications == 1)
-                viewLifecycleOwner.lifecycleScope.launch {
-                    // Fazer o pedido
-                    userDao.updateNotificationPreference(userId, notifications)
-                }
+        withContext(Dispatchers.IO){
+            if (changeNotification()) {
+                notifications = if (notifications==1) { 0 } else { 1 }
+                // Fazer o pedido
+                userId=userDao.getUserIdByUsername(username)
+                userDao.updateNotificationPreference(userId, notifications)
             }
+            val valor = userDao.getNotificationPreferenceByUserId(userId)
+            println(valor)
         }
+        notifications == 1
     }
 
     private fun getCurrentNotPref() : Int = runBlocking {
@@ -85,9 +96,8 @@ class NotificationsFragment : Fragment() {
     private fun changeNotification() : Boolean = runBlocking {
         val change : Boolean
         withContext(Dispatchers.IO){
-            change = functionConnection.checkNotifications(username)
+            change = functionConnection.changeNotifications(username)
         }
-
         change
     }
 

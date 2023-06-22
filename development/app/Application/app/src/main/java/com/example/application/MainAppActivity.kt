@@ -91,20 +91,29 @@ class MainAppActivity : AppCompatActivity() {
             while(true) {
                 Thread.sleep(8500)
                 // Pedidos para verificar alteracoes (Pin Errado / Estado Lock)
+                if (notificationStatus()) {
+                    println("Batata")
+                    if (conditionWrongPin()) {
+                        sendNotificationWrongPin()
+                    }
 
-                if ( conditionWrongPin() ){
-                    sendNotificationWrongPin()
+                    if (conditionChangePin()) {
+                        //sendNotificationState(lockname2)
+                        sendNotificationChangePin()
+                    }
                 }
-
-                if ( conditionChangePin() ){
-                    //sendNotificationState(lockname2)
-                    sendNotificationChangePin()
-                }
-
                 Thread.sleep(8500)
             }
         }
         Thread(printRunnable).start()
+    }
+
+    private fun notificationStatus() = runBlocking{
+        val p : Boolean
+        withContext(Dispatchers.IO) {
+            p = functionConnection.getUserNotification(username)
+        }
+        p
     }
 
     private fun conditionChangePin() = runBlocking{

@@ -44,6 +44,9 @@ interface SimpleApi {
     @GET("/user/email")
     suspend fun checkEmail(@Query("email") email: String): Response<String?>
 
+    @GET("/user/notifications")
+    suspend fun getStatusNot(@Query("username") username: String): Response<String?>
+
     @GET("/user/active_doors")
     suspend fun getActiveDoors(
         @Query("username") username: String
@@ -68,8 +71,8 @@ interface SimpleApi {
     ): Response<String?>
 
     // Entrar lock com engano no pin
-    @GET("/user/user_general_notification")
-    suspend fun getUserNotification(
+    @GET("/user/notification_status")
+    suspend fun getNotificationStatus(
         @Query("username") username: String?
     ): Response<String?>
 
