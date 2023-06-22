@@ -6,19 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.room.PrimaryKey
 import com.example.application.data.LockDBSingleton
 import com.example.application.data.UserAndLock.UserAndLock
 import com.example.application.data.UserAndLock.UserAndLockDao
-import com.example.application.data.UserAndLock.UserAndLockDatabase
 import com.example.application.data.UserAndLockDBSingleton
 import com.example.application.data.UserDBSingleton
 import com.example.application.data.lock.Lock
 import com.example.application.data.lock.LockDao
 import com.example.application.data.user.User
-import com.example.application.data.user.UserDatabase
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentCreateAccountBinding
 import com.example.myapplication.functions.serverConnectionFunctions
@@ -109,7 +105,6 @@ class CreateAccountFragment : Fragment() {
                 Toast.makeText(context, "Error: invalid email format", Toast.LENGTH_SHORT).show()
             } else{
                 val result = allowCreateAccount(username,password, email, pin)
-                println(result)
                 if(result == 0) {
                     flagAllowNewAccount = true
                 }else if (result==1){

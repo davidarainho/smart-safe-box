@@ -5,17 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.lifecycle.lifecycleScope
 import com.example.application.data.UserDBSingleton
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentNotificationsBinding
-import com.example.application.databinding.FragmentSettingsBinding
 import com.example.myapplication.functions.serverConnectionFunctions
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
@@ -63,7 +58,7 @@ class NotificationsFragment : Fragment() {
     private fun switchOption() : Boolean = runBlocking{
         val userDatabase = UserDBSingleton.getInstance(requireContext())
         val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
-        var userId: Int = 0
+        var userId = 0
         withContext(Dispatchers.IO){
             if (changeNotification()) {
                 notifications = if (notifications==1) { 0 } else { 1 }
@@ -71,8 +66,7 @@ class NotificationsFragment : Fragment() {
                 userId=userDao.getUserIdByUsername(username)
                 userDao.updateNotificationPreference(userId, notifications)
             }
-            val valor = userDao.getNotificationPreferenceByUserId(userId)
-            println(valor)
+            userDao.getNotificationPreferenceByUserId(userId)
         }
         notifications == 1
     }
@@ -82,8 +76,7 @@ class NotificationsFragment : Fragment() {
 
         val userDatabase = UserDBSingleton.getInstance(requireContext())
         val userDao: UserDao = userDatabase!!.getAppDatabase().userDao()
-        var userId: Int = 0
-        var notifications: Int = 1
+        var userId = 0
 
         withContext(Dispatchers.IO){
             userId=userDao.getUserIdByUsername(username)

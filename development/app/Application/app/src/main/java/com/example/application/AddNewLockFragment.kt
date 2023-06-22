@@ -1,6 +1,5 @@
 package com.example.application
 
-import android.app.ProgressDialog.show
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,15 +15,11 @@ import com.example.application.data.UserAndLockDBSingleton
 import com.example.application.data.UserDBSingleton
 import com.example.application.data.lock.Lock
 import com.example.application.data.lock.LockDao
-import com.example.application.data.user.User
 import com.example.application.data.user.UserDao
 import com.example.application.databinding.FragmentAddNewLockBinding
-import com.example.application.databinding.FragmentChangeUsernameBinding
 import com.example.application.model.AppViewModel
 import com.example.myapplication.functions.serverConnectionFunctions
-import com.example.myapplication.model.LockConn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class AddNewLockFragment : Fragment() {
 
@@ -84,7 +79,6 @@ class AddNewLockFragment : Fragment() {
                                     userLockDao.upsertUserAndLock(userandlock)
                                 }
                             }
-                            println("Fim")
                         }
                     }
                     Toast.makeText(context, "SUCCESS: Your lock was added", Toast.LENGTH_SHORT)

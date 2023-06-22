@@ -72,8 +72,6 @@ class StartFragment : Fragment() {
                 }*/
                 val (user, lockList) = loginCheck(username!!, password!!)
                 if (user != null){
-                    println(user)
-                    println(lockList)
                     setupLogin(user,lockList)
                     validAccount = true
                 }

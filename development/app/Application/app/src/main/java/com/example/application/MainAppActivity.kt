@@ -1,12 +1,10 @@
 package com.example.application
 
 import android.Manifest
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -16,14 +14,8 @@ import android.os.Handler
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat.getSystemService
 import com.example.application.data.LockDBSingleton
-import com.example.application.data.UserAndLock.UserAndLockDao
-import com.example.application.data.UserAndLockDBSingleton
-import com.example.application.data.UserDBSingleton
 import com.example.application.data.lock.LockDao
-import com.example.application.data.user.UserDao
 import com.example.myapplication.functions.serverConnectionFunctions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.*
@@ -68,11 +60,6 @@ class MainAppActivity : AppCompatActivity() {
 
 
     private fun startPrintLoop() {
-        var flagWrongPin : Boolean = false
-        var flagChangedLockState : Boolean = false
-
-
-
         // Usar query ao servidor para receber lista de doors para determinada flag
         // (Erro ao inserir código ou alteração do estado do lock)
 
@@ -82,17 +69,11 @@ class MainAppActivity : AppCompatActivity() {
         val lockDatabaseSingleton = LockDBSingleton.getInstance(this)
         val lockDao : LockDao? = lockDatabaseSingleton!!.getAppDatabase().lockDao()
 
-
-        // Receber lista
-        var lockname1 : String = "default"
-        var lockname2 : String = "default"
-
         printRunnable = Runnable {
             while(true) {
                 Thread.sleep(8500)
                 // Pedidos para verificar alteracoes (Pin Errado / Estado Lock)
                 if (notificationStatus()) {
-                    println("Batata")
                     if (conditionWrongPin()) {
                         sendNotificationWrongPin()
                     }
@@ -156,7 +137,7 @@ class MainAppActivity : AppCompatActivity() {
 
 
     private fun sendNotificationWrongPin(){
-        val message : String =
+        val message =
             "The wrong pin was inserted for your doors."
         val builder = NotificationCompat.Builder(this,CHANNEL_ID)
             .setSmallIcon(R.drawable.baseline_lock_24)
@@ -179,7 +160,7 @@ class MainAppActivity : AppCompatActivity() {
     }
 
     private fun sendNotificationChangePin(){
-        val message : String =
+        val message =
             "The pin of your for door was modifies."
         val builder = NotificationCompat.Builder(this,CHANNEL_ID)
             .setSmallIcon(R.drawable.baseline_lock_24)
@@ -197,7 +178,7 @@ class MainAppActivity : AppCompatActivity() {
             ) {
                 return
             }
-            notify(notificationIdWrong,builder.build())
+            notify(notificationIdState,builder.build())
         }
     }
 
