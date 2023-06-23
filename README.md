@@ -29,10 +29,10 @@ The following System Breakdown Structure is shown how we subdivided the subsyste
 This git project is subdivided into its 3 main Subsystems: Application, Server, and Hardware.
 Due to our lack of knowledge/practice, there are techSpikes folders so as to learn and practice the concepts needed, for each one.
 
-The hardware code wasn't commited because of reasons. Please don't ask why! I don't know either!
+The hardware code wasn't committed because of reasons. Please don't ask why! I don't know either!
 
-# Instalation
-At [link] you may find the apk so as to install the app. Unfortunately, we have tuitions to pay and so it is impossible for us to maintain the Google server running. :')
+# Installation
+At [link] you may find the APK so as to install the app. Unfortunately, we have tuitions to pay and so it is impossible for us to maintain the Google server running. :')
 
 # Pre-requisites
 The app works for Android 8.0 version (minSDK of 26)
