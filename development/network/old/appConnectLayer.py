@@ -24,8 +24,6 @@ def hello_world():
 # -------------------------------------------------------------------------- Get and Return Variables -------------------------------------------------------------------------------
 
 # Get an User Object - Args = username
-
-
 @app.get("/user")
 def get_user():
     args = request.args
@@ -256,8 +254,6 @@ def add_user():
         return {"error": "Unknown Error while creating user"}, 400
 
 # Update Username of a Specific User - Args = oldUsername, newUsername
-
-
 @app.post("/user/username")
 def update_username():
     args = request.args
@@ -276,7 +272,8 @@ def update_username():
     }
 
     if userinfo.update_username_function(json.dumps(usernameUpdateArguments)) == True:
-        return newUsername, 200
+        return json.dumps({"success": "[AppServer API] Username Updated Successfuly"}), 200
+        #return newUsername, 200
     else:
         return {"error": "Unknown Error while updating username"}, 400
 
@@ -313,7 +310,8 @@ def update_password():
         }
 
         if userinfo.update_password_function(json.dumps(passwordUpdateArguments)) == True:
-            return newPassword, 200
+            return json.dumps({"success": "[AppServer API] Password Updated Successfuly"}), 200
+            #return newPassword, 200
         else:
             return {"error": "Unknown Error while updating password"}, 400
 
@@ -362,8 +360,6 @@ def update_email():
 # -------------------------------------------------------------------------- Lockers ----------------------------------------------------------------------------
 
 # Allocate Locker to User - Args = username, lockID, accessLevel
-
-
 @app.post("/user/allocateLock")
 def allocateLock():
     args = request.args
@@ -372,6 +368,24 @@ def allocateLock():
     for field in required_fields:
         if field not in args:
             return {"error": f"[AppServer API] Missing required field '{field}'"}, 400
+
+    toGetUser = {
+        "username": args.get("username", default="", type=str)
+    }
+
+    userTest = userinfo.user_object(json.dumps(toGetUser))
+    if userTest is None:
+        return {"error": "[AppServer API] The user doesn't exist"}, 400
+    else:
+        userObject = json.loads(userTest)
+
+    userLocks = json.loads(json.dumps(userObject["active_locks"]))
+    if userLocks is None:
+        return {"error": "[AppServer API] The user doesn't have allocated locks"}, 400
+
+    for lock in userLocks:
+        if lock["lock_id"] == args.get("lockID", default="", type=str):
+            return {"error": "[AppServer API] The Lock is already allocated"}, 400
 
     toAllocateLock = {
         "lock_id": args.get("lockID", default="", type=str),
@@ -385,8 +399,6 @@ def allocateLock():
         return {"error": "Unknown Error while allocating lock"}, 400
 
 # Deallocate Locker to User - Args = username, lockID
-
-
 @app.post("/user/deallocateLock")
 def deallocateLock():
     args = request.args
@@ -398,17 +410,15 @@ def deallocateLock():
 
     toDeallocateLock = {
         "username": args.get("username", default="", type=str),
-        "lock_id": args.get("lockId", default="", type=str),
+        "lock_id": args.get("lockID", default="", type=str),
     }
-
+    
     if userinfo.deallocate_lock(json.dumps(toDeallocateLock)) == True:
         return {"success": "Locker Deallocated Successfully"}, 200
     else:
         return {"error": "Unknown Error while deallocating lock"}, 400
 
 # Update Lock Access Level of a specific User - Args = username, lockID, newAccessLevel
-
-
 @app.post("/user/lockAccessLevel")
 def updateLockAccessLevel():
     args = request.args
@@ -430,9 +440,7 @@ def updateLockAccessLevel():
         return {"error": "Unknown Error while updating user specific access level for the specified lock"}, 400
 
 # Update Pin of a specified Lock - Args = lockID, oldPin, newPin
-
-
-@app.post("/lock/updateUserPin")
+@app.post("/user/updateUserPin")
 def updateUserPin():
     args = request.args
 
@@ -452,8 +460,8 @@ def updateUserPin():
         return {"error": "[AppServer API] The user doesn't exist"}, 400
     else:
         userObject = json.loads(userTest)
-
-    if (int(userObject["pinLock"]) == oldPin):
+    print(userObject)
+    if (int(userObject["access_pin"]) == oldPin):
         toUpdateUserPin = {
             "username": args.get("username", default="", type=str),
             "new_access_pin": args.get("newPin", default="", type=str),
@@ -467,8 +475,6 @@ def updateUserPin():
         return {"error": "The old code doesn't match"}, 400
 
 # Update Location of a specified Lock - Args = lockID, newLocation
-
-
 @app.post("/lock/updateLockLocation")
 def updateLockLocation():
     args = request.args
@@ -489,8 +495,6 @@ def updateLockLocation():
         return {"error": "Unknown Error while updating lock Location"}, 400
 
 # Update Name of a specified Lock - Args = lockID, newName
-
-
 @app.post("/lock/updateLockName")
 def updateLockName():
     args = request.args
@@ -531,7 +535,7 @@ def firstInteraction():
     else:
         appcodeObject = json.loads(appcodeTest)
 
-    if args.get("appcode", default="", type=str) == appcodeObject["appcode"]:
+    if args.get("appcode", default="", type=int) == appcodeObject["appcode"]:
         toGetUser = {
             "username": args.get("username", default="", type=str)
         }
@@ -604,9 +608,16 @@ def openLock():
         }
         
         if userinfo.update_lock_request(toActivateLock) != True:
-            return {"error": "Error activating lock"}, 400
+            return {"error": "[AppServer API] Error activating lock"}, 400
 
-    return {"success": "All Lockers Activated and linked to Buyer"}, 202
+        toUpdateLastAccess = {
+            "lock_id": lockObject["lockID"],
+            "username": args.get("username", default="", type=str)
+        }
+        if userinfo.last_access_update(json.dumps(toUpdateLastAccess)) != True:
+            return {"error": "[AppServer API] Error updating last access"}, 400
+
+    return {"success": "All User Lockers Opened"}, 202
 
 # --------------------------------------------------------------------------------- Main Function -----------------------------------------------------------------------------------
 

@@ -1,0 +1,12 @@
+FALTA ALOCACAO e desalocacao
+
+#false try trigger - 0 neutro - 1 tentativa falhada - 2 tentativa com sucesso e porta aberta
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//criar função para saber quais as portas que foram abertas
+//criar função para saber se pin introduzido foi errado
+
+0 pode fazer tudo
+1 pode partilhar com qualquer utilizador, remover qualquer utilizador exceto 0 (Não consegue partilhar quando esse outro user já tem acesso - a não ser que queiras fazer uma espécie de promoção dos de nível 3 para 2)
+2 pode partilhar com qualquer utilizador (que ainda não tem acesso), remover qualquer utilizador de nível 3
+3 não pode fazer absolutamente nada a não ser ter acesso e poder abrir a door
