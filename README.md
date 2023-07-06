@@ -41,6 +41,7 @@ The app works for Android 8.0 version (minSDK of 26)
 # Utilization:
 ## Video:
 At [link] you may find the video demonstration of the system running. :)
+https://www.youtube.com/watch?v=wc5E_3YaJ0g&pp=ygUMTWFrZXJGb3JTYWtl
 
 ## License
 This project is under the MIT license...
