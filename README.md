@@ -45,4 +45,7 @@ The app works for Android 8.0 version or higher (minSDK of 26)
 At https://www.youtube.com/watch?v=wc5E_3YaJ0g&pp=ygUMTWFrZXJGb3JTYWtl you may find the video demonstration of the system running. :)
 
 ## License
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)  
 This project is licensed under the terms of the GNU General Public License v3.0 license.
+
+
